@@ -3,14 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4799095B2ABCCD540056753E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799095A2ABCCD540056753E /* AppDelegate.swift */; };
 		4799095D2ABCCD540056753E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799095C2ABCCD540056753E /* SceneDelegate.swift */; };
 		4799095F2ABCCD540056753E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799095E2ABCCD540056753E /* ViewController.swift */; };
-		479909622ABCCD540056753E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 479909602ABCCD540056753E /* Main.storyboard */; };
 		479909652ABCCD540056753E /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 479909632ABCCD540056753E /* Reciplease.xcdatamodeld */; };
 		479909672ABCCD550056753E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 479909662ABCCD550056753E /* Assets.xcassets */; };
 		4799096A2ABCCD550056753E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 479909682ABCCD550056753E /* LaunchScreen.storyboard */; };
@@ -41,7 +40,6 @@
 		4799095A2ABCCD540056753E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4799095C2ABCCD540056753E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4799095E2ABCCD540056753E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		479909612ABCCD540056753E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		479909642ABCCD540056753E /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		479909662ABCCD550056753E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		479909692ABCCD550056753E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -103,11 +101,8 @@
 			children = (
 				4799095A2ABCCD540056753E /* AppDelegate.swift */,
 				4799095C2ABCCD540056753E /* SceneDelegate.swift */,
+				47C6C9802ABD43110000D50B /* Ressources */,
 				4799095E2ABCCD540056753E /* ViewController.swift */,
-				479909602ABCCD540056753E /* Main.storyboard */,
-				479909662ABCCD550056753E /* Assets.xcassets */,
-				479909682ABCCD550056753E /* LaunchScreen.storyboard */,
-				4799096B2ABCCD550056753E /* Info.plist */,
 				479909632ABCCD540056753E /* Reciplease.xcdatamodeld */,
 			);
 			path = Reciplease;
@@ -130,6 +125,16 @@
 			path = RecipleaseUITests;
 			sourceTree = "<group>";
 		};
+		47C6C9802ABD43110000D50B /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				479909662ABCCD550056753E /* Assets.xcassets */,
+				479909682ABCCD550056753E /* LaunchScreen.storyboard */,
+				4799096B2ABCCD550056753E /* Info.plist */,
+			);
+			path = Ressources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -140,6 +145,7 @@
 				479909532ABCCD540056753E /* Sources */,
 				479909542ABCCD540056753E /* Frameworks */,
 				479909552ABCCD540056753E /* Resources */,
+				4799098D2ABCCD5F0056753E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -210,7 +216,7 @@
 				};
 			};
 			buildConfigurationList = 479909522ABCCD530056753E /* Build configuration list for PBXProject "Reciplease" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -236,7 +242,6 @@
 			files = (
 				4799096A2ABCCD550056753E /* LaunchScreen.storyboard in Resources */,
 				479909672ABCCD550056753E /* Assets.xcassets in Resources */,
-				479909622ABCCD540056753E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +260,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4799098D2ABCCD5F0056753E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		479909532ABCCD540056753E /* Sources */ = {
@@ -301,14 +327,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		479909602ABCCD540056753E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				479909612ABCCD540056753E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		479909682ABCCD550056753E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -446,8 +464,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Reciplease/Info.plist;
+				INFOPLIST_FILE = Reciplease/Ressources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -473,8 +492,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Reciplease/Info.plist;
+				INFOPLIST_FILE = Reciplease/Ressources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
