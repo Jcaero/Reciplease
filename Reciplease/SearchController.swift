@@ -20,9 +20,12 @@ class SearchController: UIViewController {
        let label = UILabel()
         label.text = "What's in your fridge ?"
         label.font = UIFont(name: "Lincoln Road", size: 50)
+        label.font = UIFont.preferredFont(forTextStyle: .extraLargeTitle)
+        label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
         label.textColor = .anthraciteGray
         label.textAlignment = .center
+        label.setAccessibility(with: .header, label: "Question Title", hint: "What's in your fridge ?")
         return label
     }()
 
@@ -31,8 +34,11 @@ class SearchController: UIViewController {
         button.setTitle("Add", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemGreen
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         button.titleLabel?.numberOfLines = 0
         button.layer.cornerRadius = 5
+        button.setAccessibility(with: .button, label: "Add ingredient", hint: "Pressed button to add ingredient")
         return button
     }()
 
@@ -40,9 +46,11 @@ class SearchController: UIViewController {
        let textField = UITextField()
         textField.placeholder = "Lemon, Cheese, Sausages..."
         textField.font = UIFont(name: "Lincoln Road", size: 30)
+        textField.font = UIFont.preferredFont(forTextStyle: .title3)
+        textField.adjustsFontForContentSizeCategory = true
         textField.textAlignment = .justified
         textField.textColor = .darkGray
-
+        textField.setAccessibility(with: .searchField, label: "input Ingredients", hint: "Area to input your ingredient")
         return textField
     }()
 
@@ -72,7 +80,6 @@ class SearchController: UIViewController {
         navigationController?.navigationBar.topItem?.title = "Reciplease"
 
         setupView()
-        setupAccessibility()
     }
 
     // MARK: - Layout
@@ -111,38 +118,13 @@ class SearchController: UIViewController {
             underligne.leftAnchor.constraint(equalTo: inputIngredients.leftAnchor),
             underligne.rightAnchor.constraint(equalTo: inputIngredients.rightAnchor),
             underligne.topAnchor.constraint(equalTo: inputIngredients.bottomAnchor, constant: 5),
-            searchArea.bottomAnchor.constraint(equalTo: underligne.bottomAnchor, constant: 5)
+            searchArea.bottomAnchor.constraint(equalTo: underligne.bottomAnchor, constant: 10)
         ])
     }
 }
 
 // MARK: - Accessibility
 extension SearchController {
-    func setupAccessibility() {
-        [questionTitle, addIngredients, inputIngredients].forEach {
-            $0.isAccessibilityElement = true
-        }
-
-        questionTitle.accessibilityTraits = .header
-        addIngredients.accessibilityTraits = .button
-        inputIngredients.accessibilityTraits = .searchField
-
-        questionTitle.accessibilityLabel = "Question Title"
-        questionTitle.accessibilityHint = "What's in your fridge ?"
-        questionTitle.font = UIFont.preferredFont(forTextStyle: .extraLargeTitle)
-        questionTitle.adjustsFontForContentSizeCategory = true
-
-        inputIngredients.accessibilityLabel = "input Ingredients"
-        inputIngredients.accessibilityHint = "Area to input your ingredient"
-        inputIngredients.font = UIFont.preferredFont(forTextStyle: .title3)
-        inputIngredients.adjustsFontForContentSizeCategory = true
-
-        addIngredients.accessibilityLabel = "Add ingredient"
-        addIngredients.accessibilityHint = "Pressed button to add ingredient"
-        addIngredients.titleLabel?.adjustsFontForContentSizeCategory = true
-        addIngredients.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-    }
-
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         let currentCategory =
             traitCollection.preferredContentSizeCategory
