@@ -9,9 +9,18 @@ import UIKit
 
 class SearchController: UIViewController {
     //
+
     let searchArea: UIView = {
         let view = UIView()
         view.backgroundColor = .white
+        return view
+    }()
+
+    let searchStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.distribution = .fillProportionally
+        view.spacing = 10
         return view
     }()
 
@@ -57,7 +66,6 @@ class SearchController: UIViewController {
         view.backgroundColor = .white
         view.axis = .horizontal
         view.distribution = .fillProportionally
-        view.spacing = 10
         return view
     }()
 
@@ -87,10 +95,9 @@ class SearchController: UIViewController {
 
     // MARK: - Layout
     private func setupView() {
-        [searchArea, questionTitle, addIngredients, inputIngredients, underligne, inputStackView, searchRecipes].forEach {
+        [searchStackView, questionTitle, addIngredients, inputIngredients, underligne, inputStackView, searchRecipes, searchArea].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-
         view.addSubview(searchArea)
         NSLayoutConstraint.activate([
             searchArea.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -99,34 +106,26 @@ class SearchController: UIViewController {
             searchArea.heightAnchor.constraint(greaterThanOrEqualToConstant: 100)
         ])
 
-        searchArea.addSubview(questionTitle)
+        searchArea.addSubview(searchStackView)
         NSLayoutConstraint.activate([
-            questionTitle.leftAnchor.constraint(equalTo: searchArea.leftAnchor),
-            questionTitle.rightAnchor.constraint(equalTo: searchArea.rightAnchor),
-            questionTitle.topAnchor.constraint(equalTo: searchArea.topAnchor)
+            searchStackView.leftAnchor.constraint(equalTo: searchArea.leftAnchor, constant: 5),
+            searchStackView.rightAnchor.constraint(equalTo: searchArea.rightAnchor, constant: -5),
+            searchStackView.topAnchor.constraint(equalTo: searchArea.topAnchor, constant: 10),
+            searchArea.bottomAnchor.constraint(equalTo: searchStackView.bottomAnchor, constant: 15)
         ])
 
-        searchArea.addSubview(inputStackView)
-        NSLayoutConstraint.activate([
-            inputStackView.leftAnchor.constraint(equalTo: searchArea.leftAnchor, constant: 5),
-            inputStackView.rightAnchor.constraint(equalTo: searchArea.rightAnchor, constant: -5),
-            inputStackView.topAnchor.constraint(equalTo: questionTitle.bottomAnchor)
-        ])
+        searchStackView.addArrangedSubview(questionTitle)
+        searchStackView.addArrangedSubview(inputStackView)
 
         inputStackView.addArrangedSubview(inputIngredients)
         inputStackView.addArrangedSubview(addIngredients)
-        NSLayoutConstraint.activate([
-            addIngredients.widthAnchor.constraint(greaterThanOrEqualToConstant: 50)
-        ])
 
-        searchArea.addSubview(underligne)
+        searchStackView.addSubview(underligne)
         NSLayoutConstraint.activate([
             underligne.heightAnchor.constraint(equalToConstant: 1),
             underligne.leftAnchor.constraint(equalTo: inputIngredients.leftAnchor),
             underligne.rightAnchor.constraint(equalTo: inputIngredients.rightAnchor),
-            underligne.topAnchor.constraint(equalTo: inputIngredients.bottomAnchor, constant: 5),
-            searchArea.bottomAnchor.constraint(equalTo: inputStackView.bottomAnchor, constant: 10)
-
+            underligne.topAnchor.constraint(equalTo: inputIngredients.bottomAnchor, constant: 5)
         ])
 
         view.addSubview(searchRecipes)
@@ -142,21 +141,25 @@ class SearchController: UIViewController {
 // MARK: - Accessibility
 extension SearchController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        let currentCategory =
-            traitCollection.preferredContentSizeCategory
-        let previousCategory =
-            previousTraitCollection?.preferredContentSizeCategory
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        let previousCategory = previousTraitCollection?.preferredContentSizeCategory
 
         guard currentCategory != previousCategory else { return }
+        updateDisplayAccessibility()
+    }
 
+    func updateDisplayAccessibility() {
+        let currentCategory = traitCollection.preferredContentSizeCategory
         if currentCategory.isAccessibilityCategory {
             inputStackView.axis = .vertical
             inputIngredients.placeholder = "ingredient"
             searchRecipes.setTitle("Search", for: .normal)
+            questionTitle.isHidden = true
         } else {
             inputStackView.axis = .horizontal
             inputIngredients.placeholder = "Lemon, Cheese..."
             searchRecipes.setTitle("Search for recipes", for: .normal)
+            questionTitle.isHidden = false
         }
     }
 }
