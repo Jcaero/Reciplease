@@ -19,7 +19,6 @@ final class RecipleaseTests: XCTestCase {
     }
 
     func testExample() throws {
- 
     }
 
     func testPerformanceExample() throws {

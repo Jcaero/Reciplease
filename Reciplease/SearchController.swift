@@ -8,8 +8,7 @@
 import UIKit
 
 class SearchController: UIViewController {
-
-    // SearchArea
+    //
     let searchArea: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -19,10 +18,7 @@ class SearchController: UIViewController {
     let questionTitle: UILabel = {
        let label = UILabel()
         label.text = "What's in your fridge ?"
-        label.font = UIFont(name: "Lincoln Road", size: 50)
-        label.font = UIFont.preferredFont(forTextStyle: .extraLargeTitle)
-        label.adjustsFontForContentSizeCategory = true
-        label.numberOfLines = 0
+        label.setupDynamicTextWith(policeName: "Symbol", size: 35, style: .largeTitle)
         label.textColor = .anthraciteGray
         label.textAlignment = .center
         label.setAccessibility(with: .header, label: "Question Title", hint: "What's in your fridge ?")
@@ -34,9 +30,7 @@ class SearchController: UIViewController {
         button.setTitle("Add", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemGreen
-        button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        button.titleLabel?.numberOfLines = 0
+        button.setupDynamicTextWith(style: .body)
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "Add ingredient", hint: "Pressed button to add ingredient")
         return button
@@ -44,10 +38,8 @@ class SearchController: UIViewController {
 
     let inputIngredients: UITextField = {
        let textField = UITextField()
-        textField.placeholder = "Lemon, Cheese, Sausages..."
-        textField.font = UIFont(name: "Lincoln Road", size: 30)
-        textField.font = UIFont.preferredFont(forTextStyle: .title3)
-        textField.adjustsFontForContentSizeCategory = true
+        textField.placeholder = "Lemon, Cheese..."
+        textField.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .title3)
         textField.textAlignment = .justified
         textField.textColor = .darkGray
         textField.setAccessibility(with: .searchField, label: "input Ingredients", hint: "Area to input your ingredient")
@@ -69,6 +61,17 @@ class SearchController: UIViewController {
         return view
     }()
 
+    let searchRecipes: UIButton = {
+        let button = UIButton()
+        button.setTitle("Search for recipes", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemGreen
+        button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .footnote)
+        button.layer.cornerRadius = 5
+        button.setAccessibility(with: .button, label: "search for recipes", hint: "Pressed button to search recipes with ingredients")
+        return button
+    }()
+
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +87,7 @@ class SearchController: UIViewController {
 
     // MARK: - Layout
     private func setupView() {
-        [searchArea, questionTitle, addIngredients, inputIngredients, underligne, inputStackView].forEach {
+        [searchArea, questionTitle, addIngredients, inputIngredients, underligne, inputStackView, searchRecipes].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -92,7 +95,8 @@ class SearchController: UIViewController {
         NSLayoutConstraint.activate([
             searchArea.leftAnchor.constraint(equalTo: view.leftAnchor),
             searchArea.rightAnchor.constraint(equalTo: view.rightAnchor),
-            searchArea.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
+            searchArea.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            searchArea.heightAnchor.constraint(greaterThanOrEqualToConstant: 100)
         ])
 
         searchArea.addSubview(questionTitle)
@@ -111,6 +115,9 @@ class SearchController: UIViewController {
 
         inputStackView.addArrangedSubview(inputIngredients)
         inputStackView.addArrangedSubview(addIngredients)
+        NSLayoutConstraint.activate([
+            addIngredients.widthAnchor.constraint(greaterThanOrEqualToConstant: 50)
+        ])
 
         searchArea.addSubview(underligne)
         NSLayoutConstraint.activate([
@@ -118,7 +125,16 @@ class SearchController: UIViewController {
             underligne.leftAnchor.constraint(equalTo: inputIngredients.leftAnchor),
             underligne.rightAnchor.constraint(equalTo: inputIngredients.rightAnchor),
             underligne.topAnchor.constraint(equalTo: inputIngredients.bottomAnchor, constant: 5),
-            searchArea.bottomAnchor.constraint(equalTo: underligne.bottomAnchor, constant: 10)
+            searchArea.bottomAnchor.constraint(equalTo: inputStackView.bottomAnchor, constant: 10)
+
+        ])
+
+        view.addSubview(searchRecipes)
+        NSLayoutConstraint.activate([
+            searchRecipes.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            searchRecipes.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            searchRecipes.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            searchRecipes.heightAnchor.constraint(greaterThanOrEqualToConstant: 60)
         ])
     }
 }
@@ -136,8 +152,11 @@ extension SearchController {
         if currentCategory.isAccessibilityCategory {
             inputStackView.axis = .vertical
             inputIngredients.placeholder = "ingredient"
+            searchRecipes.setTitle("Search", for: .normal)
         } else {
             inputStackView.axis = .horizontal
+            inputIngredients.placeholder = "Lemon, Cheese..."
+            searchRecipes.setTitle("Search for recipes", for: .normal)
         }
     }
 }

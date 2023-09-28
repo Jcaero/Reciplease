@@ -19,6 +19,9 @@
 		479909752ABCCD550056753E /* RecipleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479909742ABCCD550056753E /* RecipleaseTests.swift */; };
 		4799097F2ABCCD550056753E /* RecipleaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799097E2ABCCD550056753E /* RecipleaseUITests.swift */; };
 		479909812ABCCD550056753E /* RecipleaseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479909802ABCCD550056753E /* RecipleaseUITestsLaunchTests.swift */; };
+		47A5C5E32AC532000052BC0D /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A5C5E22AC532000052BC0D /* UILabel+.swift */; };
+		47A5C5E52AC532DD0052BC0D /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A5C5E42AC532DD0052BC0D /* UIButton+.swift */; };
+		47A5C5E72AC5342A0052BC0D /* UItextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A5C5E62AC5342A0052BC0D /* UItextField+.swift */; };
 		47C1ACB82ABDA4790049E043 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1ACB72ABDA4790049E043 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +59,9 @@
 		4799097A2ABCCD550056753E /* RecipleaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4799097E2ABCCD550056753E /* RecipleaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseUITests.swift; sourceTree = "<group>"; };
 		479909802ABCCD550056753E /* RecipleaseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		47A5C5E22AC532000052BC0D /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		47A5C5E42AC532DD0052BC0D /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		47A5C5E62AC5342A0052BC0D /* UItextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UItextField+.swift"; sourceTree = "<group>"; };
 		47C1ACB72ABDA4790049E043 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +95,9 @@
 			children = (
 				4777915C2ABF0B6400ABA120 /* UIColor+.swift */,
 				4789DF6F2AC43DA200F31373 /* UIView+.swift */,
+				47A5C5E22AC532000052BC0D /* UILabel+.swift */,
+				47A5C5E42AC532DD0052BC0D /* UIButton+.swift */,
+				47A5C5E62AC5342A0052BC0D /* UItextField+.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -308,13 +317,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				479909652ABCCD540056753E /* Reciplease.xcdatamodeld in Sources */,
+				47A5C5E72AC5342A0052BC0D /* UItextField+.swift in Sources */,
 				4799095F2ABCCD540056753E /* ViewController.swift in Sources */,
 				4789DF702AC43DA200F31373 /* UIView+.swift in Sources */,
 				4799095B2ABCCD540056753E /* AppDelegate.swift in Sources */,
+				47A5C5E32AC532000052BC0D /* UILabel+.swift in Sources */,
 				471648722AC1316D003097F5 /* SearchController.swift in Sources */,
 				47C1ACB82ABDA4790049E043 /* TabBarController.swift in Sources */,
 				4799095D2ABCCD540056753E /* SceneDelegate.swift in Sources */,
 				4777915D2ABF0B6400ABA120 /* UIColor+.swift in Sources */,
+				47A5C5E52AC532DD0052BC0D /* UIButton+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
