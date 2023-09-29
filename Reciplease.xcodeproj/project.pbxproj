@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		471648722AC1316D003097F5 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471648712AC1316D003097F5 /* SearchController.swift */; };
+		47345E7D2AC6868D00EA67A6 /* UITextView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47345E7C2AC6868D00EA67A6 /* UITextView+.swift */; };
 		4777915D2ABF0B6400ABA120 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4777915C2ABF0B6400ABA120 /* UIColor+.swift */; };
 		4789DF702AC43DA200F31373 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4789DF6F2AC43DA200F31373 /* UIView+.swift */; };
 		4799095B2ABCCD540056753E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799095A2ABCCD540056753E /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		471648712AC1316D003097F5 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		47345E7C2AC6868D00EA67A6 /* UITextView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+.swift"; sourceTree = "<group>"; };
 		4777915C2ABF0B6400ABA120 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		4789DF6F2AC43DA200F31373 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		479909572ABCCD540056753E /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +100,7 @@
 				47A5C5E22AC532000052BC0D /* UILabel+.swift */,
 				47A5C5E42AC532DD0052BC0D /* UIButton+.swift */,
 				47A5C5E62AC5342A0052BC0D /* UItextField+.swift */,
+				47345E7C2AC6868D00EA67A6 /* UITextView+.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				479909652ABCCD540056753E /* Reciplease.xcdatamodeld in Sources */,
+				47345E7D2AC6868D00EA67A6 /* UITextView+.swift in Sources */,
 				47A5C5E72AC5342A0052BC0D /* UItextField+.swift in Sources */,
 				4799095F2ABCCD540056753E /* ViewController.swift in Sources */,
 				4789DF702AC43DA200F31373 /* UIView+.swift in Sources */,
