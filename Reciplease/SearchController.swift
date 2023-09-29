@@ -38,7 +38,7 @@ class SearchController: UIViewController {
         let button = UIButton()
         button.setTitle("Add", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemGreen
+        button.backgroundColor = .darkGreen
         button.setupDynamicTextWith(style: .body)
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "Add ingredient", hint: "Pressed button to add ingredient")
@@ -73,7 +73,7 @@ class SearchController: UIViewController {
         let button = UIButton()
         button.setTitle("Search for recipes", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemGreen
+        button.backgroundColor = .darkGreen
         button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .footnote)
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "search for recipes", hint: "Pressed button to search recipes with ingredients")
