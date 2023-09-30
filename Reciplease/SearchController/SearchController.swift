@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import Combine
 
 class SearchController: UIViewController {
-    //
+    // MARK: - liste of UI
     let searchArea: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -41,7 +42,7 @@ class SearchController: UIViewController {
         return view
     }()
 
-    let addIngredients: UIButton = {
+    lazy var addIngredients: UIButton = {
         let button = UIButton()
         button.setTitle("Add", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -49,10 +50,11 @@ class SearchController: UIViewController {
         button.setupDynamicTextWith(style: .body)
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "Add ingredient", hint: "Pressed button to add ingredient")
+        button.addTarget(self, action: #selector(addIngredient), for: .touchUpInside)
         return button
     }()
 
-    let inputIngredients: UITextField = {
+    let inputIngredient: UITextField = {
        let textField = UITextField()
         textField.placeholder = "Lemon, Cheese..."
         textField.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .title3)
@@ -96,7 +98,7 @@ class SearchController: UIViewController {
         return button
     }()
 
-    let ingredientList: UITextView = {
+    let ingredientListView: UITextView = {
        let texte = UITextView()
         texte.textColor = .white
         texte.backgroundColor = .anthraciteGray
@@ -117,6 +119,11 @@ class SearchController: UIViewController {
         return button
     }()
 
+    // MARK: - Propriety
+    private var subscriptions = Set<AnyCancellable>()
+
+    private let viewModel = SearchViewModel()
+
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,25 +135,25 @@ class SearchController: UIViewController {
         navigationController?.navigationBar.topItem?.title = "Reciplease"
 
         setupView()
-        ingredientList.text = 
-        """
-            - Tomato
+        updateDisplayAccessibility()
 
-            - Avocado
-
-            - cheese
-
-            - banana
-        """
+        viewModel.$ingredientList
+            .assign(to: \.text, on: self.ingredientListView)
+            .store(in: &subscriptions)
     }
 
     // MARK: - Layout
     private func setupView() {
-        [searchStackView, questionTitle, addIngredients, inputIngredients, underligne, inputStackView, searchRecipes, searchArea].forEach {
+        [searchStackView,
+         questionTitle,
+         addIngredients,
+         inputIngredient,
+         underligne,
+         inputStackView, searchRecipes, searchArea].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
-        [clearStackView, yourIngredientsLabel, clearIngredients, ingredientList].forEach {
+        [clearStackView, yourIngredientsLabel, clearIngredients, ingredientListView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -169,15 +176,15 @@ class SearchController: UIViewController {
         searchStackView.addArrangedSubview(questionTitle)
         searchStackView.addArrangedSubview(inputStackView)
 
-        inputStackView.addArrangedSubview(inputIngredients)
+        inputStackView.addArrangedSubview(inputIngredient)
         inputStackView.addArrangedSubview(addIngredients)
 
         searchStackView.addSubview(underligne)
         NSLayoutConstraint.activate([
             underligne.heightAnchor.constraint(equalToConstant: 1),
-            underligne.leftAnchor.constraint(equalTo: inputIngredients.leftAnchor),
-            underligne.rightAnchor.constraint(equalTo: inputIngredients.rightAnchor),
-            underligne.topAnchor.constraint(equalTo: inputIngredients.bottomAnchor, constant: 5)
+            underligne.leftAnchor.constraint(equalTo: inputIngredient.leftAnchor),
+            underligne.rightAnchor.constraint(equalTo: inputIngredient.rightAnchor),
+            underligne.topAnchor.constraint(equalTo: inputIngredient.bottomAnchor, constant: 5)
         ])
 
         view.addSubview(clearStackView)
@@ -187,6 +194,7 @@ class SearchController: UIViewController {
             clearStackView.topAnchor.constraint(equalTo: searchArea.bottomAnchor, constant: 10),
             clearStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
             clearStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
+            clearIngredients.widthAnchor.constraint(greaterThanOrEqualToConstant: 70),
             addIngredients.widthAnchor.constraint(equalTo: clearIngredients.widthAnchor),
             addIngredients.heightAnchor.constraint(equalTo: clearIngredients.heightAnchor)
         ])
@@ -199,13 +207,20 @@ class SearchController: UIViewController {
             searchRecipes.heightAnchor.constraint(greaterThanOrEqualToConstant: 60)
         ])
 
-        view.addSubview(ingredientList)
+        view.addSubview(ingredientListView)
         NSLayoutConstraint.activate([
-            ingredientList.topAnchor.constraint(equalTo: clearStackView.bottomAnchor, constant: 10),
-            ingredientList.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
-            ingredientList.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            ingredientList.bottomAnchor.constraint(equalTo: searchRecipes.topAnchor, constant: -10)
+            ingredientListView.topAnchor.constraint(equalTo: clearStackView.bottomAnchor, constant: 10),
+            ingredientListView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
+            ingredientListView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
+            ingredientListView.bottomAnchor.constraint(equalTo: searchRecipes.topAnchor, constant: -10)
         ])
+    }
+}
+
+// MARK: - Add action button
+extension SearchController {
+    @objc func addIngredient() {
+        viewModel.addIngredient(inputIngredient.text)
     }
 }
 
@@ -223,14 +238,14 @@ extension SearchController {
         let currentCategory = traitCollection.preferredContentSizeCategory
         if currentCategory.isAccessibilityCategory {
             inputStackView.axis = .vertical
-            inputIngredients.placeholder = "ingredient"
+            inputIngredient.placeholder = "ingredient"
             searchRecipes.setTitle("Search", for: .normal)
             questionTitle.isHidden = true
             underligne.isHidden = true
             yourIngredientsLabel.isHidden = true
         } else {
             inputStackView.axis = .horizontal
-            inputIngredients.placeholder = "Lemon, Cheese..."
+            inputIngredient.placeholder = "Lemon, Cheese..."
             searchRecipes.setTitle("Search for recipes", for: .normal)
             questionTitle.isHidden = false
             underligne.isHidden = false

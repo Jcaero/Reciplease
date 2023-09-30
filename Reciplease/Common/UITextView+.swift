@@ -16,6 +16,4 @@ extension UITextView {
         }
         self.adjustsFontForContentSizeCategory = true
     }
-
-    
 }
