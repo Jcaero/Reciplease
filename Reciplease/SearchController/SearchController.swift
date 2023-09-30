@@ -86,7 +86,7 @@ class SearchController: UIViewController {
         return label
     }()
 
-    let clearIngredients: UIButton = {
+    lazy var clearIngredients: UIButton = {
         let button = UIButton()
         button.setTitle(" Clear ", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -95,6 +95,7 @@ class SearchController: UIViewController {
         button.setupDynamicTextWith(style: .body)
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "clear ingredient", hint: "Pressed button to clear ingredient")
+        button.addTarget(self, action: #selector(clearIngredient), for: .touchUpInside)
         return button
     }()
 
@@ -221,6 +222,10 @@ class SearchController: UIViewController {
 extension SearchController {
     @objc func addIngredient() {
         viewModel.addIngredient(inputIngredient.text)
+    }
+
+    @objc func clearIngredient() {
+        viewModel.clearIngredientList()
     }
 }
 
