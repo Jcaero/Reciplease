@@ -135,9 +135,12 @@ class SearchController: UIViewController {
                                                                    .foregroundColor: UIColor.white]
         navigationController?.navigationBar.topItem?.title = "Reciplease"
 
+        // MARK: - Setup
         setupView()
         updateDisplayAccessibility()
+        inputIngredient.delegate = self
 
+        // MARK: - Assigne publisher
         viewModel.$ingredientList
             .assign(to: \.text, on: self.ingredientListView)
             .store(in: &subscriptions)
@@ -222,6 +225,8 @@ class SearchController: UIViewController {
 extension SearchController {
     @objc func addIngredient() {
         viewModel.addIngredient(inputIngredient.text)
+        inputIngredient.text = ""
+        dismissKeyboard()
     }
 
     @objc func clearIngredient() {
@@ -239,7 +244,7 @@ extension SearchController {
         updateDisplayAccessibility()
     }
 
-    func updateDisplayAccessibility() {
+    private func updateDisplayAccessibility() {
         let currentCategory = traitCollection.preferredContentSizeCategory
         if currentCategory.isAccessibilityCategory {
             inputStackView.axis = .vertical
@@ -256,5 +261,19 @@ extension SearchController {
             underligne.isHidden = false
             yourIngredientsLabel.isHidden = false
         }
+    }
+}
+
+// MARK: - TextField
+extension SearchController: UITextFieldDelegate {
+
+    private func dismissKeyboard() {
+        inputIngredient.resignFirstResponder()
+    }
+
+    internal func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        inputIngredient.resignFirstResponder()
+        addIngredient()
+        return true
     }
 }
