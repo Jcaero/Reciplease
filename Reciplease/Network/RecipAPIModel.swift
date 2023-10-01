@@ -22,14 +22,14 @@ enum API {
                     URLQueryItem(name: "type", value: "public"),
                     URLQueryItem(name: "q", value: addQueryItems),
                     URLQueryItem(name: "app_key", value: APIKey.recipe.key),
-                    URLQueryItem(name: "app_id", value: APIKey.recipe.id),
+                    URLQueryItem(name: "app_id", value: APIKey.recipe.id)
                 ]
                 componments.queryItems = queryItems
                 return componments.url!
             }
         }
     }
-    
+
     struct RecipResponse: Decodable {
         let count: Int
         let hits: [Hit]

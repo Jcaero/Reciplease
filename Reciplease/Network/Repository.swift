@@ -13,6 +13,20 @@ class Repository {
     func fetchRecip(_ liste: [String]) -> AnyPublisher<API.RecipResponse, Error> {
         let ingredients = transformInString(liste)
         let url = API.EndPoint.recip(ingredients).url
+        
+        AF.request(url).response { response in
+                    guard let data = response.data else {return}
+                    
+                    do {
+                        let movies = try JSONDecoder().decode([MovieData].self, from: data)
+                        DispatchQueue.main.async { [weak self] in
+                            guard let self = self else { return }
+                            debugPrint(movies)
+                        }
+                    }catch{
+                        print(error.localizedDescription)
+                    }
+                }.resume()
 
         let data = URLSession
             .shared
@@ -22,7 +36,7 @@ class Repository {
             .eraseToAnyPublisher()
         return data
     }
-    
+
     private func transformInString(_ liste: [String]) -> String {
         var ingredients: String = ""
         liste.forEach { ingredient in
