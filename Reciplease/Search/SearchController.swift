@@ -109,7 +109,7 @@ class SearchController: UIViewController {
         return texte
     }()
 
-    let searchRecipes: UIButton = {
+    lazy var searchRecipes: UIButton = {
         let button = UIButton()
         button.setTitle("Search for recipes", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -117,6 +117,7 @@ class SearchController: UIViewController {
         button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .footnote)
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "search for recipes", hint: "Pressed button to search recipes with ingredients")
+        button.addTarget(self, action: #selector(serachRecip), for: .touchUpInside)
         return button
     }()
 
@@ -134,6 +135,7 @@ class SearchController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "Chalkduster", size: 25)!,
                                                                    .foregroundColor: UIColor.white]
         navigationController?.navigationBar.topItem?.title = "Reciplease"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
 
         // MARK: - Setup
         setupView()
@@ -275,5 +277,13 @@ extension SearchController: UITextFieldDelegate {
         inputIngredient.resignFirstResponder()
         addIngredient()
         return true
+    }
+}
+
+// MARK: - Serach Button
+extension SearchController {
+    @objc func serachRecip() {
+        let newController = ResultSearchViewController()
+        self.navigationController?.pushViewController(newController, animated: true)
     }
 }

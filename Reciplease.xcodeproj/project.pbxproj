@@ -10,7 +10,13 @@
 		471648722AC1316D003097F5 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471648712AC1316D003097F5 /* SearchController.swift */; };
 		4728D4752AC843030091D430 /* searchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728D4742AC843030091D430 /* searchViewModel.swift */; };
 		4728D4792AC85A970091D430 /* SearchViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728D4782AC85A970091D430 /* SearchViewModelTest.swift */; };
+		4728D47B2AC86CBE0091D430 /* ResultSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728D47A2AC86CBE0091D430 /* ResultSearchViewController.swift */; };
 		47345E7D2AC6868D00EA67A6 /* UITextView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47345E7C2AC6868D00EA67A6 /* UITextView+.swift */; };
+		4738F1192AC91F1E0014FD09 /* RecipAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738F1182AC91F1E0014FD09 /* RecipAPIModel.swift */; };
+		4738F11B2AC925EC0014FD09 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738F11A2AC925EC0014FD09 /* Repository.swift */; };
+		4738F11E2AC9272E0014FD09 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738F11D2AC9272E0014FD09 /* APIKey.swift */; };
+		4738F1212AC928FA0014FD09 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4738F1202AC928FA0014FD09 /* Alamofire */; };
+		4738F1252AC92F480014FD09 /* APIKeyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738F1242AC92F480014FD09 /* APIKeyTest.swift */; };
 		4777915D2ABF0B6400ABA120 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4777915C2ABF0B6400ABA120 /* UIColor+.swift */; };
 		4789DF702AC43DA200F31373 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4789DF6F2AC43DA200F31373 /* UIView+.swift */; };
 		4799095B2ABCCD540056753E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799095A2ABCCD540056753E /* AppDelegate.swift */; };
@@ -19,7 +25,6 @@
 		479909652ABCCD540056753E /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 479909632ABCCD540056753E /* Reciplease.xcdatamodeld */; };
 		479909672ABCCD550056753E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 479909662ABCCD550056753E /* Assets.xcassets */; };
 		4799096A2ABCCD550056753E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 479909682ABCCD550056753E /* LaunchScreen.storyboard */; };
-		479909752ABCCD550056753E /* RecipleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479909742ABCCD550056753E /* RecipleaseTests.swift */; };
 		4799097F2ABCCD550056753E /* RecipleaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799097E2ABCCD550056753E /* RecipleaseUITests.swift */; };
 		479909812ABCCD550056753E /* RecipleaseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479909802ABCCD550056753E /* RecipleaseUITestsLaunchTests.swift */; };
 		47A5C5E32AC532000052BC0D /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A5C5E22AC532000052BC0D /* UILabel+.swift */; };
@@ -49,7 +54,12 @@
 		471648712AC1316D003097F5 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		4728D4742AC843030091D430 /* searchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchViewModel.swift; sourceTree = "<group>"; };
 		4728D4782AC85A970091D430 /* SearchViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTest.swift; sourceTree = "<group>"; };
+		4728D47A2AC86CBE0091D430 /* ResultSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchViewController.swift; sourceTree = "<group>"; };
 		47345E7C2AC6868D00EA67A6 /* UITextView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+.swift"; sourceTree = "<group>"; };
+		4738F1182AC91F1E0014FD09 /* RecipAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipAPIModel.swift; sourceTree = "<group>"; };
+		4738F11A2AC925EC0014FD09 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		4738F11D2AC9272E0014FD09 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		4738F1242AC92F480014FD09 /* APIKeyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyTest.swift; sourceTree = "<group>"; };
 		4777915C2ABF0B6400ABA120 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		4789DF6F2AC43DA200F31373 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		479909572ABCCD540056753E /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,7 +71,6 @@
 		479909692ABCCD550056753E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4799096B2ABCCD550056753E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		479909702ABCCD550056753E /* RecipleaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		479909742ABCCD550056753E /* RecipleaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseTests.swift; sourceTree = "<group>"; };
 		4799097A2ABCCD550056753E /* RecipleaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4799097E2ABCCD550056753E /* RecipleaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseUITests.swift; sourceTree = "<group>"; };
 		479909802ABCCD550056753E /* RecipleaseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -76,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4738F1212AC928FA0014FD09 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,13 +106,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4728D4732AC842DE0091D430 /* SearchController */ = {
+		4728D4732AC842DE0091D430 /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				471648712AC1316D003097F5 /* SearchController.swift */,
 				4728D4742AC843030091D430 /* searchViewModel.swift */,
 			);
-			path = SearchController;
+			path = Search;
+			sourceTree = "<group>";
+		};
+		4738F11C2AC9270D0014FD09 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				4738F1182AC91F1E0014FD09 /* RecipAPIModel.swift */,
+				4738F11A2AC925EC0014FD09 /* Repository.swift */,
+				4738F11D2AC9272E0014FD09 /* APIKey.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		4738F1222AC92EFD0014FD09 /* SearchTest */ = {
+			isa = PBXGroup;
+			children = (
+				4728D4782AC85A970091D430 /* SearchViewModelTest.swift */,
+			);
+			path = SearchTest;
+			sourceTree = "<group>";
+		};
+		4738F1232AC92F0F0014FD09 /* NetworkTest */ = {
+			isa = PBXGroup;
+			children = (
+				4738F1242AC92F480014FD09 /* APIKeyTest.swift */,
+			);
+			path = NetworkTest;
 			sourceTree = "<group>";
 		};
 		4777915B2ABF0B4F00ABA120 /* Common */ = {
@@ -144,8 +180,10 @@
 				4799095A2ABCCD540056753E /* AppDelegate.swift */,
 				4799095C2ABCCD540056753E /* SceneDelegate.swift */,
 				47C1ACB72ABDA4790049E043 /* TabBarController.swift */,
-				4728D4732AC842DE0091D430 /* SearchController */,
+				4728D47A2AC86CBE0091D430 /* ResultSearchViewController.swift */,
+				4728D4732AC842DE0091D430 /* Search */,
 				4777915B2ABF0B4F00ABA120 /* Common */,
+				4738F11C2AC9270D0014FD09 /* Network */,
 				47C6C9802ABD43110000D50B /* Ressources */,
 				4799095E2ABCCD540056753E /* ViewController.swift */,
 				479909632ABCCD540056753E /* Reciplease.xcdatamodeld */,
@@ -156,8 +194,8 @@
 		479909732ABCCD550056753E /* RecipleaseTests */ = {
 			isa = PBXGroup;
 			children = (
-				479909742ABCCD550056753E /* RecipleaseTests.swift */,
-				4728D4782AC85A970091D430 /* SearchViewModelTest.swift */,
+				4738F1232AC92F0F0014FD09 /* NetworkTest */,
+				4738F1222AC92EFD0014FD09 /* SearchTest */,
 			);
 			path = RecipleaseTests;
 			sourceTree = "<group>";
@@ -198,6 +236,9 @@
 			dependencies = (
 			);
 			name = Reciplease;
+			packageProductDependencies = (
+				4738F1202AC928FA0014FD09 /* Alamofire */,
+			);
 			productName = Reciplease;
 			productReference = 479909572ABCCD540056753E /* Reciplease.app */;
 			productType = "com.apple.product-type.application";
@@ -270,6 +311,9 @@
 				Base,
 			);
 			mainGroup = 4799094E2ABCCD530056753E;
+			packageReferences = (
+				4738F11F2AC928FA0014FD09 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 479909582ABCCD540056753E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -333,8 +377,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4738F1192AC91F1E0014FD09 /* RecipAPIModel.swift in Sources */,
 				479909652ABCCD540056753E /* Reciplease.xcdatamodeld in Sources */,
 				4728D4752AC843030091D430 /* searchViewModel.swift in Sources */,
+				4728D47B2AC86CBE0091D430 /* ResultSearchViewController.swift in Sources */,
 				47345E7D2AC6868D00EA67A6 /* UITextView+.swift in Sources */,
 				47A5C5E72AC5342A0052BC0D /* UItextField+.swift in Sources */,
 				4799095F2ABCCD540056753E /* ViewController.swift in Sources */,
@@ -342,10 +388,12 @@
 				4799095B2ABCCD540056753E /* AppDelegate.swift in Sources */,
 				47A5C5E32AC532000052BC0D /* UILabel+.swift in Sources */,
 				471648722AC1316D003097F5 /* SearchController.swift in Sources */,
+				4738F11B2AC925EC0014FD09 /* Repository.swift in Sources */,
 				47C1ACB82ABDA4790049E043 /* TabBarController.swift in Sources */,
 				4799095D2ABCCD540056753E /* SceneDelegate.swift in Sources */,
 				4777915D2ABF0B6400ABA120 /* UIColor+.swift in Sources */,
 				47A5C5E52AC532DD0052BC0D /* UIButton+.swift in Sources */,
+				4738F11E2AC9272E0014FD09 /* APIKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,8 +401,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4738F1252AC92F480014FD09 /* APIKeyTest.swift in Sources */,
 				4728D4792AC85A970091D430 /* SearchViewModelTest.swift in Sources */,
-				479909752ABCCD550056753E /* RecipleaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +737,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4738F11F2AC928FA0014FD09 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4738F1202AC928FA0014FD09 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4738F11F2AC928FA0014FD09 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		479909632ABCCD540056753E /* Reciplease.xcdatamodeld */ = {
