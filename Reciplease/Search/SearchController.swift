@@ -132,6 +132,7 @@ class SearchController: UIViewController {
 
         // Init navigation controller
         view.backgroundColor = .anthraciteGray
+        navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "Chalkduster", size: 25)!,
                                                                    .foregroundColor: UIColor.white]
         navigationController?.navigationBar.topItem?.title = "Reciplease"
@@ -284,6 +285,7 @@ extension SearchController: UITextFieldDelegate {
 extension SearchController {
     @objc func serachRecip() {
         let newController = ResultSearchViewController()
+        newController.title = "Reciplease"
         self.navigationController?.pushViewController(newController, animated: true)
     }
 }
