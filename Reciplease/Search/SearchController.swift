@@ -286,7 +286,7 @@ extension SearchController: UITextFieldDelegate {
 // MARK: - Serach Button
 extension SearchController {
     @objc func serachRecip() {
-        let newController = ResultSearchViewController()
+        let newController = ResultSearchViewController(ingredients: viewModel.ingredients)
         newController.title = "Reciplease"
         self.navigationController?.pushViewController(newController, animated: true)
     }

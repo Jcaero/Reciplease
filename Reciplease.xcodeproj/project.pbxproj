@@ -153,6 +153,14 @@
 			path = NetworkTest;
 			sourceTree = "<group>";
 		};
+		4750F4012ACBC464005FC924 /* ResultSearch */ = {
+			isa = PBXGroup;
+			children = (
+				4728D47A2AC86CBE0091D430 /* ResultSearchViewController.swift */,
+			);
+			path = ResultSearch;
+			sourceTree = "<group>";
+		};
 		4777915B2ABF0B4F00ABA120 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,8 +200,8 @@
 				4799095A2ABCCD540056753E /* AppDelegate.swift */,
 				4799095C2ABCCD540056753E /* SceneDelegate.swift */,
 				47C1ACB72ABDA4790049E043 /* TabBarController.swift */,
-				4728D47A2AC86CBE0091D430 /* ResultSearchViewController.swift */,
 				4728D4732AC842DE0091D430 /* Search */,
+				4750F4012ACBC464005FC924 /* ResultSearch */,
 				4777915B2ABF0B4F00ABA120 /* Common */,
 				4738F11C2AC9270D0014FD09 /* Network */,
 				47C6C9802ABD43110000D50B /* Ressources */,

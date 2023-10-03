@@ -11,7 +11,7 @@ import Combine
 class SearchViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
 
-    private var ingredients: Set<String> = []
+    var ingredients: [String] = []
     @Published var ingredientList: String = ""
 
     func addIngredient(_ name: String?) {
@@ -20,7 +20,7 @@ class SearchViewModel: ObservableObject {
               ingredientList.contains(ingredient) == false
         else { return}
 
-        ingredients.insert(ingredient)
+        ingredients.append(ingredient)
 
         switch ingredientList {
         case "": ingredientList = "- " + ingredient
