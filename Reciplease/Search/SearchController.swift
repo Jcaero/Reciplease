@@ -138,12 +138,14 @@ class SearchController: UIViewController {
         navigationController?.navigationBar.topItem?.title = "Reciplease"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
 
-        // MARK: - Setup
+        // setup
         setupView()
         updateDisplayAccessibility()
+        setupTapGesture()
+
         inputIngredient.delegate = self
 
-        // MARK: - Assigne publisher
+        // Assigne publisher
         viewModel.$ingredientList
             .assign(to: \.text, on: self.ingredientListView)
             .store(in: &subscriptions)
@@ -270,7 +272,7 @@ extension SearchController {
 // MARK: - TextField
 extension SearchController: UITextFieldDelegate {
 
-    private func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         inputIngredient.resignFirstResponder()
     }
 
@@ -287,5 +289,13 @@ extension SearchController {
         let newController = ResultSearchViewController()
         newController.title = "Reciplease"
         self.navigationController?.pushViewController(newController, animated: true)
+    }
+}
+
+// MARK: - TapGesture
+extension SearchController {
+    private func setupTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tap)
     }
 }

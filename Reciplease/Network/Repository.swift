@@ -18,8 +18,9 @@ class Repository: ObservableObject {
     }
 
     func fetchRecip(_ liste: [String]) -> AnyPublisher<API.RecipResponse, Error> {
-        let ingredients = transformInString(liste)
+        let ingredients = liste.joined(separator: " ")
         let url = API.EndPoint.recip(ingredients).url
+        print("\(url)")
 
         return AF.request(url, method: .get, parameters: nil)
             .publishDecodable(type: API.RecipResponse.self)
@@ -27,16 +28,5 @@ class Repository: ObservableObject {
             .mapError {$0 as Error}
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
-    }
-
-    private func transformInString(_ liste: [String]) -> String {
-        var ingredients: String = ""
-        liste.forEach { ingredient in
-            switch ingredients {
-            case "": ingredients = ingredient
-            default: ingredients = ingredients + " " + ingredient
-            }
-        }
-        return ingredients
     }
 }
