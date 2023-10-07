@@ -49,7 +49,7 @@ class RecipeCell: UITableViewCell {
 
     let thumb: UIImageView = {
        let image = UIImageView()
-        image.image = UIImage(systemName: "hand.thumbsup")
+        image.image = UIImage(systemName: "hand.thumbsup.fill")
         image.tintColor = .white
         return image
     }()
@@ -65,6 +65,7 @@ class RecipeCell: UITableViewCell {
        let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
+        stackView.alignment = .firstBaseline
         stackView.spacing = 5
         return stackView
     }()
@@ -73,6 +74,7 @@ class RecipeCell: UITableViewCell {
        let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
+        stackView.alignment = .firstBaseline
         stackView.spacing = 5
         return stackView
     }()
@@ -84,8 +86,12 @@ class RecipeCell: UITableViewCell {
         stackView.spacing = 5
         stackView.layer.cornerRadius = 5
         stackView.backgroundColor = .anthraciteGray
+
         stackView.layer.borderColor = UIColor.white.cgColor
         stackView.layer.borderWidth = 1
+        stackView.layoutMargins = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        stackView.isLayoutMarginsRelativeArrangement = true
+
         return stackView
     }()
 
@@ -106,7 +112,12 @@ class RecipeCell: UITableViewCell {
     }
 
     private func setupUI() {
-        [title, ingredient, time, rate, thumb, clock, backGroundImage, infoStackView, timeStackView, rateStackView].forEach {
+        [title,
+         ingredient,
+         infoStackView,
+         timeStackView, time, clock,
+         rateStackView, rate, thumb,
+         backGroundImage].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -117,12 +128,11 @@ class RecipeCell: UITableViewCell {
         rateStackView.addArrangedSubview(thumb)
         timeStackView.addArrangedSubview(time)
         timeStackView.addArrangedSubview(clock)
-        
+
         NSLayoutConstraint.activate([
             infoStackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             infoStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
-            infoStackView.widthAnchor.constraint(equalTo: infoStackView.heightAnchor),
-//            infoStackView.heightAnchor.constraint(equalToConstant: 70)
+            infoStackView.widthAnchor.constraint(equalTo: infoStackView.heightAnchor)
         ])
 
         addSubview(title)
