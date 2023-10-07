@@ -64,7 +64,7 @@ class RecipeCell: UITableViewCell {
     let rateStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         stackView.alignment = .firstBaseline
         stackView.spacing = 5
         return stackView
@@ -73,7 +73,7 @@ class RecipeCell: UITableViewCell {
     let timeStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         stackView.alignment = .firstBaseline
         stackView.spacing = 5
         return stackView
@@ -130,9 +130,10 @@ class RecipeCell: UITableViewCell {
         timeStackView.addArrangedSubview(clock)
 
         NSLayoutConstraint.activate([
-            infoStackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            infoStackView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             infoStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
-            infoStackView.widthAnchor.constraint(equalTo: infoStackView.heightAnchor)
+            infoStackView.widthAnchor.constraint(equalTo: infoStackView.heightAnchor),
+            clock.widthAnchor.constraint(equalTo: thumb.widthAnchor)
         ])
 
         addSubview(title)
@@ -153,7 +154,11 @@ class RecipeCell: UITableViewCell {
     func setupCell(with recipe: Recipe) {
         title.text = recipe.label
         ingredient.text = recipe.ingredients[0].food
-        time.text = String(recipe.totalTime)
+        if recipe.totalTime >= 60 {
+            time.text = String(recipe.totalTime / 60) + "h"
+        } else {
+            time.text = String(recipe.totalTime) + "m"
+        }
         rate.text = "10k"
     }
 }
