@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		471648722AC1316D003097F5 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471648712AC1316D003097F5 /* SearchController.swift */; };
-		471C5B2F2ACCB296007E328B /* RecipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471C5B2E2ACCB296007E328B /* RecipCell.swift */; };
+		471C5B2F2ACCB296007E328B /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471C5B2E2ACCB296007E328B /* RecipeCell.swift */; };
 		4728D4752AC843030091D430 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728D4742AC843030091D430 /* SearchViewModel.swift */; };
 		4728D4792AC85A970091D430 /* SearchViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728D4782AC85A970091D430 /* SearchViewModelTest.swift */; };
 		4728D47B2AC86CBE0091D430 /* ResultSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728D47A2AC86CBE0091D430 /* ResultSearchViewController.swift */; };
@@ -58,7 +58,7 @@
 
 /* Begin PBXFileReference section */
 		471648712AC1316D003097F5 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
-		471C5B2E2ACCB296007E328B /* RecipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipCell.swift; sourceTree = "<group>"; };
+		471C5B2E2ACCB296007E328B /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 		4728D4742AC843030091D430 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		4728D4782AC85A970091D430 /* SearchViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTest.swift; sourceTree = "<group>"; };
 		4728D47A2AC86CBE0091D430 /* ResultSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchViewController.swift; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 			children = (
 				4728D47A2AC86CBE0091D430 /* ResultSearchViewController.swift */,
 				4750F4022ACBCAB4005FC924 /* ResultSearchViewModel.swift */,
-				471C5B2E2ACCB296007E328B /* RecipCell.swift */,
+				471C5B2E2ACCB296007E328B /* RecipeCell.swift */,
 			);
 			path = ResultSearch;
 			sourceTree = "<group>";
@@ -417,7 +417,7 @@
 				47A5C5E32AC532000052BC0D /* UILabel+.swift in Sources */,
 				471648722AC1316D003097F5 /* SearchController.swift in Sources */,
 				4738F11B2AC925EC0014FD09 /* Repository.swift in Sources */,
-				471C5B2F2ACCB296007E328B /* RecipCell.swift in Sources */,
+				471C5B2F2ACCB296007E328B /* RecipeCell.swift in Sources */,
 				47C1ACB82ABDA4790049E043 /* TabBarController.swift in Sources */,
 				4799095D2ABCCD540056753E /* SceneDelegate.swift in Sources */,
 				4777915D2ABF0B6400ABA120 /* UIColor+.swift in Sources */,

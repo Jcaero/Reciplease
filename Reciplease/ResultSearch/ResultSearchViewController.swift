@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class ResultSearchViewController: UIViewController {
 
     private var ingredients: [String] = []
     private let viewModel = ResultSearchViewModel()
+    var cancellables = Set<AnyCancellable>()
 
     // MARK: - liste of UI
     lazy var activityIndicator: UIActivityIndicatorView = {
@@ -22,6 +24,8 @@ class ResultSearchViewController: UIViewController {
         activityIndicator.startAnimating()
         return activityIndicator
     }()
+
+    let tableView = UITableView()
 
     // MARK: - Init
     init(ingredients: [String] = []) {
@@ -36,11 +40,18 @@ class ResultSearchViewController: UIViewController {
     // MARK: - Cicle life
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .anthraciteGray
-        setupIndicator()
-    }
+//        tableView.autoresizingMask = .flexibleHeight
 
-    override func viewDidAppear(_ animated: Bool) {
+//        setupTableView()
+        setupIndicator()
+        viewModel.$isLoading
+            .sink { [weak self] response in
+                if response == false {
+                    self?.setupTableView()
+//                    self?.tableView.reloadData()
+                }
+            }.store(in: &cancellables)
+
         viewModel.fetchInitRecipes(with: ingredients)
     }
 
@@ -52,5 +63,39 @@ class ResultSearchViewController: UIViewController {
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(RecipeCell.self, forCellReuseIdentifier: "RecipeCell")
+
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        NSLayoutConstraint.activate([
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+        ])
+    }
+}
+
+extension ResultSearchViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.recipes.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? RecipeCell else {
+            print("erreur de cell")
+            return UITableViewCell()
+        }
+        cell.setupCell(with: viewModel.recipes[indexPath.row].recipe)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
     }
 }

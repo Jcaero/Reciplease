@@ -12,7 +12,11 @@ class ResultSearchViewModel: ObservableObject {
 
     var cancellables = Set<AnyCancellable>()
 
+    var recipes: [Hit] = []
+    @Published var isLoading = true
+
     func fetchInitRecipes(with ingredients: [String]) {
+        self.isLoading = true
         Repository().fetchRecip(ingredients)
             .sink { completion in
             switch completion {
@@ -22,7 +26,8 @@ class ResultSearchViewModel: ObservableObject {
                 break
             }
         } receiveValue: { data in
-            print("\(data.hits.count)")
+            self.recipes = data.hits
+            self.isLoading = false
         }.store(in: &cancellables)
     }
 }

@@ -7,21 +7,22 @@
 
 import UIKit
 
-class RecipCell: UITableViewCell {
+class RecipeCell: UITableViewCell {
 
     // MARK: - liste of UI
     let title: UILabel = {
        let label = UILabel()
-        label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .headline)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .headline)
         label.textColor = .white
         label.textAlignment = .left
+        label.numberOfLines = 1
         label.setAccessibility(with: .header, label: "Recipe Title", hint: "title of the recipe")
         return label
     }()
 
     let ingredient: UILabel = {
        let label = UILabel()
-        label.setupDynamicTextWith(policeName: "Symbol", size: 10, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
         label.textColor = .white
         label.textAlignment = .left
         label.setAccessibility(with: .header, label: "ingredients", hint: "ingredients of the recipe")
@@ -30,7 +31,7 @@ class RecipCell: UITableViewCell {
 
     let time: UILabel = {
        let label = UILabel()
-        label.setupDynamicTextWith(policeName: "Symbol", size: 10, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
         label.textColor = .white
         label.textAlignment = .center
         label.setAccessibility(with: .header, label: "time", hint: "duration of the recipe")
@@ -39,7 +40,7 @@ class RecipCell: UITableViewCell {
 
     let rate: UILabel = {
        let label = UILabel()
-        label.setupDynamicTextWith(policeName: "Symbol", size: 10, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
         label.textColor = .white
         label.textAlignment = .center
         label.setAccessibility(with: .header, label: "rate", hint: "rate of the recipe")
@@ -49,33 +50,38 @@ class RecipCell: UITableViewCell {
     let thumb: UIImageView = {
        let image = UIImageView()
         image.image = UIImage(systemName: "hand.thumbsup")
+        image.tintColor = .white
         return image
     }()
 
     let clock: UIImageView = {
        let image = UIImageView()
         image.image = UIImage(systemName: "clock")
+        image.tintColor = .white
         return image
     }()
 
     let rateStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 5
         return stackView
     }()
-    
+
     let timeStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 5
         return stackView
     }()
 
     let infoStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 5
         stackView.layer.cornerRadius = 5
         stackView.backgroundColor = .anthraciteGray
         stackView.layer.borderColor = UIColor.white.cgColor
@@ -92,8 +98,9 @@ class RecipCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
+        self.backgroundColor = .anthraciteGray
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -103,20 +110,6 @@ class RecipCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
-        addSubview(ingredient)
-        NSLayoutConstraint.activate([
-            ingredient.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
-            ingredient.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            ingredient.rightAnchor.constraint(equalTo: rightAnchor, constant: -10)
-        ])
-
-        addSubview(title)
-        NSLayoutConstraint.activate([
-            ingredient.bottomAnchor.constraint(equalTo: ingredient.topAnchor, constant: -5),
-            ingredient.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            ingredient.rightAnchor.constraint(equalTo: rightAnchor, constant: -10)
-        ])
-
         addSubview(infoStackView)
         infoStackView.addArrangedSubview(rateStackView)
         infoStackView.addArrangedSubview(timeStackView)
@@ -124,17 +117,32 @@ class RecipCell: UITableViewCell {
         rateStackView.addArrangedSubview(thumb)
         timeStackView.addArrangedSubview(time)
         timeStackView.addArrangedSubview(clock)
-
+        
         NSLayoutConstraint.activate([
-            ingredient.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            ingredient.bottomAnchor.constraint(equalTo: title.topAnchor, constant: -10),
+            infoStackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            infoStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+            infoStackView.widthAnchor.constraint(equalTo: infoStackView.heightAnchor),
+//            infoStackView.heightAnchor.constraint(equalToConstant: 70)
+        ])
+
+        addSubview(title)
+        NSLayoutConstraint.activate([
+            title.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 5),
+            title.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            title.rightAnchor.constraint(equalTo: rightAnchor, constant: -10)
+        ])
+
+        addSubview(ingredient)
+        NSLayoutConstraint.activate([
+            ingredient.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5),
+            ingredient.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
             ingredient.rightAnchor.constraint(equalTo: rightAnchor, constant: -10)
         ])
     }
 
     func setupCell(with recipe: Recipe) {
         title.text = recipe.label
-        ingredient.text = recipe.ingredientLines[0]
+        ingredient.text = recipe.ingredients[0].food
         time.text = String(recipe.totalTime)
         rate.text = "10k"
     }
