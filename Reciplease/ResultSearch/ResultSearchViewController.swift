@@ -25,7 +25,12 @@ class ResultSearchViewController: UIViewController {
         return activityIndicator
     }()
 
-    let tableView = UITableView()
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(RecipeCell.self, forCellReuseIdentifier: "RecipeCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        return tableView
+    }()
 
     // MARK: - Init
     init(ingredients: [String] = []) {
@@ -37,21 +42,18 @@ class ResultSearchViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Cicle life
+    // MARK: - Cycle of life
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tableView.autoresizingMask = .flexibleHeight
-
-//        setupTableView()
+        
         setupIndicator()
         viewModel.$isLoading
             .sink { [weak self] response in
                 if response == false {
                     self?.setupTableView()
-//                    self?.tableView.reloadData()
                 }
             }.store(in: &cancellables)
-
+        
         viewModel.fetchInitRecipes(with: ingredients)
     }
 
@@ -68,8 +70,7 @@ class ResultSearchViewController: UIViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(RecipeCell.self, forCellReuseIdentifier: "RecipeCell")
-
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
@@ -95,7 +96,7 @@ extension ResultSearchViewController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
     }
 }

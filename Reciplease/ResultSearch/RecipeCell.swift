@@ -15,7 +15,7 @@ class RecipeCell: UITableViewCell {
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .headline)
         label.textColor = .white
         label.textAlignment = .left
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "Recipe Title", hint: "title of the recipe")
         return label
     }()
@@ -25,6 +25,7 @@ class RecipeCell: UITableViewCell {
         label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
         label.textColor = .white
         label.textAlignment = .left
+        label.numberOfLines = 1
         label.setAccessibility(with: .header, label: "ingredients", hint: "ingredients of the recipe")
         return label
     }()
@@ -101,6 +102,7 @@ class RecipeCell: UITableViewCell {
         return image
     }()
 
+    //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -111,6 +113,7 @@ class RecipeCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    //MARK: - Fonction
     private func setupUI() {
         [title,
          ingredient,
@@ -130,15 +133,21 @@ class RecipeCell: UITableViewCell {
         timeStackView.addArrangedSubview(clock)
 
         NSLayoutConstraint.activate([
-            infoStackView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            infoStackView.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             infoStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
-            infoStackView.widthAnchor.constraint(equalTo: infoStackView.heightAnchor),
-            clock.widthAnchor.constraint(equalTo: thumb.widthAnchor)
+            infoStackView.widthAnchor.constraint(equalTo: infoStackView.heightAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            clock.heightAnchor.constraint(equalTo: time.heightAnchor),
+            clock.widthAnchor.constraint(equalTo: thumb.widthAnchor),
+            clock.widthAnchor.constraint(equalTo: clock.heightAnchor),
+            thumb.widthAnchor.constraint(equalTo: thumb.heightAnchor)
         ])
 
         addSubview(title)
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 5),
+            title.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 10),
             title.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
             title.rightAnchor.constraint(equalTo: rightAnchor, constant: -10)
         ])
@@ -147,13 +156,21 @@ class RecipeCell: UITableViewCell {
         NSLayoutConstraint.activate([
             ingredient.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5),
             ingredient.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            ingredient.rightAnchor.constraint(equalTo: rightAnchor, constant: -10)
+            ingredient.rightAnchor.constraint(equalTo: title.rightAnchor),
+            ingredient.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
 
     func setupCell(with recipe: Recipe) {
         title.text = recipe.label
-        ingredient.text = recipe.ingredients[0].food
+        let text = recipe.ingredients.reduce("") { partialResult, ingredient in
+            if partialResult == "" {
+                partialResult + ingredient.food
+            } else {
+                partialResult + ", " + ingredient.food
+            }
+        }
+        ingredient.text = text
         if recipe.totalTime >= 60 {
             time.text = String(recipe.totalTime / 60) + "h"
         } else {

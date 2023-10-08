@@ -51,6 +51,7 @@ class SearchController: UIViewController {
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "Add ingredient", hint: "Pressed button to add ingredient")
         button.addTarget(self, action: #selector(addIngredient), for: .touchUpInside)
+        button.accessibilityIdentifier = "Add"
         return button
     }()
 
@@ -61,6 +62,7 @@ class SearchController: UIViewController {
         textField.textAlignment = .left
         textField.textColor = .darkGray
         textField.setAccessibility(with: .searchField, label: "input Ingredients", hint: "Area to input your ingredient")
+        textField.accessibilityIdentifier = "inputTextFields"
         return textField
     }()
 
@@ -118,6 +120,7 @@ class SearchController: UIViewController {
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "search for recipes", hint: "Pressed button to search recipes with ingredients")
         button.addTarget(self, action: #selector(serachRecip), for: .touchUpInside)
+        button.accessibilityIdentifier = "searchButton"
         return button
     }()
 
@@ -126,7 +129,7 @@ class SearchController: UIViewController {
 
     private let viewModel = SearchViewModel()
 
-    // MARK: - Cycle life
+    // MARK: - Cycle of life
     override func viewDidLoad() {
         super.viewDidLoad()
 
