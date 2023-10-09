@@ -102,7 +102,7 @@ class RecipeCell: UITableViewCell {
         return image
     }()
 
-    //MARK: - Init
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -113,7 +113,7 @@ class RecipeCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    //MARK: - Fonction
+    // MARK: - Fonction
     private func setupUI() {
         [title,
          ingredient,

@@ -12,6 +12,7 @@ class ResultSearchViewController: UIViewController {
 
     private var ingredients: [String] = []
     private let viewModel = ResultSearchViewModel()
+
     var cancellables = Set<AnyCancellable>()
 
     // MARK: - liste of UI
@@ -29,6 +30,7 @@ class ResultSearchViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(RecipeCell.self, forCellReuseIdentifier: "RecipeCell")
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.isHidden = true
         return tableView
     }()
 
@@ -45,19 +47,24 @@ class ResultSearchViewController: UIViewController {
     // MARK: - Cycle of life
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupTableView()
         setupIndicator()
-        viewModel.$isLoading
-            .sink { [weak self] response in
-                if response == false {
-                    self?.setupTableView()
-                }
-            }.store(in: &cancellables)
-        
+        setupBlinding()
+
         viewModel.fetchInitRecipes(with: ingredients)
     }
 
     // MARK: - Setup Function
+    private func setupBlinding() {
+        viewModel.$isNetworkSuccessful
+            .receive(on: RunLoop.main)
+            .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
+            .sink { [weak self] response in
+                if response! {
+                    self?.updateTableView()
+                }
+            }.store(in: &cancellables)
+    }
 
     private func setupIndicator() {
         view.addSubview(activityIndicator)
@@ -70,7 +77,7 @@ class ResultSearchViewController: UIViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        
+
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
@@ -79,6 +86,12 @@ class ResultSearchViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
+    }
+
+    private func updateTableView() {
+        tableView.isHidden = false
+        activityIndicator.stopAnimating()
+        tableView.reloadData()
     }
 }
 
