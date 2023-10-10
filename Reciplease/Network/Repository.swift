@@ -29,13 +29,4 @@ class Repository: ObservableObject {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
-
-    func downloadImage( url: String) -> AnyPublisher<Data, Error> {
-        return AF.request(url, method: .get, parameters: nil)
-            .publishData()
-            .value()
-            .mapError {$0 as Error}
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
-    }
 }

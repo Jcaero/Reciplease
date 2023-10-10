@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class RecipeCell: UITableViewCell {
 
@@ -99,6 +100,8 @@ class RecipeCell: UITableViewCell {
     let backGroundImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        image.image = UIImage(named: "image_non_dispo")
         return image
     }()
 
@@ -119,8 +122,7 @@ class RecipeCell: UITableViewCell {
          ingredient,
          infoStackView,
          timeStackView, time, clock,
-         rateStackView, rate, thumb,
-         backGroundImage].forEach {
+         rateStackView, rate, thumb].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -170,6 +172,7 @@ class RecipeCell: UITableViewCell {
                 partialResult + ", " + ingredient.food
             }
         }
+
         ingredient.text = text
         if recipe.totalTime >= 60 {
             time.text = String(recipe.totalTime / 60) + "h"
@@ -177,5 +180,7 @@ class RecipeCell: UITableViewCell {
             time.text = String(recipe.totalTime) + "m"
         }
         rate.text = "10k"
+                backGroundImage.downloadImageWith(recipe.images.thumbnail.url)
+        backgroundView = backGroundImage
     }
 }

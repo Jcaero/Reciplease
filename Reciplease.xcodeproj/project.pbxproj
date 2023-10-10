@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		470190492AD55648000A2E65 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470190482AD55648000A2E65 /* UIImageView+.swift */; };
 		471648722AC1316D003097F5 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471648712AC1316D003097F5 /* SearchController.swift */; };
 		471C5B2F2ACCB296007E328B /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471C5B2E2ACCB296007E328B /* RecipeCell.swift */; };
 		4728D4752AC843030091D430 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728D4742AC843030091D430 /* SearchViewModel.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		470190482AD55648000A2E65 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		471648712AC1316D003097F5 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		471C5B2E2ACCB296007E328B /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 		4728D4742AC843030091D430 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 		4777915B2ABF0B4F00ABA120 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				470190482AD55648000A2E65 /* UIImageView+.swift */,
 				4777915C2ABF0B6400ABA120 /* UIColor+.swift */,
 				4789DF6F2AC43DA200F31373 /* UIView+.swift */,
 				47A5C5E22AC532000052BC0D /* UILabel+.swift */,
@@ -420,6 +423,7 @@
 				471C5B2F2ACCB296007E328B /* RecipeCell.swift in Sources */,
 				47C1ACB82ABDA4790049E043 /* TabBarController.swift in Sources */,
 				4799095D2ABCCD540056753E /* SceneDelegate.swift in Sources */,
+				470190492AD55648000A2E65 /* UIImageView+.swift in Sources */,
 				4777915D2ABF0B6400ABA120 /* UIColor+.swift in Sources */,
 				47A5C5E52AC532DD0052BC0D /* UIButton+.swift in Sources */,
 				4738F11E2AC9272E0014FD09 /* APIKey.swift in Sources */,
