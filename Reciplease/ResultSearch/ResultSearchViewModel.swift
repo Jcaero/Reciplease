@@ -13,13 +13,9 @@ class ResultSearchViewModel: ObservableObject {
 
     var cancellables = Set<AnyCancellable>()
 
-    private let repository: Repository
+    private let repository = Repository()
     var recipes: [Hit] = []
     @Published var isNetworkSuccessful: Bool!
-
-    init(repository: Repository = Repository()) {
-        self.repository = repository
-    }
 
     func fetchInitRecipes(with ingredients: [String]) {
         self.isNetworkSuccessful = false

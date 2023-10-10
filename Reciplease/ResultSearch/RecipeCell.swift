@@ -97,13 +97,15 @@ class RecipeCell: UITableViewCell {
         return stackView
     }()
 
-    let backGroundImage: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
-        image.image = UIImage(named: "image_non_dispo")
-        return image
+    let backGroundImage: DownloadableImageView = {
+        let imageView = DownloadableImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = UIImage(named: "image_non_dispo")
+        return imageView
     }()
+
+    static let reuseIdentifier = "RecipeCell"
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -180,7 +182,7 @@ class RecipeCell: UITableViewCell {
             time.text = String(recipe.totalTime) + "m"
         }
         rate.text = "10k"
-                backGroundImage.downloadImageWith(recipe.images.thumbnail.url)
+        backGroundImage.downloadImageWith(recipe.images.thumbnail.url)
         backgroundView = backGroundImage
     }
 }

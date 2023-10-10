@@ -9,9 +9,10 @@ import Foundation
 import UIKit
 import Alamofire
 import Combine
-var cancellables: Set<AnyCancellable> = []
 
-extension UIImageView {
+class DownloadableImageView: UIImageView {
+
+    private var cancellables: Set<AnyCancellable> = []
 
     func downloadImageWith( _ url: String) {
         AF.request(url, method: .get, parameters: nil)

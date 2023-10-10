@@ -8,12 +8,10 @@
 import UIKit
 import Combine
 
-class ResultSearchViewController: UIViewController {
+class ResultSearchViewController: ViewController {
 
-    private var ingredients: [String] = []
+    private var ingredients: [String]
     private let viewModel = ResultSearchViewModel()
-
-    var cancellables = Set<AnyCancellable>()
 
     // MARK: - liste of UI
     lazy var activityIndicator: UIActivityIndicatorView = {
@@ -35,37 +33,19 @@ class ResultSearchViewController: UIViewController {
     }()
 
     // MARK: - Init
-    init(ingredients: [String] = []) {
-        super.init(nibName: nil, bundle: nil)
+    init(ingredients: [String]) {
         self.ingredients = ingredients
+        super.init()
+        setupTableView()
+        setupIndicator()
+        setupBinding()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Cycle of life
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupTableView()
-        setupIndicator()
-        setupBlinding()
-
-        viewModel.fetchInitRecipes(with: ingredients)
-    }
-
     // MARK: - Setup Function
-    private func setupBlinding() {
-        viewModel.$isNetworkSuccessful
-            .receive(on: RunLoop.main)
-            .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
-            .sink { [weak self] response in
-                if response! {
-                    self?.updateTableView()
-                }
-            }.store(in: &cancellables)
-    }
-
     private func setupIndicator() {
         view.addSubview(activityIndicator)
         NSLayoutConstraint.activate([
@@ -88,6 +68,18 @@ class ResultSearchViewController: UIViewController {
         ])
     }
 
+    private func setupBinding() {
+        viewModel.$isNetworkSuccessful
+            .receive(on: RunLoop.main)
+            .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
+            .sink { [weak self] response in
+                guard response != nil else { return }
+                self?.updateTableView()
+            }.store(in: &cancellables)
+
+        viewModel.fetchInitRecipes(with: ingredients)
+    }
+
     private func updateTableView() {
         tableView.isHidden = false
         activityIndicator.stopAnimating()
@@ -95,20 +87,25 @@ class ResultSearchViewController: UIViewController {
     }
 }
 
-extension ResultSearchViewController: UITableViewDelegate, UITableViewDataSource {
+// MARK: - UITableViewDataSource
+
+extension ResultSearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.recipes.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? RecipeCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RecipeCell.reuseIdentifier, for: indexPath) as? RecipeCell else {
             print("erreur de cell")
             return UITableViewCell()
         }
-        cell.setupCell(with: viewModel.recipes[indexPath.row].recipe)
+        let recipe = viewModel.recipes[indexPath.row].recipe
+        cell.setupCell(with: recipe)
         return cell
     }
+}
 
+extension ResultSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }

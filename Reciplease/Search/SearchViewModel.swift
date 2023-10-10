@@ -15,8 +15,7 @@ class SearchViewModel: ObservableObject {
     @Published var ingredientList: String = ""
 
     func addIngredient(_ name: String?) {
-        guard let ingredient = name,
-        ingredient != "",
+        guard let ingredient = name, ingredient != "",
               ingredientList.contains(ingredient) == false
         else { return}
 
