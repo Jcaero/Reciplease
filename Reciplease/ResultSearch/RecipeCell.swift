@@ -97,6 +97,11 @@ class RecipeCell: UITableViewCell {
         return stackView
     }()
 
+    let labelView: UIView = {
+        let view = UIView()
+        return view
+    }()
+
     let backGroundImage: DownloadableImageView = {
         let imageView = DownloadableImageView()
         imageView.contentMode = .scaleAspectFill
@@ -105,17 +110,25 @@ class RecipeCell: UITableViewCell {
         return imageView
     }()
 
+    // MARK: - Properties
     static let reuseIdentifier = "RecipeCell"
+    let gradientLayer = CAGradientLayer()
 
-    // MARK: - Init
+    // MARK: - cycle life
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
         self.backgroundColor = .anthraciteGray
+        setupGradient()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: self.layer)
+        gradientLayer.frame = labelView.bounds
     }
 
     // MARK: - Fonction
@@ -124,7 +137,8 @@ class RecipeCell: UITableViewCell {
          ingredient,
          infoStackView,
          timeStackView, time, clock,
-         rateStackView, rate, thumb].forEach {
+         rateStackView, rate, thumb,
+         labelView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -149,19 +163,27 @@ class RecipeCell: UITableViewCell {
             thumb.widthAnchor.constraint(equalTo: thumb.heightAnchor)
         ])
 
-        addSubview(title)
+        addSubview(labelView)
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 10),
-            title.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            title.rightAnchor.constraint(equalTo: rightAnchor, constant: -10)
+            labelView.topAnchor.constraint(equalTo: infoStackView.bottomAnchor),
+            labelView.leftAnchor.constraint(equalTo: leftAnchor),
+            labelView.rightAnchor.constraint(equalTo: rightAnchor),
+            labelView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
 
-        addSubview(ingredient)
+        labelView.addSubview(title)
+        NSLayoutConstraint.activate([
+            title.topAnchor.constraint(equalTo: labelView.topAnchor, constant: 15),
+            title.leftAnchor.constraint(equalTo: labelView.leftAnchor, constant: 10),
+            title.rightAnchor.constraint(equalTo: labelView.rightAnchor, constant: -10)
+        ])
+
+        labelView.addSubview(ingredient)
         NSLayoutConstraint.activate([
             ingredient.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5),
-            ingredient.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            ingredient.leftAnchor.constraint(equalTo: title.leftAnchor),
             ingredient.rightAnchor.constraint(equalTo: title.rightAnchor),
-            ingredient.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+            ingredient.bottomAnchor.constraint(equalTo: labelView.bottomAnchor, constant: -10)
         ])
     }
 
@@ -184,5 +206,11 @@ class RecipeCell: UITableViewCell {
         rate.text = "10k"
         backGroundImage.downloadImageWith(recipe.images.thumbnail.url)
         backgroundView = backGroundImage
+    }
+
+    private func setupGradient() {
+        gradientLayer.colors = [UIColor.clear, UIColor.black.cgColor]
+        gradientLayer.locations = [0.0, 1.0]
+        labelView.layer.insertSublayer(gradientLayer, at: 0)
     }
 }
