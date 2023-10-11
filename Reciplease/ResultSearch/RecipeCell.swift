@@ -204,7 +204,7 @@ class RecipeCell: UITableViewCell {
             time.text = String(recipe.totalTime) + "m"
         }
         rate.text = "10k"
-        backGroundImage.downloadImageWith(recipe.images.thumbnail.url)
+        backGroundImage.downloadImageWith(recipe.images.regular.url)
         backgroundView = backGroundImage
     }
 
