@@ -124,7 +124,7 @@ class SearchController: UIViewController {
         return button
     }()
 
-    // MARK: - Propriety
+    // MARK: - Proprietie
     private var subscriptions = Set<AnyCancellable>()
 
     private let viewModel = SearchViewModel()
@@ -134,12 +134,7 @@ class SearchController: UIViewController {
         super.viewDidLoad()
 
         // Init navigation controller
-        view.backgroundColor = .anthraciteGray
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "Chalkduster", size: 25)!,
-                                                                   .foregroundColor: UIColor.white]
-        navigationController?.navigationBar.topItem?.title = "Reciplease"
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        initNavigationBar()
 
         // setup
         setupView()
@@ -152,6 +147,22 @@ class SearchController: UIViewController {
         viewModel.$ingredientList
             .assign(to: \.text, on: self.ingredientListView)
             .store(in: &subscriptions)
+    }
+
+    // MARK: - Init navigationBar
+    private func initNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .anthraciteGray
+        appearance.titleTextAttributes = [.font: UIFont(name: "Chalkduster", size: 25)!,
+                                          .foregroundColor: UIColor.white]
+
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+        
+        navigationController?.navigationBar.topItem?.title = "Reciplease"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
     }
 
     // MARK: - Layout

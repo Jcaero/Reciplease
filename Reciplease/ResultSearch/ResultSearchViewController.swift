@@ -57,6 +57,7 @@ class ResultSearchViewController: ViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = .anthraciteGray
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
