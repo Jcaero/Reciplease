@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     var cancellables = Set<AnyCancellable>()
+
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -21,7 +22,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .anthraciteGray
     }
 
     // note: original idea by http://holko.pl/2017/06/26/checking-uiviewcontroller-deallocation,

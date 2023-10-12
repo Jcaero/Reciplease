@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class SearchController: UIViewController {
+class SearchController: ViewController {
     // MARK: - liste of UI
     let searchArea: UIView = {
         let view = UIView()
@@ -160,7 +160,7 @@ class SearchController: UIViewController {
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-        
+
         navigationController?.navigationBar.topItem?.title = "Reciplease"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
     }
