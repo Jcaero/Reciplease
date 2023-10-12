@@ -81,8 +81,8 @@ class ResultSearchViewController: ViewController {
         viewModel.$isAlerte
             .receive(on: RunLoop.main)
             .sink { [weak self] response in
-                guard response == true else { return }
-                self?.returnAndShowSimpleAlerte(with: "Erreur", message: "Pas de recette disponible")
+                guard response != nil else { return }
+                self?.returnAndShowSimpleAlerte(with: "Erreur", message: response!)
             }.store(in: &cancellables)
 
         viewModel.fetchInitRecipes(with: ingredients)

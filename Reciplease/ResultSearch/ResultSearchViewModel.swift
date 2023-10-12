@@ -17,24 +17,23 @@ class ResultSearchViewModel: ObservableObject {
     var recipes: [Hit] = []
 
     @Published var isNetworkSuccessful: Bool!
-    @Published var isAlerte: Bool!
+    @Published var isAlerte: String!
 
     func fetchInitRecipes(with ingredients: [String]) {
         self.isNetworkSuccessful = false
-        self.isAlerte = false
-        
+
         repository.fetchRecip(ingredients)
             .sink { completion in
             switch completion {
             case .finished:
                 break
             case .failure:
-                break
+                self.isAlerte = "Erreur de reseau"
             }
         } receiveValue: { data in
             self.recipes = data.hits
             if self.recipes.isEmpty == true {
-                self.isAlerte = true
+                self.isAlerte = "Pas de recette disponible"
             } else {
                 self.isNetworkSuccessful = true
             }
