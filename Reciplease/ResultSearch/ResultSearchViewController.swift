@@ -78,6 +78,13 @@ class ResultSearchViewController: ViewController {
                 self?.updateTableView()
             }.store(in: &cancellables)
 
+        viewModel.$isAlerte
+            .receive(on: RunLoop.main)
+            .sink { [weak self] response in
+                guard response == true else { return }
+                print("non recip")
+            }.store(in: &cancellables)
+
         viewModel.fetchInitRecipes(with: ingredients)
     }
 

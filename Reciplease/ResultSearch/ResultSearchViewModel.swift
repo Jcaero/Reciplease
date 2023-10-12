@@ -15,21 +15,29 @@ class ResultSearchViewModel: ObservableObject {
 
     private let repository = Repository()
     var recipes: [Hit] = []
+
     @Published var isNetworkSuccessful: Bool!
+    @Published var isAlerte: Bool!
 
     func fetchInitRecipes(with ingredients: [String]) {
         self.isNetworkSuccessful = false
+        self.isAlerte = false
+        
         repository.fetchRecip(ingredients)
             .sink { completion in
             switch completion {
             case .finished:
                 break
             case .failure:
-                print("erreur reseau")
+                break
             }
         } receiveValue: { data in
             self.recipes = data.hits
-            self.isNetworkSuccessful = true
+            if self.recipes.isEmpty == true {
+                self.isAlerte = true
+            } else {
+                self.isNetworkSuccessful = true
+            }
         }.store(in: &cancellables)
     }
 }
