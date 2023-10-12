@@ -82,7 +82,7 @@ class ResultSearchViewController: ViewController {
             .receive(on: RunLoop.main)
             .sink { [weak self] response in
                 guard response == true else { return }
-                print("non recip")
+                self?.returnAndShowSimpleAlerte(with: "Erreur", message: "Pas de recette disponible")
             }.store(in: &cancellables)
 
         viewModel.fetchInitRecipes(with: ingredients)
@@ -92,6 +92,14 @@ class ResultSearchViewController: ViewController {
         tableView.isHidden = false
         activityIndicator.stopAnimating()
         tableView.reloadData()
+    }
+
+    private func returnAndShowSimpleAlerte(with titre: String, message: String) {
+        let alertVC = UIAlertController(title: titre, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }))
+        return self.present(alertVC, animated: true, completion: nil)
     }
 }
 
