@@ -40,18 +40,18 @@ class RecipeCell: UITableViewCell {
         return label
     }()
 
-    let rate: UILabel = {
+    let yield: UILabel = {
        let label = UILabel()
         label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
         label.textColor = .white
         label.textAlignment = .center
-        label.setAccessibility(with: .header, label: "rate", hint: "rate of the recipe")
+        label.setAccessibility(with: .header, label: "yield", hint: "yield of the recipe")
         return label
     }()
 
-    let thumb: UIImageView = {
+    let fork: UIImageView = {
        let image = UIImageView()
-        image.image = UIImage(systemName: "hand.thumbsup.fill")
+        image.image = UIImage(systemName: "fork.knife")
         image.tintColor = .white
         return image
     }()
@@ -63,7 +63,7 @@ class RecipeCell: UITableViewCell {
         return image
     }()
 
-    let rateStackView: UIStackView = {
+    let yieldStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fill
@@ -85,7 +85,7 @@ class RecipeCell: UITableViewCell {
        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-        stackView.spacing = 5
+        stackView.spacing = 10
         stackView.layer.cornerRadius = 5
         stackView.backgroundColor = .anthraciteGray
 
@@ -137,16 +137,16 @@ class RecipeCell: UITableViewCell {
          ingredient,
          infoStackView,
          timeStackView, time, clock,
-         rateStackView, rate, thumb,
+         yieldStackView, yield, fork,
          labelView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
         addSubview(infoStackView)
-        infoStackView.addArrangedSubview(rateStackView)
+        infoStackView.addArrangedSubview(yieldStackView)
         infoStackView.addArrangedSubview(timeStackView)
-        rateStackView.addArrangedSubview(rate)
-        rateStackView.addArrangedSubview(thumb)
+        yieldStackView.addArrangedSubview(yield)
+        yieldStackView.addArrangedSubview(fork)
         timeStackView.addArrangedSubview(time)
         timeStackView.addArrangedSubview(clock)
 
@@ -158,9 +158,9 @@ class RecipeCell: UITableViewCell {
 
         NSLayoutConstraint.activate([
             clock.heightAnchor.constraint(equalTo: time.heightAnchor),
-            clock.widthAnchor.constraint(equalTo: thumb.widthAnchor),
+            clock.widthAnchor.constraint(equalTo: fork.widthAnchor),
             clock.widthAnchor.constraint(equalTo: clock.heightAnchor),
-            thumb.widthAnchor.constraint(equalTo: thumb.heightAnchor)
+            fork.widthAnchor.constraint(equalTo: fork.heightAnchor)
         ])
 
         addSubview(labelView)
@@ -203,7 +203,7 @@ class RecipeCell: UITableViewCell {
         } else {
             time.text = String(recipe.totalTime) + "m"
         }
-        rate.text = "10k"
+        yield.text = String(recipe.yield)
         backGroundImage.downloadImageWith(recipe.images.regular.url)
         backgroundView = backGroundImage
     }
