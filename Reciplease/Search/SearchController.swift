@@ -119,7 +119,7 @@ class SearchController: ViewController {
         button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .footnote)
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "search for recipes", hint: "Pressed button to search recipes with ingredients")
-        button.addTarget(self, action: #selector(serachRecip), for: .touchUpInside)
+        button.addTarget(self, action: #selector(searchRecip), for: .touchUpInside)
         button.accessibilityIdentifier = "searchButton"
         return button
     }()
@@ -297,9 +297,9 @@ extension SearchController: UITextFieldDelegate {
     }
 }
 
-// MARK: - Serach Button
+// MARK: - Search Button
 extension SearchController {
-    @objc func serachRecip() {
+    @objc func searchRecip() {
         guard viewModel.ingredients.isEmpty == false else {return}
 
         let newController = ResultSearchViewController(ingredients: viewModel.ingredients)

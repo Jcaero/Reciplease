@@ -125,4 +125,10 @@ extension ResultSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let newController = DetailController(with: viewModel.recipes[indexPath.row].recipe)
+        newController.title = "Reciplease"
+        self.navigationController?.pushViewController(newController, animated: true)
+    }
 }

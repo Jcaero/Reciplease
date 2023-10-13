@@ -57,18 +57,18 @@ class InfoStackView: UIStackView {
         stackView.spacing = 5
         return stackView
     }()
-    
+
     // MARK: - INIT
     init() {
         super.init(frame: .zero)
         self.initStack()
         self.setupUI()
     }
-    
+
     required init(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     // MARK: - Function
     func setup(with time: Int, yield: Int) {
         if time >= 60 {
@@ -78,7 +78,7 @@ class InfoStackView: UIStackView {
         }
         yieldLabel.text = String(yield)
     }
-    
+
     private func initStack() {
         self.axis = .vertical
         self.distribution = .fillEqually

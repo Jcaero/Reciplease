@@ -67,7 +67,6 @@ class RecipeCell: UITableViewCell {
         }
 
         addSubview(infoStackView)
-
         NSLayoutConstraint.activate([
             infoStackView.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             infoStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
