@@ -20,7 +20,7 @@ class DetailController: ViewController {
 
     let labelView =  GradientView(with: .clear, color2: .black)
 
-    var infoStackView = InfoStackView()
+    var infoStackView = InfoStackView(texteSize: 20)
 
     let titleLabel: UILabel = {
        let label = UILabel()
@@ -34,7 +34,7 @@ class DetailController: ViewController {
 
     let ingredientLabel: UILabel = {
        let label = UILabel()
-        label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
+        label.setupDynamicTextWith(policeName: "Chalkduster", size: 25, style: .body)
         label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = 1
@@ -77,7 +77,7 @@ class DetailController: ViewController {
         super.init()
         backGroundImage.downloadImageWith(recipe.images.regular.url)
         titleLabel.text = recipe.label
-        ingredientListView.text =  "- " + recipe.ingredientLines.joined(separator: "\n - ")
+        ingredientListView.text =  "- " + recipe.ingredientLines.joined(separator: "\n- ")
         infoStackView.setup(with: recipe.totalTime, yield: recipe.yield)
     }
 
@@ -109,7 +109,8 @@ class DetailController: ViewController {
         NSLayoutConstraint.activate([
             infoStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             infoStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            infoStackView.widthAnchor.constraint(equalTo: infoStackView.heightAnchor)
+            infoStackView.widthAnchor.constraint(equalTo: infoStackView.heightAnchor),
+            infoStackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 70)
         ])
 
         view.addSubview(labelView)
@@ -117,8 +118,7 @@ class DetailController: ViewController {
             labelView.leftAnchor.constraint(equalTo: view.leftAnchor),
             labelView.rightAnchor.constraint(equalTo: view.rightAnchor),
             labelView.bottomAnchor.constraint(equalTo: backGroundImage.bottomAnchor),
-            labelView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor),
-            labelView.heightAnchor.constraint(greaterThanOrEqualTo: backGroundImage.heightAnchor, multiplier: 0.3)
+            labelView.topAnchor.constraint(greaterThanOrEqualTo: infoStackView.bottomAnchor, constant: 5)
         ])
 
         labelView.addSubview(titleLabel)
@@ -148,7 +148,7 @@ class DetailController: ViewController {
         NSLayoutConstraint.activate([
             ingredientListView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
             ingredientListView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            ingredientListView.topAnchor.constraint(equalTo: backGroundImage.bottomAnchor, constant: 10),
+            ingredientListView.topAnchor.constraint(equalTo: ingredientLabel.bottomAnchor, constant: 10),
             ingredientListView.bottomAnchor.constraint(equalTo: getDirectionsButton.topAnchor, constant: -10)
         ])
     }
@@ -169,11 +169,12 @@ extension DetailController {
 
         if currentCategory.isAccessibilityCategory {
             getDirectionsButton.setTitle("Directions", for: .normal)
-            infoStackView.isHidden = true
+//            infoStackView.isHidden = true
+            ingredientLabel.isHidden = true
         } else {
             getDirectionsButton.setTitle("Get directions", for: .normal)
-            infoStackView.isHidden = false
-
+//            infoStackView.isHidden = false
+            ingredientLabel.isHidden = false
         }
     }
 }

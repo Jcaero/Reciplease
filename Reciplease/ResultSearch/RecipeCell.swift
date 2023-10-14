@@ -31,7 +31,7 @@ class RecipeCell: UITableViewCell {
         return label
     }()
 
-    var infoStackView = InfoStackView()
+    var infoStackView = InfoStackView(texteSize: 15)
 
     let labelView = GradientView(with: .clear, color2: .black)
 

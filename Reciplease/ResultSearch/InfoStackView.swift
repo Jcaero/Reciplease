@@ -10,7 +10,6 @@ import UIKit
 class InfoStackView: UIStackView {
     let timeLabel: UILabel = {
        let label = UILabel()
-        label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
         label.textColor = .white
         label.textAlignment = .center
         label.setAccessibility(with: .header, label: "time", hint: "duration of the recipe")
@@ -19,7 +18,6 @@ class InfoStackView: UIStackView {
 
     let yieldLabel: UILabel = {
        let label = UILabel()
-        label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
         label.textColor = .white
         label.textAlignment = .center
         label.setAccessibility(with: .header, label: "yield", hint: "yield of the recipe")
@@ -59,8 +57,11 @@ class InfoStackView: UIStackView {
     }()
 
     // MARK: - INIT
-    init() {
+    init(texteSize: CGFloat) {
         super.init(frame: .zero)
+        [timeLabel, yieldLabel].forEach { label in
+            label.setupDynamicTextWith(policeName: "Symbol", size: texteSize, style: .body)
+        }
         self.initStack()
         self.setupUI()
     }
