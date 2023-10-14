@@ -10,7 +10,7 @@ import UIKit
 class DetailController: ViewController {
 
     // MARK: - liste of UI
-    let backGroundImage: DownloadableImageView = {
+    let recipImage: DownloadableImageView = {
         let imageView = DownloadableImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -30,6 +30,14 @@ class DetailController: ViewController {
         label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "Recipe Title", hint: "title of the recipe")
         return label
+    }()
+
+    let ingredientListeStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.spacing = 5
+        return stackView
     }()
 
     let ingredientLabel: UILabel = {
@@ -70,12 +78,13 @@ class DetailController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupNormalContraint()
         updateDisplayAccessibility()
     }
 
     init(with recipe: Recipe) {
         super.init()
-        backGroundImage.downloadImageWith(recipe.images.regular.url)
+        recipImage.downloadImageWith(recipe.images.regular.url)
         titleLabel.text = recipe.label
         ingredientListView.text =  "- " + recipe.ingredientLines.joined(separator: "\n- ")
         infoStackView.setup(with: recipe.totalTime, yield: recipe.yield)
@@ -88,7 +97,8 @@ class DetailController: ViewController {
 
     // MARK: - Function
     private func setupView() {
-        [backGroundImage,
+        [recipImage,
+         ingredientListeStackView,
          infoStackView,
          gradientView, titleLabel,
          ingredientLabel,
@@ -97,15 +107,25 @@ class DetailController: ViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
-        view.addSubview(backGroundImage)
+        view.addSubview(recipImage)
+        view.addSubview(infoStackView)
+        view.addSubview(gradientView)
+        gradientView.addSubview(titleLabel)
+        view.addSubview(getDirectionsButton)
+        view.addSubview(ingredientListeStackView)
+        ingredientListeStackView.addArrangedSubview(ingredientLabel)
+        ingredientListeStackView.addArrangedSubview(ingredientListView)
+    }
+
+    private func setupNormalContraint() {
+
         NSLayoutConstraint.activate([
-            backGroundImage.leftAnchor.constraint(equalTo: view.leftAnchor),
-            backGroundImage.rightAnchor.constraint(equalTo: view.rightAnchor),
-            backGroundImage.topAnchor.constraint(equalTo: view.topAnchor),
-            backGroundImage.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, multiplier: 0.4)
+            recipImage.leftAnchor.constraint(equalTo: view.leftAnchor),
+            recipImage.rightAnchor.constraint(equalTo: view.rightAnchor),
+            recipImage.topAnchor.constraint(equalTo: view.topAnchor),
+            recipImage.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, multiplier: 0.4)
         ])
 
-        view.addSubview(infoStackView)
         NSLayoutConstraint.activate([
             infoStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             infoStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
@@ -113,24 +133,21 @@ class DetailController: ViewController {
             infoStackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 70)
         ])
 
-        view.addSubview(gradientView)
         NSLayoutConstraint.activate([
             gradientView.leftAnchor.constraint(equalTo: view.leftAnchor),
             gradientView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            gradientView.bottomAnchor.constraint(equalTo: backGroundImage.bottomAnchor),
-            gradientView.topAnchor.constraint(greaterThanOrEqualTo: infoStackView.bottomAnchor, constant: 5),
-            gradientView.heightAnchor.constraint(greaterThanOrEqualToConstant: 30)
+            gradientView.bottomAnchor.constraint(equalTo: recipImage.bottomAnchor),
+            gradientView.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
+            gradientView.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 5)
         ])
 
-        gradientView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.leftAnchor.constraint(equalTo: gradientView.leftAnchor, constant: 10),
             titleLabel.rightAnchor.constraint(equalTo: gradientView.rightAnchor, constant: -10),
             titleLabel.bottomAnchor.constraint(equalTo: gradientView.bottomAnchor),
-            titleLabel.topAnchor.constraint(greaterThanOrEqualTo: gradientView.topAnchor, constant: -5)
+            titleLabel.topAnchor.constraint(greaterThanOrEqualTo: gradientView.topAnchor, constant: 10)
         ])
 
-        view.addSubview(getDirectionsButton)
         NSLayoutConstraint.activate([
             getDirectionsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             getDirectionsButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
@@ -138,19 +155,11 @@ class DetailController: ViewController {
             getDirectionsButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 60)
         ])
 
-        view.addSubview(ingredientLabel)
         NSLayoutConstraint.activate([
-            ingredientLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
-            ingredientLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
-            ingredientLabel.topAnchor.constraint(equalTo: backGroundImage.bottomAnchor, constant: 10)
-        ])
-
-        view.addSubview(ingredientListView)
-        NSLayoutConstraint.activate([
-            ingredientListView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
-            ingredientListView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            ingredientListView.topAnchor.constraint(equalTo: ingredientLabel.bottomAnchor, constant: 10),
-            ingredientListView.bottomAnchor.constraint(equalTo: getDirectionsButton.topAnchor, constant: -10)
+            ingredientListeStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
+            ingredientListeStackView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            ingredientListeStackView.topAnchor.constraint(equalTo: recipImage.bottomAnchor, constant: 5),
+            ingredientListeStackView.bottomAnchor.constraint(equalTo: getDirectionsButton.topAnchor, constant: -5)
         ])
     }
 }
@@ -170,11 +179,9 @@ extension DetailController {
 
         if currentCategory.isAccessibilityCategory {
             getDirectionsButton.setTitle("Directions", for: .normal)
-//            infoStackView.isHidden = true
             ingredientLabel.isHidden = true
         } else {
             getDirectionsButton.setTitle("Get directions", for: .normal)
-//            infoStackView.isHidden = false
             ingredientLabel.isHidden = false
         }
     }
