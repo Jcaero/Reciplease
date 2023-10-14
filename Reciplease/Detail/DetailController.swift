@@ -18,7 +18,7 @@ class DetailController: ViewController {
         return imageView
     }()
 
-    let labelView =  GradientView(with: .clear, color2: .black)
+    let gradientView =  GradientView(with: .clear, color2: .black)
 
     var infoStackView = InfoStackView(texteSize: 20)
 
@@ -90,7 +90,7 @@ class DetailController: ViewController {
     private func setupView() {
         [backGroundImage,
          infoStackView,
-         labelView, titleLabel,
+         gradientView, titleLabel,
          ingredientLabel,
          ingredientListView,
          getDirectionsButton].forEach {
@@ -113,20 +113,21 @@ class DetailController: ViewController {
             infoStackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 70)
         ])
 
-        view.addSubview(labelView)
+        view.addSubview(gradientView)
         NSLayoutConstraint.activate([
-            labelView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            labelView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            labelView.bottomAnchor.constraint(equalTo: backGroundImage.bottomAnchor),
-            labelView.topAnchor.constraint(greaterThanOrEqualTo: infoStackView.bottomAnchor, constant: 5)
+            gradientView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            gradientView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            gradientView.bottomAnchor.constraint(equalTo: backGroundImage.bottomAnchor),
+            gradientView.topAnchor.constraint(greaterThanOrEqualTo: infoStackView.bottomAnchor, constant: 5),
+            gradientView.heightAnchor.constraint(greaterThanOrEqualToConstant: 30)
         ])
 
-        labelView.addSubview(titleLabel)
+        gradientView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.leftAnchor.constraint(equalTo: labelView.leftAnchor, constant: 10),
-            titleLabel.rightAnchor.constraint(equalTo: labelView.rightAnchor, constant: -10),
-            titleLabel.bottomAnchor.constraint(equalTo: labelView.bottomAnchor),
-            titleLabel.topAnchor.constraint(greaterThanOrEqualTo: labelView.topAnchor, constant: -5)
+            titleLabel.leftAnchor.constraint(equalTo: gradientView.leftAnchor, constant: 10),
+            titleLabel.rightAnchor.constraint(equalTo: gradientView.rightAnchor, constant: -10),
+            titleLabel.bottomAnchor.constraint(equalTo: gradientView.bottomAnchor),
+            titleLabel.topAnchor.constraint(greaterThanOrEqualTo: gradientView.topAnchor, constant: -5)
         ])
 
         view.addSubview(getDirectionsButton)
