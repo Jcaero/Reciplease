@@ -18,8 +18,18 @@ class DetailController: ViewController {
         return imageView
     }()
 
+    let titleStackView : UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.spacing = 5
+        return stackView
+    }()
+
     let gradientView =  GradientView(with: .clear, color2: .black)
 
+    let infoView = UIView()
+    
     var infoStackView = InfoStackView(texteSize: 20)
 
     let titleLabel: UILabel = {
@@ -27,7 +37,7 @@ class DetailController: ViewController {
         label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .headline)
         label.textColor = .white
         label.textAlignment = .center
-        label.numberOfLines = 0
+        label.numberOfLines = 3
         label.setAccessibility(with: .header, label: "Recipe Title", hint: "title of the recipe")
         return label
     }()
@@ -99,6 +109,7 @@ class DetailController: ViewController {
     private func setupView() {
         [recipImage,
          ingredientListeStackView,
+         titleStackView, infoView,
          infoStackView,
          gradientView, titleLabel,
          ingredientLabel,
@@ -108,8 +119,12 @@ class DetailController: ViewController {
         }
 
         view.addSubview(recipImage)
-        view.addSubview(infoStackView)
-        view.addSubview(gradientView)
+        infoView.addSubview(infoStackView)
+
+        view.addSubview(titleStackView)
+        titleStackView.addArrangedSubview(infoView)
+        titleStackView.addArrangedSubview(gradientView)
+
         gradientView.addSubview(titleLabel)
         view.addSubview(getDirectionsButton)
         view.addSubview(ingredientListeStackView)
@@ -123,22 +138,22 @@ class DetailController: ViewController {
             recipImage.leftAnchor.constraint(equalTo: view.leftAnchor),
             recipImage.rightAnchor.constraint(equalTo: view.rightAnchor),
             recipImage.topAnchor.constraint(equalTo: view.topAnchor),
-            recipImage.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, multiplier: 0.4)
+            recipImage.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, multiplier: 0.3)
         ])
 
         NSLayoutConstraint.activate([
-            infoStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            infoStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
+            infoStackView.topAnchor.constraint(equalTo: infoView.topAnchor),
+            infoStackView.rightAnchor.constraint(equalTo: infoView.rightAnchor, constant: -10),
             infoStackView.widthAnchor.constraint(equalTo: infoStackView.heightAnchor),
-            infoStackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 70)
+            infoStackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 70),
+            infoView.heightAnchor.constraint(equalToConstant: 100)
         ])
 
         NSLayoutConstraint.activate([
-            gradientView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            gradientView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            gradientView.bottomAnchor.constraint(equalTo: recipImage.bottomAnchor),
-            gradientView.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
-            gradientView.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 5)
+            titleStackView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            titleStackView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            titleStackView.bottomAnchor.constraint(equalTo: recipImage.bottomAnchor),
+            titleStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5)
         ])
 
         NSLayoutConstraint.activate([
@@ -180,9 +195,21 @@ extension DetailController {
         if currentCategory.isAccessibilityCategory {
             getDirectionsButton.setTitle("Directions", for: .normal)
             ingredientLabel.isHidden = true
+            infoView.isHidden = true
+            switch currentCategory {
+            case .accessibilityExtraExtraExtraLarge:
+                titleLabel.setupDynamicTextWith(policeName: "Symbol", size: 18, style: .headline)
+            case .accessibilityExtraExtraLarge:
+                titleLabel.setupDynamicTextWith(policeName: "Symbol", size: 22, style: .headline)
+            default:
+                titleLabel.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .headline)
+            }
+
         } else {
             getDirectionsButton.setTitle("Get directions", for: .normal)
             ingredientLabel.isHidden = false
+            infoView.isHidden = false
+            titleLabel.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .headline)
         }
     }
 }
