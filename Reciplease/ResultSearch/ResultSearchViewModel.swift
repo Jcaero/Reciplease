@@ -14,7 +14,7 @@ class ResultSearchViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
 
     private let repository = Repository()
-    var recipes: [Hit] = []
+    var recipes: [Recipe] = []
 
     @Published var isNetworkSuccessful: Bool!
     @Published var isAlerte: String!
@@ -31,7 +31,7 @@ class ResultSearchViewModel: ObservableObject {
                 self.isAlerte = "Erreur de reseau"
             }
         } receiveValue: { data in
-            self.recipes = data.hits
+            self.recipes = data.hits.map { $0.recipe }
             if self.recipes.isEmpty == true {
                 self.isAlerte = "Pas de recette disponible"
             } else {

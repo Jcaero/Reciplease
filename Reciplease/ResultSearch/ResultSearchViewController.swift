@@ -115,7 +115,7 @@ extension ResultSearchViewController: UITableViewDataSource {
             print("erreur de cell")
             return UITableViewCell()
         }
-        let recipe = viewModel.recipes[indexPath.row].recipe
+        let recipe = viewModel.recipes[indexPath.row]
         cell.setupCell(with: recipe)
         return cell
     }
@@ -127,7 +127,7 @@ extension ResultSearchViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let newController = DetailController(with: viewModel.recipes[indexPath.row].recipe)
+        let newController = DetailController(with: viewModel.recipes[indexPath.row])
         newController.title = "Reciplease"
         self.navigationController?.pushViewController(newController, animated: true)
     }
