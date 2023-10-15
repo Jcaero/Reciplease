@@ -17,6 +17,9 @@ class DownloadableImageView: UIImageView {
     private var cancellables: Set<AnyCancellable> = []
 
     func downloadImageWith( _ url: String) {
+        imageCache.countLimit = 75
+        imageCache.totalCostLimit = 50 * 1024 * 1024
+
         if let cachedImage = imageCache.object(forKey: url as NSString) {
             self.image = cachedImage
         } else {
