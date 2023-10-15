@@ -125,8 +125,6 @@ class SearchController: ViewController {
     }()
 
     // MARK: - Proprietie
-    private var subscriptions = Set<AnyCancellable>()
-
     private let viewModel = SearchViewModel()
 
     // MARK: - Cycle of life
@@ -146,7 +144,7 @@ class SearchController: ViewController {
         // Assigne publisher
         viewModel.$ingredientList
             .assign(to: \.text, on: self.ingredientListView)
-            .store(in: &subscriptions)
+            .store(in: &cancellables)
     }
 
     // MARK: - Init navigationBar

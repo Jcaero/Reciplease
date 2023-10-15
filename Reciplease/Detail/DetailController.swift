@@ -18,7 +18,7 @@ class DetailController: ViewController {
         return imageView
     }()
 
-    let titleStackView : UIStackView = {
+    let titleStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -84,7 +84,7 @@ class DetailController: ViewController {
         return button
     }()
 
-    // MARK: - Proprietie
+    // MARK: - Properties
     private var isStarFilled = false
 
     let emptyStarImage = UIImage(systemName: "star")
@@ -98,7 +98,7 @@ class DetailController: ViewController {
 
         updateDisplayAccessibility()
 
-        let starButton = UIBarButtonItem(image: emptyStarImage, 
+        let starButton = UIBarButtonItem(image: emptyStarImage,
                                          style: .plain,
                                          target: self,
                                          action: #selector(starButtonTapped))
