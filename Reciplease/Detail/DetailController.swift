@@ -29,7 +29,7 @@ class DetailController: ViewController {
     let gradientView =  GradientView(with: .clear, color2: .black)
 
     let infoView = UIView()
-    
+
     var infoStackView = InfoStackView(texteSize: 20)
 
     let titleLabel: UILabel = {
@@ -84,12 +84,25 @@ class DetailController: ViewController {
         return button
     }()
 
+    // MARK: - Proprietie
+    private var isStarFilled = false
+
+    let emptyStarImage = UIImage(systemName: "star")
+    let filledStarImage = UIImage(systemName: "star.fill")
+
     // MARK: - Cycle of life
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupNormalContraint()
+
         updateDisplayAccessibility()
+
+        let starButton = UIBarButtonItem(image: emptyStarImage, 
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(starButtonTapped))
+        self.navigationItem.rightBarButtonItem = starButton
     }
 
     init(with recipe: Recipe) {
@@ -211,5 +224,16 @@ extension DetailController {
             infoView.isHidden = false
             titleLabel.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .headline)
         }
+    }
+}
+
+// MARK: - Core Data
+extension DetailController {
+    @objc func starButtonTapped() {
+        print("core data")
+        isStarFilled.toggle()
+
+        let imageToSet = isStarFilled ? filledStarImage : emptyStarImage
+        self.navigationItem.rightBarButtonItem?.image = imageToSet
     }
 }
