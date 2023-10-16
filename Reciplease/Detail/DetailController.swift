@@ -90,6 +90,9 @@ class DetailController: ViewController {
     let emptyStarImage = UIImage(systemName: "star")
     let filledStarImage = UIImage(systemName: "star.fill")
 
+    private let recipeSaveRepository = RecipeSaveRepository()
+    private var recipe: Recipe!
+
     // MARK: - Cycle of life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,6 +110,7 @@ class DetailController: ViewController {
 
     init(with recipe: Recipe) {
         super.init()
+        self.recipe = recipe
         recipImage.downloadImageWith(recipe.images.regular.url)
         titleLabel.text = recipe.label
         ingredientListView.text =  "- " + recipe.ingredientLines.joined(separator: "\n- ")
@@ -235,5 +239,9 @@ extension DetailController {
 
         let imageToSet = isStarFilled ? filledStarImage : emptyStarImage
         self.navigationItem.rightBarButtonItem?.image = imageToSet
+
+        recipeSaveRepository.saveRecipe(named: recipe) {
+            print("Save OK")
+        }
     }
 }

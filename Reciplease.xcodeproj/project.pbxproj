@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		470190492AD55648000A2E65 /* DownloadableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470190482AD55648000A2E65 /* DownloadableImageView.swift */; };
+		4708F7B72ADC79C300BC5538 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4708F7B62ADC79C300BC5538 /* CoreDataManager.swift */; };
+		4708F7B92ADC79FA00BC5538 /* RecipeSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4708F7B82ADC79FA00BC5538 /* RecipeSave.swift */; };
 		470D46692AD94D6000F6886D /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470D46682AD94D6000F6886D /* DetailController.swift */; };
 		470D466B2AD94F6A00F6886D /* InfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470D466A2AD94F6A00F6886D /* InfoStackView.swift */; };
 		470D466D2AD9576000F6886D /* GradienView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470D466C2AD9576000F6886D /* GradienView.swift */; };
+		470FE26F2ADDCA8F00B8C4BC /* RecipeSaveRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470FE26E2ADDCA8F00B8C4BC /* RecipeSaveRepository.swift */; };
 		471648722AC1316D003097F5 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471648712AC1316D003097F5 /* SearchController.swift */; };
 		471C5B2F2ACCB296007E328B /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471C5B2E2ACCB296007E328B /* RecipeCell.swift */; };
 		4728D4752AC843030091D430 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728D4742AC843030091D430 /* SearchViewModel.swift */; };
@@ -62,9 +65,12 @@
 
 /* Begin PBXFileReference section */
 		470190482AD55648000A2E65 /* DownloadableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadableImageView.swift; sourceTree = "<group>"; };
+		4708F7B62ADC79C300BC5538 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		4708F7B82ADC79FA00BC5538 /* RecipeSave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSave.swift; sourceTree = "<group>"; };
 		470D46682AD94D6000F6886D /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		470D466A2AD94F6A00F6886D /* InfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoStackView.swift; sourceTree = "<group>"; };
 		470D466C2AD9576000F6886D /* GradienView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradienView.swift; sourceTree = "<group>"; };
+		470FE26E2ADDCA8F00B8C4BC /* RecipeSaveRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSaveRepository.swift; sourceTree = "<group>"; };
 		471648712AC1316D003097F5 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		471C5B2E2ACCB296007E328B /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 		4728D4742AC843030091D430 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -132,6 +138,17 @@
 				4799095E2ABCCD540056753E /* ViewController.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		4708F7B52ADC79A500BC5538 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				4708F7B62ADC79C300BC5538 /* CoreDataManager.swift */,
+				479909632ABCCD540056753E /* Reciplease.xcdatamodeld */,
+				4708F7B82ADC79FA00BC5538 /* RecipeSave.swift */,
+				470FE26E2ADDCA8F00B8C4BC /* RecipeSaveRepository.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		470D46672AD94D3200F6886D /* Detail */ = {
@@ -238,9 +255,9 @@
 				4750F4012ACBC464005FC924 /* ResultSearch */,
 				470D46672AD94D3200F6886D /* Detail */,
 				4777915B2ABF0B4F00ABA120 /* Common */,
+				4708F7B52ADC79A500BC5538 /* CoreData */,
 				4738F11C2AC9270D0014FD09 /* Network */,
 				47C6C9802ABD43110000D50B /* Ressources */,
-				479909632ABCCD540056753E /* Reciplease.xcdatamodeld */,
 			);
 			path = Reciplease;
 			sourceTree = "<group>";
@@ -434,6 +451,7 @@
 			files = (
 				4738F1192AC91F1E0014FD09 /* RecipAPIModel.swift in Sources */,
 				470D466B2AD94F6A00F6886D /* InfoStackView.swift in Sources */,
+				470FE26F2ADDCA8F00B8C4BC /* RecipeSaveRepository.swift in Sources */,
 				470D466D2AD9576000F6886D /* GradienView.swift in Sources */,
 				470D46692AD94D6000F6886D /* DetailController.swift in Sources */,
 				479909652ABCCD540056753E /* Reciplease.xcdatamodeld in Sources */,
@@ -447,9 +465,11 @@
 				4799095B2ABCCD540056753E /* AppDelegate.swift in Sources */,
 				47A5C5E32AC532000052BC0D /* UILabel+.swift in Sources */,
 				471648722AC1316D003097F5 /* SearchController.swift in Sources */,
+				4708F7B72ADC79C300BC5538 /* CoreDataManager.swift in Sources */,
 				4738F11B2AC925EC0014FD09 /* Repository.swift in Sources */,
 				471C5B2F2ACCB296007E328B /* RecipeCell.swift in Sources */,
 				47C1ACB82ABDA4790049E043 /* TabBarController.swift in Sources */,
+				4708F7B92ADC79FA00BC5538 /* RecipeSave.swift in Sources */,
 				4799095D2ABCCD540056753E /* SceneDelegate.swift in Sources */,
 				470190492AD55648000A2E65 /* DownloadableImageView.swift in Sources */,
 				4777915D2ABF0B6400ABA120 /* UIColor+.swift in Sources */,
