@@ -234,14 +234,18 @@ extension DetailController {
 // MARK: - Core Data
 extension DetailController {
     @objc func starButtonTapped() {
-        print("core data")
+
         isStarFilled.toggle()
 
-        let imageToSet = isStarFilled ? filledStarImage : emptyStarImage
-        self.navigationItem.rightBarButtonItem?.image = imageToSet
-
-        recipeSaveRepository.saveRecipe(named: recipe) {
-            print("Save OK")
+        if isStarFilled {
+            print("core data save")
+            recipeSaveRepository.saveRecipe(named: recipe)
+            self.navigationItem.rightBarButtonItem?.image = filledStarImage
+        } else {
+            print("call core data dell")
+            self.navigationItem.rightBarButtonItem?.image = emptyStarImage
+            #warning("changer le model de recipe utilisé par la tableView")
+//            recipeSaveRepository.deleteRecipe(recipe)
         }
     }
 }

@@ -16,15 +16,25 @@ final class CoreDataManager {
 
     // MARK: - Public
     private let persistentContainer: NSPersistentContainer
-    
+
     init(modelName: String) {
         persistentContainer = NSPersistentContainer(name: modelName)
     }
-    
+
     func load(completion: (() -> Void)? = nil) {
         persistentContainer.loadPersistentStores { (description, error) in
             guard error == nil else { fatalError(error!.localizedDescription)}
             completion?()
+        }
+    }
+
+    func save() {
+        if viewContext.hasChanges {
+            do {
+                try viewContext.save()
+            } catch {
+                print("Error while saving: \(error.localizedDescription )")
+            }
         }
     }
 

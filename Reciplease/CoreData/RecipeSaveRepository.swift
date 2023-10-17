@@ -23,7 +23,7 @@ final class RecipeSaveRepository {
 
     // MARK: - Repository
 
-    func saveRecipe(named recipe: Recipe, callback: @escaping () -> Void) {
+    func saveRecipe(named recipe: Recipe) {
         // create entity instance with context
         let saveRecipe = RecipeSave(context: coreDataManager.viewContext)
         // use
@@ -31,12 +31,20 @@ final class RecipeSaveRepository {
         saveRecipe.label = recipe.label
         saveRecipe.yield = Int32(recipe.yield)
         saveRecipe.totalTime = Int32(recipe.totalTime)
-        
-        do {
-            try coreDataManager.viewContext.save()
-            callback()
-        } catch {
-            print("We were unable to save \(recipe.label)")
-        }
+
+        coreDataManager.save()
+    }
+
+    func fetchSaveRecipes() -> [RecipeSave] {
+        let request: NSFetchRequest<RecipeSave> = RecipeSave.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(keyPath: \RecipeSave.label , ascending: false)
+        request.sortDescriptors = [sortDescriptor]
+        return (try? coreDataManager.viewContext.fetch(request)) ?? []
+    }
+
+    func deleteRecipe( _ recipe: RecipeSave) {
+        coreDataManager.viewContext.delete(recipe)
+        coreDataManager.save()
+        print("del core data")
     }
 }
