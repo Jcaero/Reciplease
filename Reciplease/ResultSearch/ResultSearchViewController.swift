@@ -9,8 +9,13 @@ import UIKit
 import Combine
 
 class ResultSearchViewController: ViewController {
+    
+    enum Context {
+        case search(ingredients: [String])
+        case favorite(recipes: [Recipe])
+    }
 
-    private var ingredients: [String]
+    private var context: ResultSearchViewController.Context
     private let viewModel = ResultSearchViewModel()
 
     // MARK: - liste of UI
@@ -33,8 +38,8 @@ class ResultSearchViewController: ViewController {
     }()
 
     // MARK: - Init
-    init(ingredients: [String]) {
-        self.ingredients = ingredients
+    init(context: ResultSearchViewController.Context) {
+        self.context = context
         super.init()
         setupTableView()
         setupIndicator()
@@ -85,7 +90,12 @@ class ResultSearchViewController: ViewController {
                 self?.returnAndShowSimpleAlerte(with: "Erreur", message: response!)
             }.store(in: &cancellables)
 
-        viewModel.fetchInitRecipes(with: ingredients)
+        switch context {
+        case .search(let ingredients):
+            viewModel.fetchInitRecipes(with: ingredients)
+        case .favorite(let recipes):
+            viewModel.recipes = recipes
+        }
     }
 
     private func updateTableView() {

@@ -5,7 +5,6 @@
 //  Created by pierrick viret on 16/10/2023.
 //
 
-
 import Foundation
 import CoreData
 
@@ -37,7 +36,7 @@ final class RecipeSaveRepository {
 
     func fetchSaveRecipes() -> [RecipeSave] {
         let request: NSFetchRequest<RecipeSave> = RecipeSave.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(keyPath: \RecipeSave.label , ascending: false)
+        let sortDescriptor = NSSortDescriptor(keyPath: \RecipeSave.label, ascending: false)
         request.sortDescriptors = [sortDescriptor]
         return (try? coreDataManager.viewContext.fetch(request)) ?? []
     }

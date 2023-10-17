@@ -170,11 +170,9 @@ class SearchController: ViewController {
          addIngredients,
          inputIngredient,
          underligne,
-         inputStackView, searchRecipes, searchArea].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-
-        [clearStackView, yourIngredientsLabel, clearIngredients, ingredientListView].forEach {
+         inputStackView, searchRecipes, searchArea,
+         clearStackView, yourIngredientsLabel, clearIngredients, ingredientListView
+        ].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -300,7 +298,7 @@ extension SearchController {
     @objc func searchRecip() {
         guard viewModel.ingredients.isEmpty == false else {return}
 
-        let newController = ResultSearchViewController(ingredients: viewModel.ingredients)
+        let newController = ResultSearchViewController(context: .search(ingredients: viewModel.ingredients))
         newController.title = "Reciplease"
         self.navigationController?.pushViewController(newController, animated: true)
     }

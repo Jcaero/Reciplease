@@ -10,10 +10,27 @@ import UIKit
 import Alamofire
 import Combine
 
-let imageCache = NSCache<NSString, UIImage>()
+//class SearchImageCache {
+//    
+//    private let imageCache = NSCache<NSString, UIImage>()
+//    
+//    init() {
+//        imageCache.countLimit = 75
+//        imageCache.totalCostLimit = 50 * 1024 * 1024
+//    }
+//    
+//    func save(image: UIImage) {
+//        
+//    }
+//    
+//    func getImage(for url: String) -> UIImage? {
+//        
+//    }
+//}
 
 class DownloadableImageView: UIImageView {
 
+    private let imageCache = NSCache<NSString, UIImage>()
     private var cancellables: Set<AnyCancellable> = []
 
     func downloadImageWith( _ url: String) {
@@ -34,9 +51,9 @@ class DownloadableImageView: UIImageView {
                     case .failure:
                         print("erreur reseau")
                     }
-                } receiveValue: { data in
-                    guard let image = UIImage(data: data) else {return}
-                    imageCache.setObject(image, forKey: url as NSString)
+                } receiveValue: { [weak self] data in
+                    guard let self = self, let image = UIImage(data: data) else {return}
+                    self.imageCache.setObject(image, forKey: url as NSString)
                     self.image = image
                 }.store(in: &cancellables)
         }

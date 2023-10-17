@@ -79,7 +79,7 @@ class DetailController: ViewController {
         button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .footnote)
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "go to detail liste of recipes", hint: "Pressed button to go to detail liste of recipes")
-       // button.addTarget(self, action: #selector(??), for: .touchUpInside)
+        button.addTarget(self, action: #selector(getDirection), for: .touchUpInside)
         button.accessibilityIdentifier = "getDirectionsButton"
         return button
     }()
@@ -105,6 +105,7 @@ class DetailController: ViewController {
                                          style: .plain,
                                          target: self,
                                          action: #selector(starButtonTapped))
+        starButton.tintColor = .darkGreen
         self.navigationItem.rightBarButtonItem = starButton
     }
 
@@ -247,5 +248,14 @@ extension DetailController {
             #warning("changer le model de recipe utilisé par la tableView")
 //            recipeSaveRepository.deleteRecipe(recipe)
         }
+    }
+}
+
+// MARK: - GetDirections buttons
+
+extension DetailController {
+    @objc func getDirection() {
+        guard let url = URL(string: self.recipe.url) else { return }
+        UIApplication.shared.open(url)
     }
 }
