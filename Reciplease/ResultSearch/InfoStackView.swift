@@ -72,9 +72,12 @@ class InfoStackView: UIStackView {
 
     // MARK: - Function
     func setup(with time: Int, yield: Int) {
-        if time >= 60 {
-            timeLabel.text = String(time / 60) + "h"
-        } else {
+        switch time {
+        case 0:
+            timeLabel.text = "UNK"
+        case let value where value >= 60:
+            timeLabel.text = String(value / 60) + "h"
+        default:
             timeLabel.text = String(time) + "m"
         }
         yieldLabel.text = String(yield)
