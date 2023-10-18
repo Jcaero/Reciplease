@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		470190492AD55648000A2E65 /* DownloadableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470190482AD55648000A2E65 /* DownloadableImageView.swift */; };
 		4708F7B72ADC79C300BC5538 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4708F7B62ADC79C300BC5538 /* CoreDataManager.swift */; };
 		4708F7B92ADC79FA00BC5538 /* RecipeSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4708F7B82ADC79FA00BC5538 /* RecipeSave.swift */; };
 		470D46692AD94D6000F6886D /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470D46682AD94D6000F6886D /* DetailController.swift */; };
@@ -25,6 +24,8 @@
 		4738F11E2AC9272E0014FD09 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738F11D2AC9272E0014FD09 /* APIKey.swift */; };
 		4738F1212AC928FA0014FD09 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4738F1202AC928FA0014FD09 /* Alamofire */; };
 		4738F1252AC92F480014FD09 /* APIKeyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738F1242AC92F480014FD09 /* APIKeyTest.swift */; };
+		4740D9862ADF16680060F979 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4740D9852ADF16680060F979 /* ImageCache.swift */; };
+		47452B7B2AE060BD005AFBF3 /* DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47452B7A2AE060BD005AFBF3 /* DownloadImage.swift */; };
 		4750F4032ACBCAB4005FC924 /* ResultSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750F4022ACBCAB4005FC924 /* ResultSearchViewModel.swift */; };
 		4777915D2ABF0B6400ABA120 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4777915C2ABF0B6400ABA120 /* UIColor+.swift */; };
 		4789DF702AC43DA200F31373 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4789DF6F2AC43DA200F31373 /* UIView+.swift */; };
@@ -64,7 +65,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		470190482AD55648000A2E65 /* DownloadableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadableImageView.swift; sourceTree = "<group>"; };
 		4708F7B62ADC79C300BC5538 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		4708F7B82ADC79FA00BC5538 /* RecipeSave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSave.swift; sourceTree = "<group>"; };
 		470D46682AD94D6000F6886D /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
@@ -81,6 +81,8 @@
 		4738F11A2AC925EC0014FD09 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		4738F11D2AC9272E0014FD09 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		4738F1242AC92F480014FD09 /* APIKeyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyTest.swift; sourceTree = "<group>"; };
+		4740D9852ADF16680060F979 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		47452B7A2AE060BD005AFBF3 /* DownloadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImage.swift; sourceTree = "<group>"; };
 		4750F4022ACBCAB4005FC924 /* ResultSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchViewModel.swift; sourceTree = "<group>"; };
 		4777915C2ABF0B6400ABA120 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		4789DF6F2AC43DA200F31373 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
@@ -198,6 +200,15 @@
 			path = NetworkTest;
 			sourceTree = "<group>";
 		};
+		4740D9842ADF164F0060F979 /* ImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				4740D9852ADF16680060F979 /* ImageCache.swift */,
+				47452B7A2AE060BD005AFBF3 /* DownloadImage.swift */,
+			);
+			path = ImageCache;
+			sourceTree = "<group>";
+		};
 		4750F4012ACBC464005FC924 /* ResultSearch */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,7 +223,6 @@
 		4777915B2ABF0B4F00ABA120 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				470190482AD55648000A2E65 /* DownloadableImageView.swift */,
 				4777915C2ABF0B6400ABA120 /* UIColor+.swift */,
 				4789DF6F2AC43DA200F31373 /* UIView+.swift */,
 				47A5C5E22AC532000052BC0D /* UILabel+.swift */,
@@ -255,6 +265,7 @@
 				4750F4012ACBC464005FC924 /* ResultSearch */,
 				470D46672AD94D3200F6886D /* Detail */,
 				4777915B2ABF0B4F00ABA120 /* Common */,
+				4740D9842ADF164F0060F979 /* ImageCache */,
 				4708F7B52ADC79A500BC5538 /* CoreData */,
 				4738F11C2AC9270D0014FD09 /* Network */,
 				47C6C9802ABD43110000D50B /* Ressources */,
@@ -461,6 +472,7 @@
 				47A5C5E72AC5342A0052BC0D /* UItextField+.swift in Sources */,
 				4799095F2ABCCD540056753E /* ViewController.swift in Sources */,
 				4750F4032ACBCAB4005FC924 /* ResultSearchViewModel.swift in Sources */,
+				4740D9862ADF16680060F979 /* ImageCache.swift in Sources */,
 				4789DF702AC43DA200F31373 /* UIView+.swift in Sources */,
 				4799095B2ABCCD540056753E /* AppDelegate.swift in Sources */,
 				47A5C5E32AC532000052BC0D /* UILabel+.swift in Sources */,
@@ -471,9 +483,9 @@
 				47C1ACB82ABDA4790049E043 /* TabBarController.swift in Sources */,
 				4708F7B92ADC79FA00BC5538 /* RecipeSave.swift in Sources */,
 				4799095D2ABCCD540056753E /* SceneDelegate.swift in Sources */,
-				470190492AD55648000A2E65 /* DownloadableImageView.swift in Sources */,
 				4777915D2ABF0B6400ABA120 /* UIColor+.swift in Sources */,
 				47A5C5E52AC532DD0052BC0D /* UIButton+.swift in Sources */,
+				47452B7B2AE060BD005AFBF3 /* DownloadImage.swift in Sources */,
 				4738F11E2AC9272E0014FD09 /* APIKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

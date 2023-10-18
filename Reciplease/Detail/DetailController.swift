@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class DetailController: ViewController {
 
     // MARK: - liste of UI
-    let recipImage: DownloadableImageView = {
-        let imageView = DownloadableImageView()
+    let recipImage: UIImageView = {
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.image = UIImage(named: "image_non_dispo")
@@ -93,6 +94,8 @@ class DetailController: ViewController {
     private let recipeSaveRepository = RecipeSaveRepository()
     private var recipe: Recipe!
 
+    private var imageRepository = DownloadImage()
+
     // MARK: - Cycle of life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,10 +115,23 @@ class DetailController: ViewController {
     init(with recipe: Recipe) {
         super.init()
         self.recipe = recipe
-        recipImage.downloadImageWith(recipe.images.regular.url)
         titleLabel.text = recipe.label
         ingredientListView.text =  "- " + recipe.ingredientLines.joined(separator: "\n- ")
         infoStackView.setup(with: recipe.totalTime, yield: recipe.yield)
+
+        imageRepository.downloadImageWith(recipe.images.regular.url)
+            .receive(on: DispatchQueue.main)
+            .sink { result in
+                switch result {
+                case.finished:
+                    break
+                case .failure(let error):
+                    print("erreur de telechargement d'image \(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] image in
+                guard let self = self else {return }
+                self.recipImage.image = image
+            }.store(in: &cancellables)
     }
 
     required init?(coder: NSCoder) {

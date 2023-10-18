@@ -35,8 +35,8 @@ class RecipeCell: UITableViewCell {
 
     let labelView = GradientView(with: .clear, color2: .black)
 
-    let backGroundImage: DownloadableImageView = {
-        let imageView = DownloadableImageView()
+    let backGroundImage: UIImageView = {
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.image = UIImage(named: "image_non_dispo")
@@ -45,6 +45,9 @@ class RecipeCell: UITableViewCell {
 
     // MARK: - Properties
     static let reuseIdentifier = "RecipeCell"
+
+    var cancellables = Set<AnyCancellable>()
+    private var imageRepository = DownloadImage()
 
     // MARK: - cycle life
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -109,7 +112,20 @@ class RecipeCell: UITableViewCell {
 
         ingredient.text = text
         infoStackView.setup(with: recipe.totalTime, yield: recipe.yield)
-        backGroundImage.downloadImageWith(recipe.images.regular.url)
-        backgroundView = backGroundImage
+
+        imageRepository.downloadImageWith(recipe.images.regular.url)
+            .receive(on: DispatchQueue.main)
+            .sink { result in
+                switch result {
+                case.finished:
+                    break
+                case .failure(let error):
+                    print("erreur de telechargement d'image \(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] image in
+                guard let self = self else {return }
+                self.backGroundImage.image = image
+                self.backgroundView = backGroundImage
+            }.store(in: &cancellables)
     }
 }

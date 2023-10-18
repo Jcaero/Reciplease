@@ -4,8 +4,8 @@
         <attribute name="imageUrl" optional="YES" attributeType="String"/>
         <attribute name="ingredients" optional="YES" attributeType="Transformable"/>
         <attribute name="ingredientsLines" optional="YES" attributeType="Transformable"/>
-        <attribute name="label" optional="YES" attributeType="String"/>
-        <attribute name="source" optional="YES" attributeType="String"/>
+        <attribute name="label" attributeType="String"/>
+        <attribute name="sourceUrl" optional="YES" attributeType="String"/>
         <attribute name="totalTime" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="yield" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>

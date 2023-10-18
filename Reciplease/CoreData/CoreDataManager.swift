@@ -14,9 +14,10 @@ final class CoreDataManager {
 
     static let sharedInstance = CoreDataManager(modelName: "Reciplease")
 
-    // MARK: - Public
+    // MARK: - Propertie
     private let persistentContainer: NSPersistentContainer
 
+    // MARK: - INIT
     init(modelName: String) {
         persistentContainer = NSPersistentContainer(name: modelName)
     }
