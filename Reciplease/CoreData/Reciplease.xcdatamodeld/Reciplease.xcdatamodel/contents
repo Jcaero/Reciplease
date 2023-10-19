@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="RecipeSave" representedClassName=".RecipeSave" syncable="YES" codeGenerationType="category">
-        <attribute name="imageUrl" optional="YES" attributeType="String"/>
-        <attribute name="ingredients" optional="YES" attributeType="Transformable"/>
-        <attribute name="ingredientsLines" optional="YES" attributeType="Transformable"/>
+    <entity name="LocalRecipe" representedClassName=".LocalRecipe" syncable="YES" codeGenerationType="category">
+        <attribute name="imageUrl" attributeType="String"/>
+        <attribute name="ingredients" attributeType="String" valueTransformerName="NSSecureUnarchiveFromDataTransformer"/>
+        <attribute name="ingredientsLines" attributeType="String" valueTransformerName="NSSecureUnarchiveFromDataTransformer"/>
         <attribute name="label" attributeType="String"/>
-        <attribute name="sourceUrl" optional="YES" attributeType="String"/>
-        <attribute name="totalTime" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="yield" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sourceUrl" attributeType="String"/>
+        <attribute name="totalTime" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="yield" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
 </model>

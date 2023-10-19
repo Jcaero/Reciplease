@@ -14,7 +14,8 @@ class ResultSearchViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
 
     private let repository = Repository()
-    var recipes: [Recipe] = []
+    private let recipRepository = RecipeRepository()
+    var recipes: [LocalRecipe] = []
 
     @Published var isNetworkSuccessful: Bool!
     @Published var isAlerte: String!
@@ -30,8 +31,13 @@ class ResultSearchViewModel: ObservableObject {
             case .failure:
                 self.isAlerte = "Erreur de reseau"
             }
-        } receiveValue: { data in
-            self.recipes = data.hits.map { $0.recipe }
+        } receiveValue: { [weak self] data in
+            guard let self = self else { return }
+
+            data.hits.forEach { hit in
+                let localRecipe = self.recipRepository.transformInLocalAPI(hit.recipe)
+                self.recipes.append(localRecipe)
+            }
             if self.recipes.isEmpty == true {
                 self.isAlerte = "Pas de recette disponible"
             } else {

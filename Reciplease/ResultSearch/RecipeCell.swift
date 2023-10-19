@@ -100,20 +100,12 @@ class RecipeCell: UITableViewCell {
         ])
     }
 
-    func setupCell(with recipe: Recipe) {
+    func setupCell(with recipe: LocalRecipe) {
         title.text = recipe.label
-        let text = recipe.ingredients.reduce("") { partialResult, ingredient in
-            if partialResult == "" {
-                partialResult + ingredient.food
-            } else {
-                partialResult + ", " + ingredient.food
-            }
-        }
+        ingredient.text = recipe.ingredients
+        infoStackView.setup(with: Int(recipe.totalTime), yield: Int(recipe.yield))
 
-        ingredient.text = text
-        infoStackView.setup(with: recipe.totalTime, yield: recipe.yield)
-
-        imageRepository.downloadImageWith(recipe.images.regular.url)
+        imageRepository.downloadImageWith(recipe.imageUrl!)
             .receive(on: DispatchQueue.main)
             .sink { result in
                 switch result {

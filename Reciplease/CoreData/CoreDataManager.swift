@@ -23,13 +23,15 @@ final class CoreDataManager {
     }
 
     func load(completion: (() -> Void)? = nil) {
-        persistentContainer.loadPersistentStores { (description, error) in
+        persistentContainer.loadPersistentStores { (_, error) in
             guard error == nil else { fatalError(error!.localizedDescription)}
             completion?()
         }
     }
 
     func save() {
+        let viewContext = persistentContainer.viewContext
+
         if viewContext.hasChanges {
             do {
                 try viewContext.save()

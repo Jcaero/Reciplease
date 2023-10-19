@@ -91,8 +91,8 @@ class DetailController: ViewController {
     let emptyStarImage = UIImage(systemName: "star")
     let filledStarImage = UIImage(systemName: "star.fill")
 
-    private let recipeSaveRepository = RecipeSaveRepository()
-    private var recipe: Recipe!
+    private let recipeSaveRepository = RecipeRepository()
+    private var recipe: LocalRecipe!
 
     private var imageRepository = DownloadImage()
 
@@ -112,14 +112,14 @@ class DetailController: ViewController {
         self.navigationItem.rightBarButtonItem = starButton
     }
 
-    init(with recipe: Recipe) {
+    init(with recipe: LocalRecipe) {
         super.init()
         self.recipe = recipe
         titleLabel.text = recipe.label
-        ingredientListView.text =  "- " + recipe.ingredientLines.joined(separator: "\n- ")
-        infoStackView.setup(with: recipe.totalTime, yield: recipe.yield)
+        ingredientListView.text = recipe.ingredientsLines
+        infoStackView.setup(with: Int(recipe.totalTime), yield: Int(recipe.yield))
 
-        imageRepository.downloadImageWith(recipe.images.regular.url)
+        imageRepository.downloadImageWith(recipe.imageUrl!)
             .receive(on: DispatchQueue.main)
             .sink { result in
                 switch result {
@@ -271,7 +271,7 @@ extension DetailController {
 
 extension DetailController {
     @objc func getDirection() {
-        guard let url = URL(string: self.recipe.url) else { return }
+        guard let url = URL(string: self.recipe.sourceUrl!) else { return }
         UIApplication.shared.open(url)
     }
 }

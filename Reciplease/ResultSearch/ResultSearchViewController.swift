@@ -9,10 +9,10 @@ import UIKit
 import Combine
 
 class ResultSearchViewController: ViewController {
-    
+
     enum Context {
         case search(ingredients: [String])
-        case favorite(recipes: [Recipe])
+        case favorite(recipes: [LocalRecipe])
     }
 
     private var context: ResultSearchViewController.Context
