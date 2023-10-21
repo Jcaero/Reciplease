@@ -91,7 +91,7 @@ class DetailController: ViewController {
     let emptyStarImage = UIImage(systemName: "star")
     let filledStarImage = UIImage(systemName: "star.fill")
 
-    private let recipeSaveRepository = RecipeRepository()
+    private let recipeSaveManager = RecipeSaveManager()
     private var recipe: LocalRecipe!
 
     private var imageRepository = DownloadImage()
@@ -116,10 +116,10 @@ class DetailController: ViewController {
         super.init()
         self.recipe = recipe
         titleLabel.text = recipe.label
-        ingredientListView.text = recipe.ingredientsLines
+        ingredientListView.text = recipe.listeOfIngredientsWithDetail
         infoStackView.setup(with: Int(recipe.totalTime), yield: Int(recipe.yield))
 
-        imageRepository.downloadImageWith(recipe.imageUrl!)
+        imageRepository.downloadImageWith(recipe.imageUrl)
             .receive(on: DispatchQueue.main)
             .sink { result in
                 switch result {
@@ -256,13 +256,12 @@ extension DetailController {
 
         if isStarFilled {
             print("core data save")
-            recipeSaveRepository.saveRecipe(named: recipe)
+//            recipeSaveManager.saveRecipe(named: recipe)
             self.navigationItem.rightBarButtonItem?.image = filledStarImage
         } else {
             print("call core data dell")
             self.navigationItem.rightBarButtonItem?.image = emptyStarImage
-            #warning("changer le model de recipe utilisé par la tableView")
-//            recipeSaveRepository.deleteRecipe(recipe)
+//            recipeSaveManager.deleteRecipe(recipe)
         }
     }
 }
@@ -271,7 +270,7 @@ extension DetailController {
 
 extension DetailController {
     @objc func getDirection() {
-        guard let url = URL(string: self.recipe.sourceUrl!) else { return }
+        guard let url = URL(string: self.recipe.sourceUrl) else { return }
         UIApplication.shared.open(url)
     }
 }

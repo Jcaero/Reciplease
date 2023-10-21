@@ -14,7 +14,7 @@ class ResultSearchViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
 
     private let repository = Repository()
-    private let recipRepository = RecipeRepository()
+    private let recipRepository = RecipeSaveManager()
     var recipes: [LocalRecipe] = []
 
     @Published var isNetworkSuccessful: Bool!
@@ -35,8 +35,7 @@ class ResultSearchViewModel: ObservableObject {
             guard let self = self else { return }
 
             data.hits.forEach { hit in
-                let localRecipe = self.recipRepository.transformInLocalAPI(hit.recipe)
-                self.recipes.append(localRecipe)
+                self.recipes.append(LocalRecipe(recipe: hit.recipe))
             }
             if self.recipes.isEmpty == true {
                 self.isAlerte = "Pas de recette disponible"

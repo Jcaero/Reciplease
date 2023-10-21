@@ -12,7 +12,7 @@ class ResultSearchViewController: ViewController {
 
     enum Context {
         case search(ingredients: [String])
-        case favorite(recipes: [LocalRecipe])
+        case favorite
     }
 
     private var context: ResultSearchViewController.Context
@@ -37,6 +37,8 @@ class ResultSearchViewController: ViewController {
         return tableView
     }()
 
+    // MARK: - Properties
+
     // MARK: - Init
     init(context: ResultSearchViewController.Context) {
         self.context = context
@@ -44,6 +46,15 @@ class ResultSearchViewController: ViewController {
         setupTableView()
         setupIndicator()
         setupBinding()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        switch context {
+        case .favorite:
+            fetchRecipe()
+        default:
+            break
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -93,8 +104,8 @@ class ResultSearchViewController: ViewController {
         switch context {
         case .search(let ingredients):
             viewModel.fetchInitRecipes(with: ingredients)
-        case .favorite(let recipes):
-            viewModel.recipes = recipes
+        case .favorite:
+            fetchRecipe()
         }
     }
 
@@ -110,6 +121,21 @@ class ResultSearchViewController: ViewController {
             self?.navigationController?.popViewController(animated: true)
         }))
         return self.present(alertVC, animated: true, completion: nil)
+    }
+
+    private func showSimpleAlerte(with titre: String, message: String) {
+        let alertVC = UIAlertController(title: titre, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        return self.present(alertVC, animated: true, completion: nil)
+    }
+
+    private func fetchRecipe() {
+        viewModel.recipes = recipeRepository.fetchRecipes()
+        if viewModel.recipes.isEmpty {
+            showSimpleAlerte(with: "Erreur", message: "Aucune recette sauvegardée")
+        } else {
+            viewModel.isNetworkSuccessful = true
+        }
     }
 }
 

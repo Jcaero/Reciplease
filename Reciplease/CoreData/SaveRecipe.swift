@@ -7,4 +7,5 @@
 
 import Foundation
 import CoreData
-class LocalRecipe: NSManagedObject {}
+class SaveRecipe: NSManagedObject {
+}

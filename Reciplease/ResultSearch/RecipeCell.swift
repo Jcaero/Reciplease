@@ -102,10 +102,11 @@ class RecipeCell: UITableViewCell {
 
     func setupCell(with recipe: LocalRecipe) {
         title.text = recipe.label
-        ingredient.text = recipe.ingredients
+        ingredient.text = recipe.listeOfIngredients
         infoStackView.setup(with: Int(recipe.totalTime), yield: Int(recipe.yield))
 
-        imageRepository.downloadImageWith(recipe.imageUrl!)
+        guard recipe.imageUrl != "" else { return }
+        imageRepository.downloadImageWith(recipe.imageUrl)
             .receive(on: DispatchQueue.main)
             .sink { result in
                 switch result {

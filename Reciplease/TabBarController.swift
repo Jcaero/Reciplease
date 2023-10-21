@@ -16,7 +16,7 @@ class TabBar: UITabBarController {
 
     func setupVCs() {
         let searchController = UINavigationController(rootViewController: SearchController())
-        let favoriteController = ViewController()
+        let favoriteController = UINavigationController(rootViewController: ResultSearchViewController(context: .favorite) )
 
         searchController.tabBarItem = UITabBarItem(title: "Search", image: nil, tag: 0)
         searchController.tabBarItem.accessibilityHint = "appuyer pour afficher la page de recherche"

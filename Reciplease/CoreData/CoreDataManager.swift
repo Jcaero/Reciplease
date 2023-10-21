@@ -30,8 +30,6 @@ final class CoreDataManager {
     }
 
     func save() {
-        let viewContext = persistentContainer.viewContext
-
         if viewContext.hasChanges {
             do {
                 try viewContext.save()
