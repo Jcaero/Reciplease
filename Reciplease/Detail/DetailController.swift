@@ -86,10 +86,14 @@ class DetailController: ViewController {
     }()
 
     // MARK: - Properties
-    private var isStarFilled = false
+    private var isStarFilled = false {
+        didSet {
+            isStarFilled ? setStarWith(filledStarImage)  : setStarWith(emptyStarImage)
+        }
+    }
 
-    let emptyStarImage = UIImage(systemName: "star")
-    let filledStarImage = UIImage(systemName: "star.fill")
+    let emptyStarImage = UIImage(systemName: "star")!
+    let filledStarImage = UIImage(systemName: "star.fill")!
 
     private let recipeSaveManager = RecipeSaveManager()
     private var recipe: LocalRecipe!
@@ -101,15 +105,9 @@ class DetailController: ViewController {
         super.viewDidLoad()
         setupView()
         setupNormalContraint()
+        setupStar()
 
         updateDisplayAccessibility()
-
-        let starButton = UIBarButtonItem(image: emptyStarImage,
-                                         style: .plain,
-                                         target: self,
-                                         action: #selector(starButtonTapped))
-        starButton.tintColor = .darkGreen
-        self.navigationItem.rightBarButtonItem = starButton
     }
 
     init(with recipe: LocalRecipe) {
@@ -118,6 +116,7 @@ class DetailController: ViewController {
         titleLabel.text = recipe.label
         ingredientListView.text = recipe.listeOfIngredientsWithDetail
         infoStackView.setup(with: Int(recipe.totalTime), yield: Int(recipe.yield))
+        isStarFilled = recipe.isSave
 
         imageRepository.downloadImageWith(recipe.imageUrl)
             .receive(on: DispatchQueue.main)
@@ -211,6 +210,22 @@ class DetailController: ViewController {
             ingredientListeStackView.bottomAnchor.constraint(equalTo: getDirectionsButton.topAnchor, constant: -5)
         ])
     }
+
+    func setupStar() {
+        let starButton = UIBarButtonItem(image: emptyStarImage,
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(starButtonTapped))
+        starButton.tintColor = .darkGreen
+        self.navigationItem.rightBarButtonItem = starButton
+        if recipe.isSave == true {
+            self.setStarWith(filledStarImage)
+        }
+    }
+
+    func setStarWith(_ image: UIImage) {
+        self.navigationItem.rightBarButtonItem?.image = image
+    }
 }
 
 // MARK: - Accessibility
@@ -257,11 +272,12 @@ extension DetailController {
         if isStarFilled {
             print("core data save")
             recipeSaveManager.saveRecipe(named: recipe)
+            recipe.isSave = true
             self.navigationItem.rightBarButtonItem?.image = filledStarImage
         } else {
-            print("call core data dell")
-            self.navigationItem.rightBarButtonItem?.image = emptyStarImage
             recipeSaveManager.deleteRecipe(recipe)
+            recipe.isSave = false
+            self.navigationItem.rightBarButtonItem?.image = emptyStarImage
         }
     }
 }

@@ -17,6 +17,7 @@ class LocalRecipe {
     var listeOfIngredientsWithDetail: String
     var totalTime: Int
     var yield: Int
+    var isSave: Bool = false
 
     init( recipe: Recipe) {
         self.label = recipe.label
@@ -36,6 +37,6 @@ class LocalRecipe {
         self.listeOfIngredientsWithDetail = saveRecipe.listeOfIngredientsWithDetail ?? ""
         self.totalTime = Int(saveRecipe.totalTime)
         self.yield = Int(saveRecipe.yield)
+        self.isSave = saveRecipe.isSave
     }
 }
-

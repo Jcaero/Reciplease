@@ -71,6 +71,7 @@ final class RecipeSaveManager {
         localRecipe.totalTime = Int16(recipe.totalTime)
         localRecipe.yield = Int16(recipe.yield)
         localRecipe.sourceUrl = recipe.sourceUrl
+        localRecipe.isSave = true
         return localRecipe
     }
 }
