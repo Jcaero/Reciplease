@@ -14,7 +14,7 @@ class ResultSearchViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
 
     private let repository = Repository()
-    private let recipRepository = RecipeSaveManager()
+    private let recipesSaveRepository = RecipeSaveManager()
     var recipes: [LocalRecipe] = []
 
     @Published var isNetworkSuccessful: Bool!
@@ -37,11 +37,20 @@ class ResultSearchViewModel: ObservableObject {
             data.hits.forEach { hit in
                 self.recipes.append(LocalRecipe(recipe: hit.recipe))
             }
-            if self.recipes.isEmpty == true {
-                self.isAlerte = "Pas de recette disponible"
-            } else {
-                self.isNetworkSuccessful = true
-            }
+            checkRecipes()
         }.store(in: &cancellables)
+    }
+
+    func fetchSaveRecipes() {
+        recipes = recipesSaveRepository.fetchRecipes()
+        checkRecipes()
+    }
+
+    private func checkRecipes() {
+        if self.recipes.isEmpty == true {
+            self.isAlerte = "Pas de recette disponible"
+        } else {
+            self.isNetworkSuccessful = true
+        }
     }
 }

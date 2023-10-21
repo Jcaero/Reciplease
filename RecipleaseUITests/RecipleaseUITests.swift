@@ -22,14 +22,15 @@ final class AccessibilityTest: XCTestCase {
     }
 
     func testAccessibility() throws {
-                // UI tests must launch the application that they test.
+        
         let app = XCUIApplication()
         app.launch()
         try app.performAccessibilityAudit()
     }
 
+    // Test TableView without clipped : ingredients liste is normally clipped
     func testAccessibilityTableView() throws {
-                // UI tests must launch the application that they test.
+        
         let app = XCUIApplication()
         app.launch()
         app.tabBarSearch.tap()
@@ -37,6 +38,8 @@ final class AccessibilityTest: XCTestCase {
         app.input.typeText("Tomato")
         app.addButton.tap()
         app.searchButton.tap()
-        try app.performAccessibilityAudit()
+        let expectation = XCTestExpectation(description: "Attente de 5 secondes")
+        XCTWaiter().wait(for: [expectation], timeout: 5.0)
+        try app.performAccessibilityAudit(for: .all.subtracting(.textClipped))
     }
 }

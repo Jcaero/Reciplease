@@ -50,10 +50,10 @@ class ResultSearchViewController: ViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         switch context {
+        case .search(let ingredients):
+            viewModel.fetchInitRecipes(with: ingredients)
         case .favorite:
-            fetchRecipe()
-        default:
-            break
+            viewModel.fetchSaveRecipes()
         }
     }
 
@@ -98,15 +98,10 @@ class ResultSearchViewController: ViewController {
             .receive(on: RunLoop.main)
             .sink { [weak self] response in
                 guard response != nil else { return }
+                self?.tableView.isHidden = true
+                self?.activityIndicator.stopAnimating()
                 self?.returnAndShowSimpleAlerte(with: "Erreur", message: response!)
             }.store(in: &cancellables)
-
-        switch context {
-        case .search(let ingredients):
-            viewModel.fetchInitRecipes(with: ingredients)
-        case .favorite:
-            fetchRecipe()
-        }
     }
 
     private func updateTableView() {
@@ -127,15 +122,6 @@ class ResultSearchViewController: ViewController {
         let alertVC = UIAlertController(title: titre, message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         return self.present(alertVC, animated: true, completion: nil)
-    }
-
-    private func fetchRecipe() {
-        viewModel.recipes = recipeRepository.fetchRecipes()
-        if viewModel.recipes.isEmpty {
-            showSimpleAlerte(with: "Erreur", message: "Aucune recette sauvegardée")
-        } else {
-            viewModel.isNetworkSuccessful = true
-        }
     }
 }
 
