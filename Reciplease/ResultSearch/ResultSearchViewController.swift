@@ -100,7 +100,7 @@ class ResultSearchViewController: ViewController {
                 guard response != nil else { return }
                 self?.tableView.isHidden = true
                 self?.activityIndicator.stopAnimating()
-                self?.returnAndShowSimpleAlerte(with: "Erreur", message: response!)
+                self?.returnAndShowSimpleAlerte(with: response!)
             }.store(in: &cancellables)
     }
 
@@ -110,16 +110,16 @@ class ResultSearchViewController: ViewController {
         tableView.reloadData()
     }
 
-    private func returnAndShowSimpleAlerte(with titre: String, message: String) {
-        let alertVC = UIAlertController(title: titre, message: message, preferredStyle: .alert)
+    private func returnAndShowSimpleAlerte(with error: ErrorMessage) {
+        let alertVC = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
         }))
         return self.present(alertVC, animated: true, completion: nil)
     }
 
-    private func showSimpleAlerte(with titre: String, message: String) {
-        let alertVC = UIAlertController(title: titre, message: message, preferredStyle: .alert)
+    private func showSimpleAlerte(with error: ErrorMessage) {
+        let alertVC = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         return self.present(alertVC, animated: true, completion: nil)
     }

@@ -18,7 +18,7 @@ class ResultSearchViewModel: ObservableObject {
     var recipes: [LocalRecipe] = []
 
     @Published var isNetworkSuccessful: Bool!
-    @Published var isAlerte: String!
+    @Published var isAlerte: ErrorMessage!
 
     func fetchInitRecipes(with ingredients: [String]) {
         self.isNetworkSuccessful = false
@@ -29,7 +29,7 @@ class ResultSearchViewModel: ObservableObject {
             case .finished:
                 break
             case .failure:
-                self.isAlerte = "Erreur de reseau"
+                self.isAlerte = ErrorMessage(title: "Erreur", message: "Erreur de reseau")
             }
         } receiveValue: { [weak self] data in
             guard let self = self else { return }
@@ -48,7 +48,7 @@ class ResultSearchViewModel: ObservableObject {
 
     private func checkRecipes() {
         if self.recipes.isEmpty == true {
-            self.isAlerte = "Pas de recette disponible"
+            self.isAlerte = ErrorMessage(title: "Information", message: "Pas de recette disponible")
         } else {
             self.isNetworkSuccessful = true
         }
