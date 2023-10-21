@@ -23,9 +23,9 @@ class TabBar: UITabBarController {
         favoriteController.tabBarItem = UITabBarItem(title: "Favorite", image: nil, tag: 1)
         searchController.tabBarItem.accessibilityHint = "appuyer pour afficher la page des Favoris"
 
-           viewControllers = [searchController, favoriteController]
+        viewControllers = [searchController, favoriteController]
 
-      }
+    }
 
     func setupTabBar() {
 
@@ -67,5 +67,15 @@ class TabBar: UITabBarController {
         firstVerticalLine.frame = CGRect(x: self.tabBar.frame.width / 2, y: 0, width: 2, height: (self.tabBar.frame.height + 34))
         firstVerticalLine.backgroundColor = UIColor.gray.cgColor
         self.tabBar.layer.addSublayer(firstVerticalLine)
+    }
+}
+
+extension TabBar {
+
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        let index = item.tag
+        if index == 0 {
+            self.selectedIndex = 0
+        }
     }
 }

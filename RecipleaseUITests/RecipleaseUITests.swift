@@ -22,7 +22,7 @@ final class AccessibilityTest: XCTestCase {
     }
 
     func testAccessibility() throws {
-        
+
         let app = XCUIApplication()
         app.launch()
         try app.performAccessibilityAudit()
@@ -30,7 +30,7 @@ final class AccessibilityTest: XCTestCase {
 
     // Test TableView without clipped : ingredients liste is normally clipped
     func testAccessibilityTableView() throws {
-        
+
         let app = XCUIApplication()
         app.launch()
         app.tabBarSearch.tap()
