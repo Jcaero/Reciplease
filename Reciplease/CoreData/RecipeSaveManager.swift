@@ -22,9 +22,9 @@ final class RecipeSaveManager {
 
     // MARK: - Repository
 
-    func saveRecipe(named recipe: SaveRecipe) {
+    func saveRecipe(named recipe: LocalRecipe) {
         let viewContext = coreDataManager.viewContext
-        viewContext.insert(recipe)
+        viewContext.insert(transformInSaveRecipe(LocalRecipe: recipe))
         coreDataManager.save()
     }
 
@@ -42,21 +42,35 @@ final class RecipeSaveManager {
         return (try? coreDataManager.viewContext.fetch(request)) ?? []
     }
 
-    func deleteRecipe( _ recipe: SaveRecipe) {
-        coreDataManager.viewContext.delete(recipe)
-        coreDataManager.save()
-        print("del core data")
+    func deleteRecipe( _ recipe: LocalRecipe) {
+        let context = coreDataManager.viewContext
+        // Cast the result returned from the fetchRequest as Person class
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SaveRecipe")
+
+        // fetch records which match this condition
+        fetchRequest.predicate = NSPredicate(format: "label == %@", recipe.label)
+
+        do {
+            let recipesToDelete = try context.fetch(fetchRequest)
+            for recipeToDelete in recipesToDelete {
+                context.delete(recipeToDelete)
+            }
+            coreDataManager.save()
+            print("Recipe deleted from Core Data")
+        } catch let error as NSError {
+            print("Could not fetch or delete. \(error), \(error.userInfo)")
+        }
     }
 
-//    func transformInLocalAPI(_ recipe: Recipe) -> SaveRecipe {
-//        let localRecipe = SaveRecipe(context: coreDataManager.viewContext)
-//        localRecipe.label = recipe.label
-//        localRecipe.ingredients = recipe.ingredients.map { $0.food }.joined(separator: ", ")
-//        localRecipe.ingredientsLines = "- " + recipe.ingredientLines.joined(separator: "\n- ")
-//        localRecipe.imageUrl = recipe.images.regular.url
-//        localRecipe.totalTime = Int32(recipe.totalTime)
-//        localRecipe.yield = Int32(recipe.yield)
-//        localRecipe.sourceUrl = recipe.url
-//        return localRecipe
-//    }
+    func transformInSaveRecipe(LocalRecipe recipe: LocalRecipe) -> SaveRecipe {
+        let localRecipe = SaveRecipe(context: coreDataManager.viewContext)
+        localRecipe.label = recipe.label
+        localRecipe.listeOfIngredients = recipe.listeOfIngredients
+        localRecipe.listeOfIngredientsWithDetail = recipe.listeOfIngredientsWithDetail
+        localRecipe.imageUrl = recipe.imageUrl
+        localRecipe.totalTime = Int16(recipe.totalTime)
+        localRecipe.yield = Int16(recipe.yield)
+        localRecipe.sourceUrl = recipe.sourceUrl
+        return localRecipe
+    }
 }

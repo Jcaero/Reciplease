@@ -256,12 +256,12 @@ extension DetailController {
 
         if isStarFilled {
             print("core data save")
-//            recipeSaveManager.saveRecipe(named: recipe)
+            recipeSaveManager.saveRecipe(named: recipe)
             self.navigationItem.rightBarButtonItem?.image = filledStarImage
         } else {
             print("call core data dell")
             self.navigationItem.rightBarButtonItem?.image = emptyStarImage
-//            recipeSaveManager.deleteRecipe(recipe)
+            recipeSaveManager.deleteRecipe(recipe)
         }
     }
 }
