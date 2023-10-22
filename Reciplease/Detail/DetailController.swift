@@ -110,6 +110,10 @@ class DetailController: ViewController {
         updateDisplayAccessibility()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        isStarFilled = recipeSaveManager.isSaveRecipeContains(recipe)
+    }
+
     init(with recipe: LocalRecipe) {
         super.init()
         self.recipe = recipe

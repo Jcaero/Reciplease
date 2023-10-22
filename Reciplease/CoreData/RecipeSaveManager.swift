@@ -13,11 +13,13 @@ final class RecipeSaveManager {
     // MARK: - Properties
 
     private let coreDataManager: CoreDataManager
+    private let context: NSManagedObjectContext!
 
     // MARK: - Init
 
     init(coreDataManager: CoreDataManager = CoreDataManager.sharedInstance) {
         self.coreDataManager = coreDataManager
+        context = coreDataManager.viewContext
     }
 
     // MARK: - Repository
@@ -29,25 +31,24 @@ final class RecipeSaveManager {
     }
 
     func fetchRecipes() -> [LocalRecipe] {
-        let saveRecipes = fetchSaveRecipes()
-        return saveRecipes.map { saveRecipe in
-            return LocalRecipe(saveRecipe: saveRecipe)
-        }
+        return fetchSaveRecipes().map(LocalRecipe.init)
     }
 
     private func fetchSaveRecipes() -> [SaveRecipe] {
         let request: NSFetchRequest<SaveRecipe> = SaveRecipe.fetchRequest()
         let sortDescriptor = NSSortDescriptor(keyPath: \SaveRecipe.label, ascending: false)
         request.sortDescriptors = [sortDescriptor]
-        return (try? coreDataManager.viewContext.fetch(request)) ?? []
+        do {
+            return try coreDataManager.viewContext.fetch(request)
+        } catch {
+            print("Error fetching SaveRecipes: \(error)")
+            return []
+        }
     }
 
     func deleteRecipe( _ recipe: LocalRecipe) {
-        let context = coreDataManager.viewContext
-        // Cast the result returned from the fetchRequest as Person class
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SaveRecipe")
 
-        // fetch records which match this condition
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SaveRecipe")
         fetchRequest.predicate = NSPredicate(format: "label == %@", recipe.label)
 
         do {
@@ -73,5 +74,18 @@ final class RecipeSaveManager {
         localRecipe.sourceUrl = recipe.sourceUrl
         localRecipe.isSave = true
         return localRecipe
+    }
+
+    func isSaveRecipeContains(_ recipe: LocalRecipe) -> Bool {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SaveRecipe")
+         fetchRequest.predicate = NSPredicate(format: "label == %@", recipe.label)
+
+         do {
+             let recipeFetched = try context.fetch(fetchRequest)
+             return !recipeFetched.isEmpty
+         } catch let error as NSError {
+             print("Could not fetch or delete. \(error), \(error.userInfo)")
+             return false
+         }
     }
 }
