@@ -10,14 +10,6 @@ import Combine
 
 class ResultSearchViewController: ViewController {
 
-    enum Context {
-        case search(ingredients: [String])
-        case favorite
-    }
-
-    private var context: ResultSearchViewController.Context
-    private let viewModel = ResultSearchViewModel()
-
     // MARK: - liste of UI
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
@@ -34,17 +26,25 @@ class ResultSearchViewController: ViewController {
         tableView.register(RecipeCell.self, forCellReuseIdentifier: "RecipeCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.isHidden = true
+        tableView.backgroundColor = .anthraciteGray
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
 
     // MARK: - Properties
+    enum Context {
+        case search(ingredients: [String])
+        case favorite
+    }
+
+    private var context: ResultSearchViewController.Context
+    private let viewModel = ResultSearchViewModel()
 
     // MARK: - Init
     init(context: ResultSearchViewController.Context) {
         self.context = context
         super.init()
-        setupTableView()
-        setupIndicator()
+        setupUI()
         setupBinding()
     }
 
@@ -53,6 +53,7 @@ class ResultSearchViewController: ViewController {
         case .search(let ingredients):
             viewModel.fetchInitRecipes(with: ingredients)
         case .favorite:
+            initNavigationBar()
             viewModel.fetchSaveRecipes()
         }
     }
@@ -62,21 +63,18 @@ class ResultSearchViewController: ViewController {
     }
 
     // MARK: - Setup Function
-    private func setupIndicator() {
+    private func setupUI() {
         view.addSubview(activityIndicator)
+        view.addSubview(tableView)
+
+        tableView.delegate = self
+        tableView.dataSource = self
+
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-    }
 
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = .anthraciteGray
-
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
@@ -90,17 +88,17 @@ class ResultSearchViewController: ViewController {
             .receive(on: RunLoop.main)
             .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
             .sink { [weak self] response in
-                guard response != nil else { return }
-                self?.updateTableView()
+                guard response != false, let self = self else { return }
+                self.updateTableView()
             }.store(in: &cancellables)
 
-        viewModel.$isAlerte
+        viewModel.$alerteMessage
             .receive(on: RunLoop.main)
             .sink { [weak self] response in
-                guard response != nil else { return }
-                self?.tableView.isHidden = true
-                self?.activityIndicator.stopAnimating()
-                self?.returnAndShowSimpleAlerte(with: response!)
+                guard response != nil, let self = self else { return }
+                self.tableView.isHidden = true
+                self.activityIndicator.stopAnimating()
+                self.returnAndShowSimpleAlerte(with: response!)
             }.store(in: &cancellables)
     }
 

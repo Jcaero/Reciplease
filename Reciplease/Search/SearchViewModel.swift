@@ -11,24 +11,20 @@ import Combine
 class SearchViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
 
-    var ingredients: [String] = []
+    var ingredients: [String] = [] {
+        didSet {
+            ingredientList = ingredients.joined(separator: "\n- ")
+        }
+    }
     @Published var ingredientList: String = ""
 
     func addIngredient(_ name: String?) {
-        guard let ingredient = name, ingredient != "",
-              ingredientList.contains(ingredient) == false
-        else { return}
+        guard let ingredient = name, !ingredient.isEmpty, !ingredientList.contains(ingredient) else { return}
 
         ingredients.append(ingredient)
-
-        switch ingredientList {
-        case "": ingredientList = "- " + ingredient
-        default: ingredientList = ingredientList + "\n- " + ingredient
-        }
     }
 
     func clearIngredientList() {
-        ingredientList = ""
-        ingredients = []
+        ingredients.removeAll()
     }
 }

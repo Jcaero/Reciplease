@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-class RecipeResultCache {
+class RecipeCacheManager {
 
     // MARK: - Singleton
-    static let shared = RecipeResultCache()
+    static let shared = RecipeCacheManager()
 
     // MARK: - Propertie
     private let recipeCache = NSCache<NSString, NSArray>()

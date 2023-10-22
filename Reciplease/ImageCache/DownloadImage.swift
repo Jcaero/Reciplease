@@ -23,12 +23,13 @@ class DownloadImage {
             return AF.request(url, method: .get, parameters: nil)
                 .publishData()
                 .value()
-                .receive(on: DispatchQueue.main)
                 .tryMap { [weak self] data in
                     guard let self = self, let image = UIImage(data: data) else { throw URLError(.badServerResponse)}
                     self.cacheRepository.save(image: image, forKey: url)
                     return image
-                }.eraseToAnyPublisher()
+                }
+                .receive(on: DispatchQueue.main)
+                .eraseToAnyPublisher()
         }
     }
 }

@@ -47,7 +47,7 @@
 		47A5C5E72AC5342A0052BC0D /* UItextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A5C5E62AC5342A0052BC0D /* UItextField+.swift */; };
 		47C1ACB82ABDA4790049E043 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1ACB72ABDA4790049E043 /* TabBarController.swift */; };
 		47C576E92AE3F18600CC8C65 /* LocalRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C576E82AE3F18600CC8C65 /* LocalRecipe.swift */; };
-		47FAF5C42AE547C800B30996 /* RecipeResultCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FAF5C32AE547C800B30996 /* RecipeResultCache.swift */; };
+		47FAF5C42AE547C800B30996 /* RecipeCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FAF5C32AE547C800B30996 /* RecipeCacheManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,7 +111,7 @@
 		47A5C5E62AC5342A0052BC0D /* UItextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UItextField+.swift"; sourceTree = "<group>"; };
 		47C1ACB72ABDA4790049E043 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		47C576E82AE3F18600CC8C65 /* LocalRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRecipe.swift; sourceTree = "<group>"; };
-		47FAF5C32AE547C800B30996 /* RecipeResultCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeResultCache.swift; sourceTree = "<group>"; };
+		47FAF5C32AE547C800B30996 /* RecipeCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCacheManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,7 +211,7 @@
 			children = (
 				4740D9852ADF16680060F979 /* ImageCache.swift */,
 				47452B7A2AE060BD005AFBF3 /* DownloadImage.swift */,
-				47FAF5C32AE547C800B30996 /* RecipeResultCache.swift */,
+				47FAF5C32AE547C800B30996 /* RecipeCacheManager.swift */,
 			);
 			path = ImageCache;
 			sourceTree = "<group>";
@@ -494,7 +494,7 @@
 				4799095D2ABCCD540056753E /* SceneDelegate.swift in Sources */,
 				4777915D2ABF0B6400ABA120 /* UIColor+.swift in Sources */,
 				47A5C5E52AC532DD0052BC0D /* UIButton+.swift in Sources */,
-				47FAF5C42AE547C800B30996 /* RecipeResultCache.swift in Sources */,
+				47FAF5C42AE547C800B30996 /* RecipeCacheManager.swift in Sources */,
 				47452B7B2AE060BD005AFBF3 /* DownloadImage.swift in Sources */,
 				471D6E9A2AE45F0E00F99EA8 /* ErrorMessage.swift in Sources */,
 				4738F11E2AC9272E0014FD09 /* APIKey.swift in Sources */,

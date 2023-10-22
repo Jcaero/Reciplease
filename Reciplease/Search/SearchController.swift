@@ -131,36 +131,17 @@ class SearchController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Init navigation controller
         initNavigationBar()
 
-        // setup
         setupView()
         updateDisplayAccessibility()
         setupTapGesture()
 
         inputIngredient.delegate = self
 
-        // Assigne publisher
         viewModel.$ingredientList
             .assign(to: \.text, on: self.ingredientListView)
             .store(in: &cancellables)
-    }
-
-    // MARK: - Init navigationBar
-    private func initNavigationBar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .anthraciteGray
-        appearance.titleTextAttributes = [.font: UIFont(name: "Chalkduster", size: 25)!,
-                                          .foregroundColor: UIColor.white]
-
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-
-        navigationController?.navigationBar.topItem?.title = "Reciplease"
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
     }
 
     // MARK: - Layout
@@ -261,21 +242,14 @@ extension SearchController {
 
     private func updateDisplayAccessibility() {
         let currentCategory = traitCollection.preferredContentSizeCategory
-        if currentCategory.isAccessibilityCategory {
-            inputStackView.axis = .vertical
-            inputIngredient.placeholder = "ingredient"
-            searchRecipes.setTitle("Search", for: .normal)
-            questionTitle.isHidden = true
-            underligne.isHidden = true
-            yourIngredientsLabel.isHidden = true
-        } else {
-            inputStackView.axis = .horizontal
-            inputIngredient.placeholder = "Lemon, Cheese..."
-            searchRecipes.setTitle("Search for recipes", for: .normal)
-            questionTitle.isHidden = false
-            underligne.isHidden = false
-            yourIngredientsLabel.isHidden = false
-        }
+        let isAccessibilityCategory = currentCategory.isAccessibilityCategory
+
+        inputStackView.axis = isAccessibilityCategory ? .vertical : .horizontal
+        inputIngredient.placeholder = isAccessibilityCategory ? "ingredient" : "Lemon, Cheese..."
+        searchRecipes.setTitle(isAccessibilityCategory ? "Search" : "Search for recipes", for: .normal)
+        questionTitle.isHidden = isAccessibilityCategory
+        underligne.isHidden = isAccessibilityCategory
+        yourIngredientsLabel.isHidden = isAccessibilityCategory
     }
 }
 
@@ -296,7 +270,7 @@ extension SearchController: UITextFieldDelegate {
 // MARK: - Search Button
 extension SearchController {
     @objc func searchRecip() {
-        guard viewModel.ingredients.isEmpty == false else {return}
+        guard !viewModel.ingredients.isEmpty else {return}
 
         let newController = ResultSearchViewController(context: .search(ingredients: viewModel.ingredients))
         newController.title = "Reciplease"

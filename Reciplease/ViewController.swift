@@ -60,4 +60,20 @@ class ViewController: UIViewController {
         return root
     }
 #endif
+
+    // MARK: - Init navigationBar
+    func initNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .anthraciteGray
+        appearance.titleTextAttributes = [.font: UIFont(name: "Chalkduster", size: 25)!,
+                                          .foregroundColor: UIColor.white]
+
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+
+        navigationController?.navigationBar.topItem?.title = "Reciplease"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+    }
 }

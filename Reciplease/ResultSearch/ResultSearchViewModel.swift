@@ -13,13 +13,21 @@ class ResultSearchViewModel: ObservableObject {
 
     var cancellables = Set<AnyCancellable>()
 
-    private let repository = Repository()
-    private let recipesSaveManager = RecipeSaveManager()
-    var recipes: [LocalRecipe] = []
-    private var ingredientsKey: String!
+    private let repository: Repository
+    private let recipesSaveManager: RecipeSaveManager
+    private let recipeCacheManager: RecipeCacheManager
+    private var ingredientsKey: String = ""
 
-    @Published var isNetworkSuccessful: Bool!
-    @Published var isAlerte: ErrorMessage!
+    var recipes: [LocalRecipe] = []
+
+    @Published var isNetworkSuccessful = false
+    @Published var alerteMessage: ErrorMessage?
+
+    init(repository: Repository = Repository(), recipesSaveManager: RecipeSaveManager = RecipeSaveManager(), recipeCacheManager: RecipeCacheManager = RecipeCacheManager.shared) {
+        self.repository = repository
+        self.recipesSaveManager = recipesSaveManager
+        self.recipeCacheManager = recipeCacheManager
+    }
 
     func fetchInitRecipes(with ingredients: [String]) {
         self.ingredientsKey = ingredients.joined(separator: ",")
@@ -36,16 +44,14 @@ class ResultSearchViewModel: ObservableObject {
         repository.fetchRecip(ingredients)
             .sink { [weak self] completion in
                 guard let self = self else { return }
-
                 switch completion {
                 case .finished:
                     break
                 case .failure:
-                    self.isAlerte = ErrorMessage(title: "Erreur", message: "Erreur de reseau")
+                    self.alerteMessage = ErrorMessage(title: "Erreur", message: "Erreur de reseau")
                 }
             } receiveValue: { [weak self] data in
                 guard let self = self else { return }
-
                 self.recipes = data.hits.map { LocalRecipe(recipe: $0.recipe) }
                 self.checkIfRecipesCanBeShow()
             }.store(in: &cancellables)
@@ -57,16 +63,16 @@ class ResultSearchViewModel: ObservableObject {
     }
 
     private func checkIfRecipesCanBeShow() {
-        if self.recipes.isEmpty == true {
-            self.isAlerte = ErrorMessage(title: "Information", message: "Pas de recette disponible")
+        if self.recipes.isEmpty {
+            alerteMessage = ErrorMessage(title: "Information", message: "Pas de recette disponible")
         } else {
-            RecipeResultCache.shared.save(recipes: recipes, forKey: ingredientsKey)
-            self.isNetworkSuccessful = true
+            recipeCacheManager.save(recipes: recipes, forKey: ingredientsKey)
+            isNetworkSuccessful = true
         }
     }
 
     private func haveRecipesInCache() -> Bool {
-        recipes = RecipeResultCache.shared.getRecipes(for: ingredientsKey)
+        recipes = recipeCacheManager.getRecipes(for: ingredientsKey)
         return !recipes.isEmpty
     }
 }

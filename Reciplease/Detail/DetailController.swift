@@ -103,10 +103,9 @@ class DetailController: ViewController {
     // MARK: - Cycle of life
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        setupNormalContraint()
+        setupUI()
+        setupContraints()
         setupStar()
-
         updateDisplayAccessibility()
     }
 
@@ -143,7 +142,7 @@ class DetailController: ViewController {
     }
 
     // MARK: - Function
-    private func setupView() {
+    private func setupUI() {
         [recipImage,
          ingredientListeStackView,
          titleStackView, infoView,
@@ -169,7 +168,7 @@ class DetailController: ViewController {
         ingredientListeStackView.addArrangedSubview(ingredientListView)
     }
 
-    private func setupNormalContraint() {
+    private func setupContraints() {
 
         NSLayoutConstraint.activate([
             recipImage.leftAnchor.constraint(equalTo: view.leftAnchor),
