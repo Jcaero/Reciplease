@@ -38,5 +38,9 @@ class LocalRecipe {
         self.totalTime = Int(saveRecipe.totalTime)
         self.yield = Int(saveRecipe.yield)
         self.isSave = saveRecipe.isSave
+
+        if let imageData = saveRecipe.imageData, let image = UIImage(data: imageData) {
+                self.image = image
+        }
     }
 }

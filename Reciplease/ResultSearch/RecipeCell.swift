@@ -105,11 +105,19 @@ class RecipeCell: UITableViewCell {
         ingredient.text = recipe.listeOfIngredients
         infoStackView.setup(with: Int(recipe.totalTime), yield: Int(recipe.yield))
 
-        guard !recipe.imageUrl.isEmpty else { return }
-        downloadRecipeImage(recipe.imageUrl)
+        setupImageRecip(of: recipe)
     }
 
-    func downloadRecipeImage(_ imageUrl: String) {
+    private func setupImageRecip(of recipe: LocalRecipe) {
+        if let image = recipe.image {
+            print("save image")
+            showImage(image: image)
+        } else if !recipe.imageUrl.isEmpty {
+            downloadRecipeImage(recipe.imageUrl)
+        }
+    }
+
+    private func downloadRecipeImage(_ imageUrl: String) {
         imageRepository.downloadImageWith(imageUrl)
             .receive(on: DispatchQueue.main)
             .sink { result in
@@ -121,8 +129,12 @@ class RecipeCell: UITableViewCell {
                 }
             } receiveValue: { [weak self] image in
                 guard let self = self else {return }
-                self.backGroundImage.image = image
-                self.backgroundView = backGroundImage
+                showImage(image: image)
             }.store(in: &cancellables)
+    }
+
+    private func showImage( image: UIImage) {
+        self.backGroundImage.image = image
+        self.backgroundView = backGroundImage
     }
 }

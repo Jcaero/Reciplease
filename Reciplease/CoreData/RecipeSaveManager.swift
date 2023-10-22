@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 final class RecipeSaveManager {
 
@@ -24,9 +25,9 @@ final class RecipeSaveManager {
 
     // MARK: - Repository
 
-    func saveRecipe(named recipe: LocalRecipe) {
+    func saveRecipe(named recipe: LocalRecipe, image: UIImage) {
         let viewContext = coreDataManager.viewContext
-        viewContext.insert(transformInSaveRecipe(LocalRecipe: recipe))
+        viewContext.insert(transformInSaveRecipe(LocalRecipe: recipe, recipeImage: image))
         coreDataManager.save()
     }
 
@@ -63,7 +64,7 @@ final class RecipeSaveManager {
         }
     }
 
-    func transformInSaveRecipe(LocalRecipe recipe: LocalRecipe) -> SaveRecipe {
+    func transformInSaveRecipe(LocalRecipe recipe: LocalRecipe, recipeImage: UIImage) -> SaveRecipe {
         let localRecipe = SaveRecipe(context: coreDataManager.viewContext)
         localRecipe.label = recipe.label
         localRecipe.listeOfIngredients = recipe.listeOfIngredients
@@ -73,6 +74,7 @@ final class RecipeSaveManager {
         localRecipe.yield = Int16(recipe.yield)
         localRecipe.sourceUrl = recipe.sourceUrl
         localRecipe.isSave = true
+        localRecipe.imageData = recipeImage.jpegData(compressionQuality: 1)
         return localRecipe
     }
 

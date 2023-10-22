@@ -121,19 +121,7 @@ class DetailController: ViewController {
         infoStackView.setup(with: Int(recipe.totalTime), yield: Int(recipe.yield))
         isStarFilled = recipe.isSave
 
-        imageRepository.downloadImageWith(recipe.imageUrl)
-            .receive(on: DispatchQueue.main)
-            .sink { result in
-                switch result {
-                case.finished:
-                    break
-                case .failure(let error):
-                    print("erreur de telechargement d'image \(error.localizedDescription)")
-                }
-            } receiveValue: { [weak self] image in
-                guard let self = self else {return }
-                self.recipImage.image = image
-            }.store(in: &cancellables)
+        setupImageRecip(of: recipe)
     }
 
     required init?(coder: NSCoder) {
@@ -214,6 +202,7 @@ class DetailController: ViewController {
         ])
     }
 
+    // MARK: - Star saver
     func setupStar() {
         let starButton = UIBarButtonItem(image: emptyStarImage,
                                          style: .plain,
@@ -228,6 +217,32 @@ class DetailController: ViewController {
 
     func setStarWith(_ image: UIImage) {
         self.navigationItem.rightBarButtonItem?.image = image
+    }
+
+    // MARK: - manage Image
+    private func setupImageRecip(of recipe: LocalRecipe) {
+        if let image = recipe.image {
+            print("save image")
+            self.recipImage.image = image
+        } else if !recipe.imageUrl.isEmpty {
+            downloadRecipeImage(recipe.imageUrl)
+        }
+    }
+
+    private func downloadRecipeImage(_ imageUrl: String) {
+        imageRepository.downloadImageWith(recipe.imageUrl)
+            .receive(on: DispatchQueue.main)
+            .sink { result in
+                switch result {
+                case.finished:
+                    break
+                case .failure(let error):
+                    print("erreur de telechargement d'image \(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] image in
+                guard let self = self else {return }
+                self.recipImage.image = image
+            }.store(in: &cancellables)
     }
 }
 
@@ -274,7 +289,7 @@ extension DetailController {
 
         if isStarFilled {
             print("core data save")
-            recipeSaveManager.saveRecipe(named: recipe)
+            recipeSaveManager.saveRecipe(named: recipe, image: recipImage.image!)
             recipe.isSave = true
             self.navigationItem.rightBarButtonItem?.image = filledStarImage
         } else {
