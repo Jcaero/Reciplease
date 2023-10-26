@@ -13,7 +13,11 @@ class SearchViewModel: ObservableObject {
 
     var ingredients: [String] = [] {
         didSet {
-            ingredientList = ingredients.joined(separator: "\n- ")
+            if self.ingredients.isEmpty {
+                ingredientList = ""
+            } else {
+                ingredientList = "- " + ingredients.joined(separator: "\n- ")
+            }
         }
     }
     @Published var ingredientList: String = ""
