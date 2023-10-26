@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 @objc(SaveRecipe)
 class SaveRecipe: NSManagedObject {
 
@@ -29,6 +28,6 @@ class SaveRecipe: NSManagedObject {
 
 }
 
-extension SaveRecipe : Identifiable {
+extension SaveRecipe: Identifiable {
 
 }

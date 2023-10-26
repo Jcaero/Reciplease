@@ -95,7 +95,6 @@ class DetailController: ViewController {
     let emptyStarImage = UIImage(systemName: "star")!
     let filledStarImage = UIImage(systemName: "star.fill")!
 
-    private let recipeSaveManager = RecipeSaveManager()
     private var recipe: LocalRecipe!
 
     private var imageRepository = DownloadImage()

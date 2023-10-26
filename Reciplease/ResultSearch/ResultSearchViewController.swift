@@ -56,6 +56,7 @@ class ResultSearchViewController: ViewController {
             initNavigationBar()
             viewModel.fetchSaveRecipes()
         }
+        tableView.reloadData()
     }
 
     required init?(coder: NSCoder) {
@@ -153,19 +154,28 @@ extension ResultSearchViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        switch context {
-        case .favorite: return false
-        default: return true
-        }
+        return true
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-      let contextItem = UIContextualAction(style: .destructive, title: "Delete") {  (contextualAction, view, boolValue) in
-          self.viewModel.recipes.remove(at: indexPath.row)
-          tableView.deleteRows(at: [indexPath], with: .fade)
-      }
-      let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
+        let deleteItem = UIContextualAction(style: .destructive, title: "Delete") {  (contextualAction, view, boolValue) in
+            self.recipeSaveManager.deleteRecipe(self.viewModel.recipes[indexPath.row])
+            self.viewModel.recipes.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
+        }
+        
+        let saveItem = UIContextualAction(style: .normal, title: "Save") {  (contextualAction, view, boolValue) in
+            let recipe = self.viewModel.recipes[indexPath.row]
+            self.recipeSaveManager.saveRecipe(named: recipe, image: nil)
+            recipe.isSave = true
+            tableView.reloadData()
+        }
+        saveItem.backgroundColor = .blue
 
-      return swipeActions
+        switch context {
+        case .favorite: return UISwipeActionsConfiguration(actions: [deleteItem])
+        default: return UISwipeActionsConfiguration(actions: [saveItem])
+        }
   }
 }

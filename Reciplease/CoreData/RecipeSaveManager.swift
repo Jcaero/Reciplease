@@ -25,9 +25,9 @@ final class RecipeSaveManager {
 
     // MARK: - Repository
 
-    func saveRecipe(named recipe: LocalRecipe, image: UIImage) {
-        let viewContext = coreDataManager.viewContext
-        viewContext.insert(transformInSaveRecipe(LocalRecipe: recipe, recipeImage: image))
+    func saveRecipe(named recipe: LocalRecipe, image: UIImage?) {
+        guard !isSaveRecipeContains(recipe) else { return }
+        addInContext(LocalRecipe: recipe, recipeImage: image)
         coreDataManager.save()
     }
 
@@ -48,7 +48,6 @@ final class RecipeSaveManager {
     }
 
     func deleteRecipe( _ recipe: LocalRecipe) {
-
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SaveRecipe")
         fetchRequest.predicate = NSPredicate(format: "label == %@", recipe.label)
 
@@ -64,7 +63,7 @@ final class RecipeSaveManager {
         }
     }
 
-    func transformInSaveRecipe(LocalRecipe recipe: LocalRecipe, recipeImage: UIImage) -> SaveRecipe {
+    func addInContext(LocalRecipe recipe: LocalRecipe, recipeImage: UIImage?) {
         let localRecipe = SaveRecipe(context: coreDataManager.viewContext)
         localRecipe.label = recipe.label
         localRecipe.listeOfIngredients = recipe.listeOfIngredients as NSArray
@@ -74,8 +73,9 @@ final class RecipeSaveManager {
         localRecipe.yield = Int16(recipe.yield)
         localRecipe.sourceUrl = recipe.sourceUrl
         localRecipe.isSave = true
-        localRecipe.imageData = recipeImage.jpegData(compressionQuality: 1)
-        return localRecipe
+        if let image = recipeImage {
+            localRecipe.imageData = image.jpegData(compressionQuality: 1)
+        }
     }
 
     func isSaveRecipeContains(_ recipe: LocalRecipe) -> Bool {

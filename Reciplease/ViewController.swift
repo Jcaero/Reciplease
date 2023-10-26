@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     var cancellables = Set<AnyCancellable>()
+    let recipeSaveManager = RecipeSaveManager()
 
     init() {
         super.init(nibName: nil, bundle: nil)
