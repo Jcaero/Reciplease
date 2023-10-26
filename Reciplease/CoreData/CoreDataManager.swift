@@ -19,12 +19,16 @@ final class CoreDataManager {
 
     // MARK: - INIT
     init(modelName: String) {
+        ValueTransformer.setValueTransformer(ArrayIngredientTransformer(), forName: NSValueTransformerName("ArrayIngredientTransformer"))
+        
         persistentContainer = NSPersistentContainer(name: modelName)
+        print("init container")
     }
 
     func load(completion: (() -> Void)? = nil) {
         persistentContainer.loadPersistentStores { (_, error) in
             guard error == nil else { fatalError(error!.localizedDescription)}
+            print("load container")
             completion?()
         }
     }
@@ -33,6 +37,7 @@ final class CoreDataManager {
         if viewContext.hasChanges {
             do {
                 try viewContext.save()
+                print("save")
             } catch {
                 print("Error while saving: \(error.localizedDescription )")
             }

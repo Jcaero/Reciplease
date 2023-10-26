@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="SaveRecipe" representedClassName=".SaveRecipe" syncable="YES" codeGenerationType="category">
+    <entity name="SaveRecipe" representedClassName=".SaveRecipe" syncable="YES">
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="imageUrl" attributeType="String"/>
         <attribute name="isSave" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="label" attributeType="String"/>
-        <attribute name="listeOfIngredients" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[Any]"/>
+        <attribute name="listeOfIngredients" attributeType="Transformable" valueTransformerName="ArrayIngredientTransformer" customClassName="NSArray"/>
         <attribute name="listeOfIngredientsWithDetail" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
         <attribute name="sourceUrl" attributeType="String"/>
         <attribute name="totalTime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

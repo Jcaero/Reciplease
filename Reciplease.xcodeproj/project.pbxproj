@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4708F7B72ADC79C300BC5538 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4708F7B62ADC79C300BC5538 /* CoreDataManager.swift */; };
-		4708F7B92ADC79FA00BC5538 /* SaveRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4708F7B82ADC79FA00BC5538 /* SaveRecipe.swift */; };
 		470D46692AD94D6000F6886D /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470D46682AD94D6000F6886D /* DetailController.swift */; };
 		470D466B2AD94F6A00F6886D /* InfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470D466A2AD94F6A00F6886D /* InfoStackView.swift */; };
 		470D466D2AD9576000F6886D /* GradienView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470D466C2AD9576000F6886D /* GradienView.swift */; };
@@ -28,6 +27,8 @@
 		4740D9862ADF16680060F979 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4740D9852ADF16680060F979 /* ImageCache.swift */; };
 		47452B7B2AE060BD005AFBF3 /* DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47452B7A2AE060BD005AFBF3 /* DownloadImage.swift */; };
 		4750F4032ACBCAB4005FC924 /* ResultSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750F4022ACBCAB4005FC924 /* ResultSearchViewModel.swift */; };
+		475DF2922AEAE7EC0017254C /* ArrayIngredienttransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475DF2912AEAE7EC0017254C /* ArrayIngredienttransformer.swift */; };
+		475DF2962AEAEE070017254C /* SaveRecipe+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475DF2942AEAEE070017254C /* SaveRecipe+CoreDataProperties.swift */; };
 		4777915D2ABF0B6400ABA120 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4777915C2ABF0B6400ABA120 /* UIColor+.swift */; };
 		4789DF702AC43DA200F31373 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4789DF6F2AC43DA200F31373 /* UIView+.swift */; };
 		479638722AC99B8F00CFFBC6 /* testRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479638712AC99B8F00CFFBC6 /* testRepository.swift */; };
@@ -69,7 +70,6 @@
 
 /* Begin PBXFileReference section */
 		4708F7B62ADC79C300BC5538 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		4708F7B82ADC79FA00BC5538 /* SaveRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRecipe.swift; sourceTree = "<group>"; };
 		470D46682AD94D6000F6886D /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		470D466A2AD94F6A00F6886D /* InfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoStackView.swift; sourceTree = "<group>"; };
 		470D466C2AD9576000F6886D /* GradienView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradienView.swift; sourceTree = "<group>"; };
@@ -88,6 +88,8 @@
 		4740D9852ADF16680060F979 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		47452B7A2AE060BD005AFBF3 /* DownloadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImage.swift; sourceTree = "<group>"; };
 		4750F4022ACBCAB4005FC924 /* ResultSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchViewModel.swift; sourceTree = "<group>"; };
+		475DF2912AEAE7EC0017254C /* ArrayIngredienttransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayIngredienttransformer.swift; sourceTree = "<group>"; };
+		475DF2942AEAEE070017254C /* SaveRecipe+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SaveRecipe+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4777915C2ABF0B6400ABA120 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		4789DF6F2AC43DA200F31373 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		479638712AC99B8F00CFFBC6 /* testRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testRepository.swift; sourceTree = "<group>"; };
@@ -153,8 +155,9 @@
 			children = (
 				4708F7B62ADC79C300BC5538 /* CoreDataManager.swift */,
 				479909632ABCCD540056753E /* Reciplease.xcdatamodeld */,
-				4708F7B82ADC79FA00BC5538 /* SaveRecipe.swift */,
+				475DF2912AEAE7EC0017254C /* ArrayIngredienttransformer.swift */,
 				470FE26E2ADDCA8F00B8C4BC /* RecipeSaveManager.swift */,
+				475DF2942AEAEE070017254C /* SaveRecipe+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				4750F4032ACBCAB4005FC924 /* ResultSearchViewModel.swift in Sources */,
 				4740D9862ADF16680060F979 /* ImageCache.swift in Sources */,
 				4789DF702AC43DA200F31373 /* UIView+.swift in Sources */,
+				475DF2962AEAEE070017254C /* SaveRecipe+CoreDataProperties.swift in Sources */,
 				4799095B2ABCCD540056753E /* AppDelegate.swift in Sources */,
 				47A5C5E32AC532000052BC0D /* UILabel+.swift in Sources */,
 				471648722AC1316D003097F5 /* SearchController.swift in Sources */,
@@ -490,11 +494,11 @@
 				4738F11B2AC925EC0014FD09 /* Repository.swift in Sources */,
 				471C5B2F2ACCB296007E328B /* RecipeCell.swift in Sources */,
 				47C1ACB82ABDA4790049E043 /* TabBarController.swift in Sources */,
-				4708F7B92ADC79FA00BC5538 /* SaveRecipe.swift in Sources */,
 				4799095D2ABCCD540056753E /* SceneDelegate.swift in Sources */,
 				4777915D2ABF0B6400ABA120 /* UIColor+.swift in Sources */,
 				47A5C5E52AC532DD0052BC0D /* UIButton+.swift in Sources */,
 				47FAF5C42AE547C800B30996 /* RecipeCacheManager.swift in Sources */,
+				475DF2922AEAE7EC0017254C /* ArrayIngredienttransformer.swift in Sources */,
 				47452B7B2AE060BD005AFBF3 /* DownloadImage.swift in Sources */,
 				471D6E9A2AE45F0E00F99EA8 /* ErrorMessage.swift in Sources */,
 				4738F11E2AC9272E0014FD09 /* APIKey.swift in Sources */,

@@ -151,4 +151,21 @@ extension ResultSearchViewController: UITableViewDelegate {
         newController.title = "Reciplease"
         self.navigationController?.pushViewController(newController, animated: true)
     }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        switch context {
+        case .favorite: return false
+        default: return true
+        }
+    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+      let contextItem = UIContextualAction(style: .destructive, title: "Delete") {  (contextualAction, view, boolValue) in
+          self.viewModel.recipes.remove(at: indexPath.row)
+          tableView.deleteRows(at: [indexPath], with: .fade)
+      }
+      let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
+
+      return swipeActions
+  }
 }

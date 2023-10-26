@@ -67,7 +67,7 @@ final class RecipeSaveManager {
     func transformInSaveRecipe(LocalRecipe recipe: LocalRecipe, recipeImage: UIImage) -> SaveRecipe {
         let localRecipe = SaveRecipe(context: coreDataManager.viewContext)
         localRecipe.label = recipe.label
-        localRecipe.listeOfIngredients = recipe.listeOfIngredients
+        localRecipe.listeOfIngredients = recipe.listeOfIngredients as NSArray
         localRecipe.listeOfIngredientsWithDetail = recipe.listeOfIngredientsWithDetail
         localRecipe.imageUrl = recipe.imageUrl
         localRecipe.totalTime = Int16(recipe.totalTime)
