@@ -47,7 +47,9 @@ class RecipeCell: UITableViewCell {
     static let reuseIdentifier = "RecipeCell"
 
     var cancellables = Set<AnyCancellable>()
-    private var imageRepository = DownloadImage()
+    private let imageRepository = DownloadImage()
+
+    private var recipe: LocalRecipe!
 
     // MARK: - cycle life
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -101,19 +103,28 @@ class RecipeCell: UITableViewCell {
     }
 
     func setupCell(with recipe: LocalRecipe) {
+        self.recipe = recipe
         title.text = recipe.label
         ingredient.text = recipe.listeOfIngredients.map { $0.food }.joined(separator: ", ")
         infoStackView.setup(with: Int(recipe.totalTime), yield: Int(recipe.yield))
-
-        setupImageRecip(of: recipe)
+        setupImageRecip()
+        setupColorOfStackInfoView()
     }
 
-    private func setupImageRecip(of recipe: LocalRecipe) {
+    private func setupImageRecip() {
         if let image = recipe.image {
-            print("save image")
             showImage(image: image)
         } else if !recipe.imageUrl.isEmpty {
             downloadRecipeImage(recipe.imageUrl)
+        }
+    }
+
+    private func setupColorOfStackInfoView() {
+        if RecipeSaveManager().isSaveRecipeContains(recipe) {
+            recipe.isSave = true
+            infoStackView.backgroundColor = .darkGreen
+        } else {
+            infoStackView.backgroundColor = .anthraciteGray
         }
     }
 

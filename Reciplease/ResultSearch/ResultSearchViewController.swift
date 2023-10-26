@@ -158,14 +158,14 @@ extension ResultSearchViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteItem = UIContextualAction(style: .destructive, title: "Delete") {  (contextualAction, view, boolValue) in
+        let deleteItem = UIContextualAction(style: .destructive, title: "Delete") {  (_, _, _) in
             self.recipeSaveManager.deleteRecipe(self.viewModel.recipes[indexPath.row])
             self.viewModel.recipes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.reloadData()
         }
-        
-        let saveItem = UIContextualAction(style: .normal, title: "Save") {  (contextualAction, view, boolValue) in
+
+        let saveItem = UIContextualAction(style: .normal, title: "Save") {  (_, _, _) in
             let recipe = self.viewModel.recipes[indexPath.row]
             self.recipeSaveManager.saveRecipe(named: recipe, image: nil)
             recipe.isSave = true

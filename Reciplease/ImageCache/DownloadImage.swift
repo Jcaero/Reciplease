@@ -16,12 +16,10 @@ class DownloadImage {
 
     func downloadImageWith( _ url: String) -> AnyPublisher<UIImage, Error> {
         if let cacheImage = cacheRepository.getImage(for: url) {
-            print("cach image")
             return Just(cacheImage)
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         } else {
-            print ("download image")
             return AF.request(url, method: .get, parameters: nil)
                 .publishData()
                 .value()
