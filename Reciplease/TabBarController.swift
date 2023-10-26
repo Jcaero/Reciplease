@@ -70,12 +70,12 @@ class TabBar: UITabBarController {
     }
 }
 
-extension TabBar {
-
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        let index = item.tag
-        if index == 0 {
-            self.selectedIndex = 0
-        }
-    }
-}
+// extension TabBar {
+//
+//    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+//        let index = item.tag
+//        if index == 0 {
+//            self.selectedIndex = 0
+//        }
+//    }
+// }

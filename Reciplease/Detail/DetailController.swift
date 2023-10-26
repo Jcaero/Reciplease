@@ -117,7 +117,7 @@ class DetailController: ViewController {
         super.init()
         self.recipe = recipe
         titleLabel.text = recipe.label
-        ingredientListView.text = recipe.listeOfIngredientsWithDetail
+        ingredientListView.text = "- " + recipe.listeOfIngredientsWithDetail.joined(separator: "\n- ")
         infoStackView.setup(with: Int(recipe.totalTime), yield: Int(recipe.yield))
         isStarFilled = recipe.isSave
 

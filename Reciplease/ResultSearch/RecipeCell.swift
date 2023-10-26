@@ -102,7 +102,7 @@ class RecipeCell: UITableViewCell {
 
     func setupCell(with recipe: LocalRecipe) {
         title.text = recipe.label
-        ingredient.text = recipe.listeOfIngredients
+        ingredient.text = recipe.listeOfIngredients.map { $0.food }.joined(separator: ", ")
         infoStackView.setup(with: Int(recipe.totalTime), yield: Int(recipe.yield))
 
         setupImageRecip(of: recipe)

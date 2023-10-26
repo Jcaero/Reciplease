@@ -13,8 +13,8 @@ class LocalRecipe {
     var imageUrl: String
     var image: UIImage?
     var sourceUrl: String
-    var listeOfIngredients: String
-    var listeOfIngredientsWithDetail: String
+    var listeOfIngredients: [Ingredient]
+    var listeOfIngredientsWithDetail: [String]
     var totalTime: Int
     var yield: Int
     var isSave: Bool = false
@@ -23,8 +23,8 @@ class LocalRecipe {
         self.label = recipe.label
         self.imageUrl = recipe.images.regular.url
         self.sourceUrl = recipe.url
-        self.listeOfIngredients = recipe.ingredients.map { $0.food }.joined(separator: ", ")
-        self.listeOfIngredientsWithDetail = "- " + recipe.ingredientLines.joined(separator: "\n- ")
+        self.listeOfIngredients = recipe.ingredients
+        self.listeOfIngredientsWithDetail = recipe.ingredientLines
         self.totalTime = recipe.totalTime
         self.yield = recipe.yield
     }
@@ -33,8 +33,8 @@ class LocalRecipe {
         self.label = saveRecipe.label ?? ""
         self.imageUrl = saveRecipe.imageUrl ?? ""
         self.sourceUrl = saveRecipe.sourceUrl ?? ""
-        self.listeOfIngredients = saveRecipe.listeOfIngredients ?? ""
-        self.listeOfIngredientsWithDetail = saveRecipe.listeOfIngredientsWithDetail ?? ""
+        self.listeOfIngredients = (saveRecipe.listeOfIngredients as? [Ingredient]) ?? []
+        self.listeOfIngredientsWithDetail = saveRecipe.listeOfIngredientsWithDetail ?? []
         self.totalTime = Int(saveRecipe.totalTime)
         self.yield = Int(saveRecipe.yield)
         self.isSave = saveRecipe.isSave
