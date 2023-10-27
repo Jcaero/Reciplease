@@ -138,6 +138,7 @@ extension ResultSearchViewController: UITableViewDataSource {
         }
         let recipe = viewModel.recipes[indexPath.row]
         cell.setupCell(with: recipe)
+        cell.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         return cell
     }
 }

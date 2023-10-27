@@ -157,13 +157,13 @@
 		4708F7B52ADC79A500BC5538 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				479909632ABCCD540056753E /* Reciplease.xcdatamodeld */,
+				4708F7B62ADC79C300BC5538 /* CoreDataManager.swift */,
+				470FE26E2ADDCA8F00B8C4BC /* RecipeSaveManager.swift */,
 				47BDE5F32AEBEF0500FECF20 /* SaveRecipe+CoreDataClass.swift */,
 				47BDE5F42AEBEF0500FECF20 /* SaveRecipe+CoreDataProperties.swift */,
 				47BDE5F52AEBEF0500FECF20 /* SaveIngredient+CoreDataClass.swift */,
 				47BDE5F62AEBEF0500FECF20 /* SaveIngredient+CoreDataProperties.swift */,
-				4708F7B62ADC79C300BC5538 /* CoreDataManager.swift */,
-				479909632ABCCD540056753E /* Reciplease.xcdatamodeld */,
-				470FE26E2ADDCA8F00B8C4BC /* RecipeSaveManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";

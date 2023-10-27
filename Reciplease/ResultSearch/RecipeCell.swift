@@ -98,7 +98,8 @@ class RecipeCell: UITableViewCell {
             ingredient.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5),
             ingredient.leftAnchor.constraint(equalTo: title.leftAnchor),
             ingredient.rightAnchor.constraint(equalTo: title.rightAnchor),
-            ingredient.bottomAnchor.constraint(equalTo: labelView.bottomAnchor, constant: -10)
+            ingredient.bottomAnchor.constraint(equalTo: labelView.bottomAnchor, constant: -10),
+            ingredient.heightAnchor.constraint(greaterThanOrEqualToConstant: 20)
         ])
     }
 
@@ -122,7 +123,7 @@ class RecipeCell: UITableViewCell {
     private func setupColorOfStackInfoView() {
         if RecipeSaveManager().isSaveRecipeContains(recipe) {
             recipe.isSave = true
-            infoStackView.backgroundColor = .darkGreen
+            infoStackView.backgroundColor = .heavyDarkGreen
         } else {
             infoStackView.backgroundColor = .anthraciteGray
         }

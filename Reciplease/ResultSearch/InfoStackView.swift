@@ -20,6 +20,8 @@ class InfoStackView: UIStackView {
        let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
+        label.adjustsFontForContentSizeCategory = true
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.setAccessibility(with: .header, label: "yield", hint: "yield of the recipe")
         return label
     }()
@@ -113,7 +115,8 @@ class InfoStackView: UIStackView {
             clock.heightAnchor.constraint(equalTo: timeLabel.heightAnchor),
             clock.widthAnchor.constraint(equalTo: fork.widthAnchor),
             clock.widthAnchor.constraint(equalTo: clock.heightAnchor),
-            fork.widthAnchor.constraint(equalTo: fork.heightAnchor)
+            fork.widthAnchor.constraint(equalTo: fork.heightAnchor),
+            yieldLabel.heightAnchor.constraint(equalTo: timeLabel.heightAnchor)
         ])
     }
 

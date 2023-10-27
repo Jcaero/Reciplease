@@ -18,7 +18,7 @@ class GradientView: UIView {
     init(with color: UIColor, color2: UIColor) {
         super.init(frame: .zero)
         gradientLayer.colors = [color.cgColor, color2.cgColor]
-        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.locations = [0.0, 0.7]
         self.layer.insertSublayer(gradientLayer, at: 0)
     }
 
