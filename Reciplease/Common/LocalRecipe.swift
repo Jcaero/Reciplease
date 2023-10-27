@@ -33,7 +33,7 @@ class LocalRecipe {
         self.label = saveRecipe.label ?? ""
         self.imageUrl = saveRecipe.imageUrl ?? ""
         self.sourceUrl = saveRecipe.sourceUrl ?? ""
-        self.listeOfIngredients = (saveRecipe.listeOfIngredients as? [Ingredient]) ?? []
+        self.listeOfIngredients = saveRecipe.ingredientsListe
         self.listeOfIngredientsWithDetail = saveRecipe.listeOfIngredientsWithDetail ?? []
         self.totalTime = Int(saveRecipe.totalTime)
         self.yield = Int(saveRecipe.yield)

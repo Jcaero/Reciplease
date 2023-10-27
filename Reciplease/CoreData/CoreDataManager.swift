@@ -19,9 +19,9 @@ final class CoreDataManager {
 
     // MARK: - INIT
     init(modelName: String) {
-        ValueTransformer.setValueTransformer(ArrayIngredientTransformer(), forName: NSValueTransformerName("ArrayIngredientTransformer"))
 
         persistentContainer = NSPersistentContainer(name: modelName)
+        viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         print("init container")
     }
 

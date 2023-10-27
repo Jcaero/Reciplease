@@ -73,6 +73,6 @@ struct Large: Codable {
 }
 
 // MARK: - Ingredient
-struct Ingredient: Codable {
-    let food: String
+struct Ingredient: Codable, Hashable {
+    var food: String
 }

@@ -65,8 +65,8 @@ final class RecipeSaveManager {
 
     func addInContext(LocalRecipe recipe: LocalRecipe, recipeImage: UIImage?) {
         let localRecipe = SaveRecipe(context: coreDataManager.viewContext)
+
         localRecipe.label = recipe.label
-        localRecipe.listeOfIngredients = recipe.listeOfIngredients as NSArray
         localRecipe.listeOfIngredientsWithDetail = recipe.listeOfIngredientsWithDetail
         localRecipe.imageUrl = recipe.imageUrl
         localRecipe.totalTime = Int16(recipe.totalTime)
@@ -76,6 +76,14 @@ final class RecipeSaveManager {
         if let image = recipeImage {
             localRecipe.imageData = image.jpegData(compressionQuality: 1)
         }
+
+        recipe.listeOfIngredients.forEach { ingredient in
+            let saveIngredient = SaveIngredient(context: coreDataManager.viewContext)
+            saveIngredient.food = ingredient.food
+            saveIngredient.addToRecipe(localRecipe)
+            print("save liste = \(String(describing: saveIngredient.food))")
+        }
+
     }
 
     func isSaveRecipeContains(_ recipe: LocalRecipe) -> Bool {
