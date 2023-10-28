@@ -18,9 +18,13 @@
 		4728D4752AC843030091D430 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728D4742AC843030091D430 /* SearchViewModel.swift */; };
 		4728D4792AC85A970091D430 /* SearchViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728D4782AC85A970091D430 /* SearchViewModelTest.swift */; };
 		4728D47B2AC86CBE0091D430 /* ResultSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728D47A2AC86CBE0091D430 /* ResultSearchViewController.swift */; };
+		472ADD822AED8F7F00F143A5 /* ResultSearchControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ADD812AED8F7F00F143A5 /* ResultSearchControllerTest.swift */; };
+		472ADD862AED916500F143A5 /* RecipeSaveManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ADD852AED916500F143A5 /* RecipeSaveManagerMock.swift */; };
+		472ADD8B2AED993800F143A5 /* RecipeCacheManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ADD8A2AED993800F143A5 /* RecipeCacheManagerMock.swift */; };
+		472ADD8D2AED9AB200F143A5 /* NetwokRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ADD8C2AED9AB200F143A5 /* NetwokRepositoryMock.swift */; };
 		47345E7D2AC6868D00EA67A6 /* UITextView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47345E7C2AC6868D00EA67A6 /* UITextView+.swift */; };
 		4738F1192AC91F1E0014FD09 /* RecipAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738F1182AC91F1E0014FD09 /* RecipAPIModel.swift */; };
-		4738F11B2AC925EC0014FD09 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738F11A2AC925EC0014FD09 /* Repository.swift */; };
+		4738F11B2AC925EC0014FD09 /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738F11A2AC925EC0014FD09 /* NetworkRepository.swift */; };
 		4738F11E2AC9272E0014FD09 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738F11D2AC9272E0014FD09 /* APIKey.swift */; };
 		4738F1212AC928FA0014FD09 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4738F1202AC928FA0014FD09 /* Alamofire */; };
 		4738F1252AC92F480014FD09 /* APIKeyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738F1242AC92F480014FD09 /* APIKeyTest.swift */; };
@@ -84,9 +88,13 @@
 		4728D4742AC843030091D430 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		4728D4782AC85A970091D430 /* SearchViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTest.swift; sourceTree = "<group>"; };
 		4728D47A2AC86CBE0091D430 /* ResultSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchViewController.swift; sourceTree = "<group>"; };
+		472ADD812AED8F7F00F143A5 /* ResultSearchControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchControllerTest.swift; sourceTree = "<group>"; };
+		472ADD852AED916500F143A5 /* RecipeSaveManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSaveManagerMock.swift; sourceTree = "<group>"; };
+		472ADD8A2AED993800F143A5 /* RecipeCacheManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCacheManagerMock.swift; sourceTree = "<group>"; };
+		472ADD8C2AED9AB200F143A5 /* NetwokRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetwokRepositoryMock.swift; sourceTree = "<group>"; };
 		47345E7C2AC6868D00EA67A6 /* UITextView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+.swift"; sourceTree = "<group>"; };
 		4738F1182AC91F1E0014FD09 /* RecipAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipAPIModel.swift; sourceTree = "<group>"; };
-		4738F11A2AC925EC0014FD09 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		4738F11A2AC925EC0014FD09 /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
 		4738F11D2AC9272E0014FD09 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		4738F1242AC92F480014FD09 /* APIKeyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyTest.swift; sourceTree = "<group>"; };
 		4740D9852ADF16680060F979 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -189,11 +197,37 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		472ADD832AED8FA300F143A5 /* ResultSearchTest */ = {
+			isa = PBXGroup;
+			children = (
+				472ADD812AED8F7F00F143A5 /* ResultSearchControllerTest.swift */,
+				472ADD852AED916500F143A5 /* RecipeSaveManagerMock.swift */,
+				472ADD8A2AED993800F143A5 /* RecipeCacheManagerMock.swift */,
+				472ADD8C2AED9AB200F143A5 /* NetwokRepositoryMock.swift */,
+			);
+			path = ResultSearchTest;
+			sourceTree = "<group>";
+		};
+		472ADD842AED913B00F143A5 /* CoreDataTest */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreDataTest;
+			sourceTree = "<group>";
+		};
+		472ADD8E2AEDA36100F143A5 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				479638752AC9A08F00CFFBC6 /* TestCase.swift */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
 		4738F11C2AC9270D0014FD09 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				4738F1182AC91F1E0014FD09 /* RecipAPIModel.swift */,
-				4738F11A2AC925EC0014FD09 /* Repository.swift */,
+				4738F11A2AC925EC0014FD09 /* NetworkRepository.swift */,
 				4738F11D2AC9272E0014FD09 /* APIKey.swift */,
 			);
 			path = Network;
@@ -213,7 +247,6 @@
 				4738F1242AC92F480014FD09 /* APIKeyTest.swift */,
 				479638712AC99B8F00CFFBC6 /* testRepository.swift */,
 				479638732AC9A02B00CFFBC6 /* RecipJSON.json */,
-				479638752AC9A08F00CFFBC6 /* TestCase.swift */,
 				479638772AC9A3A400CFFBC6 /* MockURLProtocol.swift */,
 			);
 			path = NetworkTest;
@@ -298,6 +331,9 @@
 		479909732ABCCD550056753E /* RecipleaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				472ADD8E2AEDA36100F143A5 /* common */,
+				472ADD842AED913B00F143A5 /* CoreDataTest */,
+				472ADD832AED8FA300F143A5 /* ResultSearchTest */,
 				4738F1232AC92F0F0014FD09 /* NetworkTest */,
 				4738F1222AC92EFD0014FD09 /* SearchTest */,
 			);
@@ -505,7 +541,7 @@
 				47A5C5E32AC532000052BC0D /* UILabel+.swift in Sources */,
 				471648722AC1316D003097F5 /* SearchController.swift in Sources */,
 				4708F7B72ADC79C300BC5538 /* CoreDataManager.swift in Sources */,
-				4738F11B2AC925EC0014FD09 /* Repository.swift in Sources */,
+				4738F11B2AC925EC0014FD09 /* NetworkRepository.swift in Sources */,
 				471C5B2F2ACCB296007E328B /* RecipeCell.swift in Sources */,
 				47C1ACB82ABDA4790049E043 /* TabBarController.swift in Sources */,
 				4799095D2ABCCD540056753E /* SceneDelegate.swift in Sources */,
@@ -524,8 +560,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				472ADD862AED916500F143A5 /* RecipeSaveManagerMock.swift in Sources */,
+				472ADD822AED8F7F00F143A5 /* ResultSearchControllerTest.swift in Sources */,
 				4738F1252AC92F480014FD09 /* APIKeyTest.swift in Sources */,
 				479638762AC9A08F00CFFBC6 /* TestCase.swift in Sources */,
+				472ADD8B2AED993800F143A5 /* RecipeCacheManagerMock.swift in Sources */,
+				472ADD8D2AED9AB200F143A5 /* NetwokRepositoryMock.swift in Sources */,
 				479638782AC9A3A400CFFBC6 /* MockURLProtocol.swift in Sources */,
 				4728D4792AC85A970091D430 /* SearchViewModelTest.swift in Sources */,
 				479638722AC99B8F00CFFBC6 /* testRepository.swift in Sources */,

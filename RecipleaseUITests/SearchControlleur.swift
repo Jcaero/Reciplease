@@ -34,9 +34,9 @@ final class SearchControlleur: XCTestCase {
         app.addButton.tap()
         let expectation = XCTestExpectation(description: "Attente de 2 secondes")
         XCTWaiter().wait(for: [expectation], timeout: 2.0)
-        
+
         app.clearButton.tap()
-        
+
         XCTAssertTrue(!app.staticTexts["- Tomato"].exists)
     }
 }

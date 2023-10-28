@@ -9,7 +9,11 @@ import Foundation
 import Combine
 import Alamofire
 
-class Repository: ObservableObject {
+protocol NetworkRepositoryProtocol {
+    func fetchRecip(_ liste: [String]) -> AnyPublisher<API.RecipResponse, Error>
+}
+
+class NetworkRepository: NetworkRepositoryProtocol, ObservableObject {
 
     private let sessionManager: Session
 

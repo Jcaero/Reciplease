@@ -13,9 +13,9 @@ class ResultSearchViewModel: ObservableObject {
 
     var cancellables = Set<AnyCancellable>()
 
-    private let repository: Repository
-    private let recipesSaveManager: RecipeSaveManager
-    private let recipeCacheManager: RecipeCacheManager
+    private let repository: NetworkRepositoryProtocol
+    private let recipesSaveManager: RecipeSaveManagerProtocol
+    private let recipeCacheManager: RecipeCacheManagerProtocol
     private var ingredientsKey: String = ""
 
     var recipes: [LocalRecipe] = []
@@ -23,7 +23,9 @@ class ResultSearchViewModel: ObservableObject {
     @Published var isNetworkSuccessful = false
     @Published var alerteMessage: ErrorMessage?
 
-    init(repository: Repository = Repository(), recipesSaveManager: RecipeSaveManager = RecipeSaveManager(), recipeCacheManager: RecipeCacheManager = RecipeCacheManager.shared) {
+    init(repository: NetworkRepositoryProtocol = NetworkRepository(),
+         recipesSaveManager: RecipeSaveManagerProtocol = RecipeSaveManager(),
+         recipeCacheManager: RecipeCacheManagerProtocol = RecipeCacheManager.shared) {
         self.repository = repository
         self.recipesSaveManager = recipesSaveManager
         self.recipeCacheManager = recipeCacheManager

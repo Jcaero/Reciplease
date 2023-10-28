@@ -8,7 +8,12 @@
 import Foundation
 import UIKit
 
-class RecipeCacheManager {
+protocol RecipeCacheManagerProtocol {
+    func save(recipes: [LocalRecipe], forKey ingredients: String)
+    func getRecipes(for ingredients: String) -> [LocalRecipe]
+}
+
+class RecipeCacheManager: RecipeCacheManagerProtocol {
 
     // MARK: - Singleton
     static let shared = RecipeCacheManager()

@@ -9,7 +9,14 @@ import Foundation
 import CoreData
 import UIKit
 
-final class RecipeSaveManager {
+protocol RecipeSaveManagerProtocol {
+    func saveRecipe(named recipe: LocalRecipe, image: UIImage?)
+    func fetchRecipes() -> [LocalRecipe]
+    func deleteRecipe( _ recipe: LocalRecipe)
+    func isSaveRecipeContains(_ recipe: LocalRecipe) -> Bool
+}
+
+final class RecipeSaveManager: RecipeSaveManagerProtocol {
 
     // MARK: - Properties
 
@@ -63,7 +70,7 @@ final class RecipeSaveManager {
         }
     }
 
-    func addInContext(LocalRecipe recipe: LocalRecipe, recipeImage: UIImage?) {
+    private func addInContext(LocalRecipe recipe: LocalRecipe, recipeImage: UIImage?) {
         let localRecipe = SaveRecipe(context: coreDataManager.viewContext)
 
         localRecipe.label = recipe.label

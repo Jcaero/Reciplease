@@ -18,7 +18,7 @@ final class TestRepository: TestCase {
     func testRecipFetching() {
         let configuration = URLSessionConfiguration.af.default
         configuration.protocolClasses = [MockURLProtocol.self] + (configuration.protocolClasses ?? [])
-        let sessionManager = Repository(sessionConfiguration: configuration)
+        let sessionManager = NetworkRepository(sessionConfiguration: configuration)
 
         let response = HTTPURLResponse(url: URL(string: "https://api.edamam.com/api/recipes/v2?type=public&q=Lemon%20Cheese&app_key=key&app_id=id")!,
                                        statusCode: 200,
