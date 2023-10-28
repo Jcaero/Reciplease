@@ -98,6 +98,7 @@ class SearchController: ViewController {
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "clear ingredient", hint: "Pressed button to clear ingredient")
         button.addTarget(self, action: #selector(clearIngredient), for: .touchUpInside)
+        button.accessibilityIdentifier = "Clear"
         return button
     }()
 

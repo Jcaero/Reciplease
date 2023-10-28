@@ -67,7 +67,7 @@ class DetailController: ViewController {
         texte.textColor = .white
         texte.backgroundColor = .anthraciteGray
         texte.isEditable = false
-        texte.setupDynamicTextWith(policeName: "Chalkduster", size: 18, style: .largeTitle)
+        texte.setupDynamicTextWith(policeName: "Chalkduster", size: 18, style: .caption1)
         texte.setAccessibility(with: .staticText, label: "ingredients", hint: "liste of Ingredients")
         return texte
     }()
@@ -264,11 +264,11 @@ extension DetailController {
             infoView.isHidden = true
             switch currentCategory {
             case .accessibilityExtraExtraExtraLarge:
-                titleLabel.setupDynamicTextWith(policeName: "Symbol", size: 18, style: .headline)
+                titleLabel.setupDynamicTextWith(policeName: "Symbol", size: 19, style: .caption2)
             case .accessibilityExtraExtraLarge:
-                titleLabel.setupDynamicTextWith(policeName: "Symbol", size: 22, style: .headline)
+                titleLabel.setupDynamicTextWith(policeName: "Symbol", size: 23, style: .caption1)
             default:
-                titleLabel.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .headline)
+                titleLabel.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .caption1)
             }
 
         } else {

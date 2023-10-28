@@ -9,10 +9,7 @@ import XCTest
 @testable import Reciplease
 
 private extension XCUIApplication {
-    var addButton: XCUIElement {self.buttons["Add"]}
-    var searchButton: XCUIElement {self.buttons["searchButton"]}
-    var input: XCUIElement {self.searchFields["inputTextFields"]}
-    var tabBarSearch: XCUIElement {tabBars.buttons.element(boundBy: 0)}
+
 }
 
 final class AccessibilityTest: XCTestCase {
@@ -31,7 +28,7 @@ final class AccessibilityTest: XCTestCase {
     // Test TableView without clipped : ingredients liste is normally clipped
     func testAccessibilityTableView() throws {
 
-        let app = XCUIApplication()
+        let app = UIApplication()
         app.launch()
         app.tabBarSearch.tap()
         app.input.tap()
@@ -40,6 +37,22 @@ final class AccessibilityTest: XCTestCase {
         app.searchButton.tap()
         let expectation = XCTestExpectation(description: "Attente de 5 secondes")
         XCTWaiter().wait(for: [expectation], timeout: 5.0)
+        try app.performAccessibilityAudit(for: .all.subtracting(.textClipped))
+    }
+
+    // Test TableView without clipped : ingredients liste is normally clipped
+    func testAccessibilityTableViewDetail() throws {
+
+        let app = UIApplication()
+        app.launch()
+        app.tabBarSearch.tap()
+        app.input.tap()
+        app.input.typeText("Tomato")
+        app.addButton.tap()
+        app.searchButton.tap()
+        let expectation = XCTestExpectation(description: "Attente de 5 secondes")
+        XCTWaiter().wait(for: [expectation], timeout: 5.0)
+        app.cells["Tomato Gravy"].tap()
         try app.performAccessibilityAudit(for: .all.subtracting(.textClipped))
     }
 }

@@ -50,6 +50,8 @@
 		47BDE5FA2AEBEF0500FECF20 /* SaveIngredient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BDE5F62AEBEF0500FECF20 /* SaveIngredient+CoreDataProperties.swift */; };
 		47C1ACB82ABDA4790049E043 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1ACB72ABDA4790049E043 /* TabBarController.swift */; };
 		47C576E92AE3F18600CC8C65 /* LocalRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C576E82AE3F18600CC8C65 /* LocalRecipe.swift */; };
+		47D73EA32AED069600498103 /* SearchControlleur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D73EA22AED069600498103 /* SearchControlleur.swift */; };
+		47D73EA52AED07B700498103 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D73EA42AED07B700498103 /* UIApplication.swift */; };
 		47FAF5C42AE547C800B30996 /* RecipeCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FAF5C32AE547C800B30996 /* RecipeCacheManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +119,8 @@
 		47BDE5F62AEBEF0500FECF20 /* SaveIngredient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SaveIngredient+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		47C1ACB72ABDA4790049E043 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		47C576E82AE3F18600CC8C65 /* LocalRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRecipe.swift; sourceTree = "<group>"; };
+		47D73EA22AED069600498103 /* SearchControlleur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControlleur.swift; sourceTree = "<group>"; };
+		47D73EA42AED07B700498103 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		47FAF5C32AE547C800B30996 /* RecipeCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCacheManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -304,6 +308,8 @@
 			isa = PBXGroup;
 			children = (
 				4799097E2ABCCD550056753E /* RecipleaseUITests.swift */,
+				47D73EA42AED07B700498103 /* UIApplication.swift */,
+				47D73EA22AED069600498103 /* SearchControlleur.swift */,
 				479909802ABCCD550056753E /* RecipleaseUITestsLaunchTests.swift */,
 			);
 			path = RecipleaseUITests;
@@ -530,8 +536,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47D73EA52AED07B700498103 /* UIApplication.swift in Sources */,
 				4799097F2ABCCD550056753E /* RecipleaseUITests.swift in Sources */,
 				479909812ABCCD550056753E /* RecipleaseUITestsLaunchTests.swift in Sources */,
+				47D73EA32AED069600498103 /* SearchControlleur.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

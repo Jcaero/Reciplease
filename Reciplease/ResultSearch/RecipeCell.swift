@@ -99,7 +99,7 @@ class RecipeCell: UITableViewCell {
             ingredient.leftAnchor.constraint(equalTo: title.leftAnchor),
             ingredient.rightAnchor.constraint(equalTo: title.rightAnchor),
             ingredient.bottomAnchor.constraint(equalTo: labelView.bottomAnchor, constant: -10),
-            ingredient.heightAnchor.constraint(greaterThanOrEqualToConstant: 20)
+            ingredient.heightAnchor.constraint(greaterThanOrEqualToConstant: 25)
         ])
     }
 
