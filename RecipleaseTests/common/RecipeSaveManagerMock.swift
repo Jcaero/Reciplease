@@ -11,6 +11,8 @@ import UIKit
 @testable import Reciplease
 
 final class RecipeSaveManagerMock: RecipeSaveManagerProtocol {
+    func deleteAllRecipe() {
+    }
 
     private var mockRecipe: Recipe?
 
@@ -19,7 +21,6 @@ final class RecipeSaveManagerMock: RecipeSaveManagerProtocol {
     }
 
     func saveRecipe(named recipe: LocalRecipe, image: UIImage?) {
-
     }
 
     func fetchRecipes() -> [LocalRecipe] {

@@ -1,21 +1,17 @@
 //
-//  CoreDataStack.swift
-//  Reciplease
+//  CoreDataManagerMock.swift
+//  RecipleaseTests
 //
-//  Created by pierrick viret on 15/10/2023.
+//  Created by pierrick viret on 29/10/2023.
 //
 
 import Foundation
+import UIKit
 import CoreData
 
-protocol CoreDataManagerProtocol {
-    var viewContext: NSManagedObjectContext { get }
-    func load(completion: (() -> Void)?)
-    func save()
-}
+@testable import Reciplease
 
-final class CoreDataManager: CoreDataManagerProtocol {
-
+class CoreDataManagerMock: CoreDataManagerProtocol {
     // MARK: - Singleton
 
     static let sharedInstance = CoreDataManager(modelName: "Reciplease")
@@ -26,7 +22,18 @@ final class CoreDataManager: CoreDataManagerProtocol {
     // MARK: - INIT
     init(modelName: String) {
 
-        persistentContainer = NSPersistentContainer(name: modelName)
+        persistentContainer = {
+        let description = NSPersistentStoreDescription()
+        description.url = URL(fileURLWithPath: "/dev/null")
+        let container = NSPersistentContainer(name: modelName)
+        container.persistentStoreDescriptions = [description]
+        container.loadPersistentStores { _, error in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+        return container
+    }()
         viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         print("init container")
     }
@@ -43,7 +50,6 @@ final class CoreDataManager: CoreDataManagerProtocol {
         if viewContext.hasChanges {
             do {
                 try viewContext.save()
-                print("save")
             } catch {
                 print("Error while saving: \(error.localizedDescription )")
             }

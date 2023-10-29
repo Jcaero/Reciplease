@@ -22,6 +22,9 @@
 		472ADD862AED916500F143A5 /* RecipeSaveManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ADD852AED916500F143A5 /* RecipeSaveManagerMock.swift */; };
 		472ADD8B2AED993800F143A5 /* RecipeCacheManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ADD8A2AED993800F143A5 /* RecipeCacheManagerMock.swift */; };
 		472ADD8D2AED9AB200F143A5 /* NetwokRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472ADD8C2AED9AB200F143A5 /* NetwokRepositoryMock.swift */; };
+		472E3D4C2AEEEE83006398B4 /* LocalRecipeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472E3D4B2AEEEE83006398B4 /* LocalRecipeTest.swift */; };
+		472E3D4E2AEEF207006398B4 /* RecipeSaveManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472E3D4D2AEEF207006398B4 /* RecipeSaveManagerTest.swift */; };
+		472E3D502AEEF68C006398B4 /* CoreDataManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472E3D4F2AEEF68C006398B4 /* CoreDataManagerMock.swift */; };
 		47345E7D2AC6868D00EA67A6 /* UITextView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47345E7C2AC6868D00EA67A6 /* UITextView+.swift */; };
 		4738F1192AC91F1E0014FD09 /* RecipAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738F1182AC91F1E0014FD09 /* RecipAPIModel.swift */; };
 		4738F11B2AC925EC0014FD09 /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738F11A2AC925EC0014FD09 /* NetworkRepository.swift */; };
@@ -92,6 +95,9 @@
 		472ADD852AED916500F143A5 /* RecipeSaveManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSaveManagerMock.swift; sourceTree = "<group>"; };
 		472ADD8A2AED993800F143A5 /* RecipeCacheManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCacheManagerMock.swift; sourceTree = "<group>"; };
 		472ADD8C2AED9AB200F143A5 /* NetwokRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetwokRepositoryMock.swift; sourceTree = "<group>"; };
+		472E3D4B2AEEEE83006398B4 /* LocalRecipeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRecipeTest.swift; sourceTree = "<group>"; };
+		472E3D4D2AEEF207006398B4 /* RecipeSaveManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSaveManagerTest.swift; sourceTree = "<group>"; };
+		472E3D4F2AEEF68C006398B4 /* CoreDataManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerMock.swift; sourceTree = "<group>"; };
 		47345E7C2AC6868D00EA67A6 /* UITextView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+.swift"; sourceTree = "<group>"; };
 		4738F1182AC91F1E0014FD09 /* RecipAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipAPIModel.swift; sourceTree = "<group>"; };
 		4738F11A2AC925EC0014FD09 /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
@@ -201,9 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				472ADD812AED8F7F00F143A5 /* ResultSearchControllerTest.swift */,
-				472ADD852AED916500F143A5 /* RecipeSaveManagerMock.swift */,
-				472ADD8A2AED993800F143A5 /* RecipeCacheManagerMock.swift */,
-				472ADD8C2AED9AB200F143A5 /* NetwokRepositoryMock.swift */,
 			);
 			path = ResultSearchTest;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 		472ADD842AED913B00F143A5 /* CoreDataTest */ = {
 			isa = PBXGroup;
 			children = (
+				472E3D4D2AEEF207006398B4 /* RecipeSaveManagerTest.swift */,
 			);
 			path = CoreDataTest;
 			sourceTree = "<group>";
@@ -219,8 +223,21 @@
 			isa = PBXGroup;
 			children = (
 				479638752AC9A08F00CFFBC6 /* TestCase.swift */,
+				472E3D4B2AEEEE83006398B4 /* LocalRecipeTest.swift */,
+				472ADD852AED916500F143A5 /* RecipeSaveManagerMock.swift */,
+				472ADD8A2AED993800F143A5 /* RecipeCacheManagerMock.swift */,
+				472ADD8C2AED9AB200F143A5 /* NetwokRepositoryMock.swift */,
+				472E3D4F2AEEF68C006398B4 /* CoreDataManagerMock.swift */,
 			);
 			path = common;
+			sourceTree = "<group>";
+		};
+		472E3D482AEEEDCF006398B4 /* RecipeCache */ = {
+			isa = PBXGroup;
+			children = (
+				47FAF5C32AE547C800B30996 /* RecipeCacheManager.swift */,
+			);
+			path = RecipeCache;
 			sourceTree = "<group>";
 		};
 		4738F11C2AC9270D0014FD09 /* Network */ = {
@@ -257,7 +274,6 @@
 			children = (
 				4740D9852ADF16680060F979 /* ImageCache.swift */,
 				47452B7A2AE060BD005AFBF3 /* DownloadImage.swift */,
-				47FAF5C32AE547C800B30996 /* RecipeCacheManager.swift */,
 			);
 			path = ImageCache;
 			sourceTree = "<group>";
@@ -321,6 +337,7 @@
 				470D46672AD94D3200F6886D /* Detail */,
 				4777915B2ABF0B4F00ABA120 /* Common */,
 				4740D9842ADF164F0060F979 /* ImageCache */,
+				472E3D482AEEEDCF006398B4 /* RecipeCache */,
 				4708F7B52ADC79A500BC5538 /* CoreData */,
 				4738F11C2AC9270D0014FD09 /* Network */,
 				47C6C9802ABD43110000D50B /* Ressources */,
@@ -564,7 +581,10 @@
 				472ADD822AED8F7F00F143A5 /* ResultSearchControllerTest.swift in Sources */,
 				4738F1252AC92F480014FD09 /* APIKeyTest.swift in Sources */,
 				479638762AC9A08F00CFFBC6 /* TestCase.swift in Sources */,
+				472E3D502AEEF68C006398B4 /* CoreDataManagerMock.swift in Sources */,
 				472ADD8B2AED993800F143A5 /* RecipeCacheManagerMock.swift in Sources */,
+				472E3D4E2AEEF207006398B4 /* RecipeSaveManagerTest.swift in Sources */,
+				472E3D4C2AEEEE83006398B4 /* LocalRecipeTest.swift in Sources */,
 				472ADD8D2AED9AB200F143A5 /* NetwokRepositoryMock.swift in Sources */,
 				479638782AC9A3A400CFFBC6 /* MockURLProtocol.swift in Sources */,
 				4728D4792AC85A970091D430 /* SearchViewModelTest.swift in Sources */,

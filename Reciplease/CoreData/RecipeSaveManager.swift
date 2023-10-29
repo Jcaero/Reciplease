@@ -13,6 +13,7 @@ protocol RecipeSaveManagerProtocol {
     func saveRecipe(named recipe: LocalRecipe, image: UIImage?)
     func fetchRecipes() -> [LocalRecipe]
     func deleteRecipe( _ recipe: LocalRecipe)
+    func deleteAllRecipe()
     func isSaveRecipeContains(_ recipe: LocalRecipe) -> Bool
 }
 
@@ -20,12 +21,12 @@ final class RecipeSaveManager: RecipeSaveManagerProtocol {
 
     // MARK: - Properties
 
-    private let coreDataManager: CoreDataManager
+    private let coreDataManager: CoreDataManagerProtocol
     private let context: NSManagedObjectContext!
 
     // MARK: - Init
 
-    init(coreDataManager: CoreDataManager = CoreDataManager.sharedInstance) {
+    init(coreDataManager: CoreDataManagerProtocol = CoreDataManager.sharedInstance) {
         self.coreDataManager = coreDataManager
         context = coreDataManager.viewContext
     }
@@ -65,6 +66,20 @@ final class RecipeSaveManager: RecipeSaveManagerProtocol {
             }
             coreDataManager.save()
             print("Recipe deleted from Core Data")
+        } catch let error as NSError {
+            print("Could not fetch or delete. \(error), \(error.userInfo)")
+        }
+    }
+
+    func deleteAllRecipe() {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SaveRecipe")
+
+        do {
+            let recipesToDelete = try context.fetch(fetchRequest)
+            for recipeToDelete in recipesToDelete {
+                context.delete(recipeToDelete)
+            }
+            coreDataManager.save()
         } catch let error as NSError {
             print("Could not fetch or delete. \(error), \(error.userInfo)")
         }

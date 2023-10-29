@@ -22,6 +22,20 @@ class TestCase: XCTestCase {
                         ],
                         ingredients: [Ingredient(food: "Lemon"), Ingredient(food: "blueberries")],
                         totalTime: 2)
+    let mockRecipeTwo = Recipe(uri: "http://www.edamam.com/Lemon",
+                        label: "Blueberry-Lemon 2",
+                        images: Images(regular: Large(url: "https://edamam-product-images/Lemon")),
+                        source: "Food Network",
+                        url: "https://www.foodnetwork.com/recipes/Blueberry-Lemon",
+                        yield: 12,
+                        ingredientLines: [
+                            "2 pints blueberries (about 12 ounces)",
+                            "2 tablespoons lemon juice"
+                        ],
+                        ingredients: [Ingredient(food: "Lemon"), Ingredient(food: "blueberries")],
+                        totalTime: 2)
+    
+    let mockImage = UIImage(data: "ImageMock".data(using: .utf8)!)
 
     func getData(fromJson file: String) -> Data? {
         // get bundle of class
