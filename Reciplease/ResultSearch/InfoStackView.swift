@@ -91,7 +91,7 @@ class InfoStackView: UIStackView {
         self.spacing = 10
         self.layer.cornerRadius = 5
         self.backgroundColor = .anthraciteGray
-
+        self.layoutMargins = UIEdgeInsets(top: 8, left: 5, bottom: 5, right: 5)
         self.layer.borderColor = UIColor.white.cgColor
         self.layer.borderWidth = 1
         self.isLayoutMarginsRelativeArrangement = true
