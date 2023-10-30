@@ -8,10 +8,6 @@
 import XCTest
 @testable import Reciplease
 
-private extension XCUIApplication {
-
-}
-
 final class AccessibilityTest: XCTestCase {
 
     override func setUpWithError() throws {

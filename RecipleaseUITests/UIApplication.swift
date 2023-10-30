@@ -16,4 +16,5 @@ class UIApplication: XCUIApplication {
     var input: XCUIElement {self.searchFields["inputTextFields"]}
     var tabBarSearch: XCUIElement {tabBars.buttons.element(boundBy: 0)}
     var tabBarFavorite: XCUIElement {tabBars.buttons.element(boundBy: 1)}
+    var saveButtonStar: XCUIElement {self.buttons["SaveButtonStar"]}
 }

@@ -208,6 +208,8 @@ class DetailController: ViewController {
                                          target: self,
                                          action: #selector(starButtonTapped))
         starButton.tintColor = .darkGreen
+        starButton.accessibilityIdentifier = "SaveButtonStar"
+        starButton.customView?.setAccessibility(with: .button, label: "Save Recipe", hint: "tap to save recipe")
         self.navigationItem.rightBarButtonItem = starButton
         if recipe.isSave == true {
             self.setStarWith(filledStarImage)

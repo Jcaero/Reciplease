@@ -35,6 +35,7 @@
 		47452B7B2AE060BD005AFBF3 /* DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47452B7A2AE060BD005AFBF3 /* DownloadImage.swift */; };
 		4750F4032ACBCAB4005FC924 /* ResultSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750F4022ACBCAB4005FC924 /* ResultSearchViewModel.swift */; };
 		4777915D2ABF0B6400ABA120 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4777915C2ABF0B6400ABA120 /* UIColor+.swift */; };
+		4783D8CE2AEFCAF900531227 /* FavoriteSearchControlleur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4783D8CD2AEFCAF900531227 /* FavoriteSearchControlleur.swift */; };
 		4789DF702AC43DA200F31373 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4789DF6F2AC43DA200F31373 /* UIView+.swift */; };
 		479638722AC99B8F00CFFBC6 /* testRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479638712AC99B8F00CFFBC6 /* testRepository.swift */; };
 		479638742AC9A02B00CFFBC6 /* RecipJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 479638732AC9A02B00CFFBC6 /* RecipJSON.json */; };
@@ -107,6 +108,7 @@
 		47452B7A2AE060BD005AFBF3 /* DownloadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImage.swift; sourceTree = "<group>"; };
 		4750F4022ACBCAB4005FC924 /* ResultSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSearchViewModel.swift; sourceTree = "<group>"; };
 		4777915C2ABF0B6400ABA120 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		4783D8CD2AEFCAF900531227 /* FavoriteSearchControlleur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSearchControlleur.swift; sourceTree = "<group>"; };
 		4789DF6F2AC43DA200F31373 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		479638712AC99B8F00CFFBC6 /* testRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testRepository.swift; sourceTree = "<group>"; };
 		479638732AC9A02B00CFFBC6 /* RecipJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RecipJSON.json; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 				47D73EA42AED07B700498103 /* UIApplication.swift */,
 				47D73EA22AED069600498103 /* SearchControlleur.swift */,
 				479909802ABCCD550056753E /* RecipleaseUITestsLaunchTests.swift */,
+				4783D8CD2AEFCAF900531227 /* FavoriteSearchControlleur.swift */,
 			);
 			path = RecipleaseUITests;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 			files = (
 				47D73EA52AED07B700498103 /* UIApplication.swift in Sources */,
 				4799097F2ABCCD550056753E /* RecipleaseUITests.swift in Sources */,
+				4783D8CE2AEFCAF900531227 /* FavoriteSearchControlleur.swift in Sources */,
 				479909812ABCCD550056753E /* RecipleaseUITestsLaunchTests.swift in Sources */,
 				47D73EA32AED069600498103 /* SearchControlleur.swift in Sources */,
 			);
