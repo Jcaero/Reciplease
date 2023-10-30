@@ -19,6 +19,7 @@ class ResultSearchViewModel: ObservableObject {
     private var ingredientsKey: String = ""
 
     var recipes: [LocalRecipe] = []
+    var nextPage: String?
 
     @Published var isNetworkSuccessful = false
     @Published var alerteMessage: ErrorMessage?
@@ -54,6 +55,7 @@ class ResultSearchViewModel: ObservableObject {
                 }
             } receiveValue: { [weak self] data in
                 guard let self = self else { return }
+                self.nextPage = data.links.next.href
                 self.recipes = data.hits.map { LocalRecipe(recipe: $0.recipe) }
                 self.checkIfRecipesCanBeShow()
             }.store(in: &cancellables)
@@ -68,13 +70,37 @@ class ResultSearchViewModel: ObservableObject {
         if self.recipes.isEmpty {
             alerteMessage = ErrorMessage(title: "Information", message: "Pas de recette disponible")
         } else {
-            recipeCacheManager.save(recipes: recipes, forKey: ingredientsKey)
+            recipeCacheManager.save(recipes: recipes, nextPage: nextPage, forKey: ingredientsKey)
             isNetworkSuccessful = true
         }
     }
 
     private func haveRecipesInCache() -> Bool {
-        recipes = recipeCacheManager.getRecipes(for: ingredientsKey)
+        let (cachedRecipes, cachedNextPage) = recipeCacheManager.getRecipes(for: ingredientsKey)
+
+        recipes = cachedRecipes
+        nextPage = cachedNextPage
         return !recipes.isEmpty
+    }
+
+    func fetchMoreRecipes() {
+        guard let url = nextPage else { return }
+        self.isNetworkSuccessful = false
+
+        repository.fetchMoreRecipe(url)
+            .sink { [weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .finished:
+                    break
+                case .failure:
+                    self.alerteMessage = ErrorMessage(title: "Erreur", message: "Erreur de reseau")
+                }
+            } receiveValue: { [weak self] data in
+                guard let self = self else { return }
+                self.nextPage = data.links.next.href
+                self.recipes.append(contentsOf: data.hits.map { LocalRecipe(recipe: $0.recipe) })
+                self.checkIfRecipesCanBeShow()
+            }.store(in: &cancellables)
     }
 }

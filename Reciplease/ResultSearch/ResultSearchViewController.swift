@@ -56,7 +56,6 @@ class ResultSearchViewController: ViewController {
             initNavigationBar()
             viewModel.fetchSaveRecipes()
         }
-        tableView.reloadData()
     }
 
     required init?(coder: NSCoder) {
@@ -164,14 +163,12 @@ extension ResultSearchViewController: UITableViewDelegate {
             self.recipeSaveManager.deleteRecipe(self.viewModel.recipes[indexPath.row])
             self.viewModel.recipes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.reloadData()
         }
 
         let saveItem = UIContextualAction(style: .normal, title: "Save") {  (_, _, _) in
             let recipe = self.viewModel.recipes[indexPath.row]
             self.recipeSaveManager.saveRecipe(named: recipe, image: nil)
             recipe.isSave = true
-            tableView.reloadData()
         }
         saveItem.backgroundColor = .blue
 
@@ -180,4 +177,14 @@ extension ResultSearchViewController: UITableViewDelegate {
         default: return UISwipeActionsConfiguration(actions: [saveItem])
         }
   }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        switch context {
+        case .favorite: if indexPath.row == (viewModel.recipes.count - 1) && viewModel.isNetworkSuccessful == true {
+            viewModel.fetchMoreRecipes()
+        }
+        default: break
+        }
+    }
 }

@@ -11,6 +11,7 @@ import Alamofire
 
 protocol NetworkRepositoryProtocol {
     func fetchRecip(_ liste: [String]) -> AnyPublisher<API.RecipResponse, Error>
+    func fetchMoreRecipe(_ nextPage: String) -> AnyPublisher<API.RecipResponse, Error>
 }
 
 class NetworkRepository: NetworkRepositoryProtocol, ObservableObject {
@@ -25,6 +26,21 @@ class NetworkRepository: NetworkRepositoryProtocol, ObservableObject {
         let ingredients = liste.joined(separator: " ")
         let url = API.EndPoint.recip(ingredients).url
         print("\(url)")
+
+        return AF.request(url, method: .get, parameters: nil)
+            .publishDecodable(type: API.RecipResponse.self)
+            .value()
+            .mapError {$0 as Error}
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+
+    func fetchMoreRecipe(_ nextPage: String) -> AnyPublisher<API.RecipResponse, Error> {
+        guard let url = URL(string: nextPage) else {
+               return Fail(error: URLError(.badURL))
+                   .eraseToAnyPublisher()
+           }
+        print("\(String(describing: url))")
 
         return AF.request(url, method: .get, parameters: nil)
             .publishDecodable(type: API.RecipResponse.self)

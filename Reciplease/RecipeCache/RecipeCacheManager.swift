@@ -9,8 +9,13 @@ import Foundation
 import UIKit
 
 protocol RecipeCacheManagerProtocol {
-    func save(recipes: [LocalRecipe], forKey ingredients: String)
-    func getRecipes(for ingredients: String) -> [LocalRecipe]
+    func save(recipes: [LocalRecipe], nextPage: String?, forKey ingredients: String)
+    func getRecipes(for ingredients: String) -> ([LocalRecipe], String?)
+}
+
+struct RecipeCache {
+    let recipes: [LocalRecipe]
+    let nextPage: String?
 }
 
 class RecipeCacheManager: RecipeCacheManagerProtocol {
@@ -19,20 +24,25 @@ class RecipeCacheManager: RecipeCacheManagerProtocol {
     static let shared = RecipeCacheManager()
 
     // MARK: - Propertie
-    private let recipeCache = NSCache<NSString, NSArray>()
+    private let recipeCache = NSCache<NSString, AnyObject>()
 
     // MARK: - INIT
    private init() {
        recipeCache.countLimit = 50
-       recipeCache.totalCostLimit = 50 * 1024 * 1024
+       recipeCache.totalCostLimit = 50_000_000
     }
 
     // MARK: - Function
-    func save(recipes: [LocalRecipe], forKey ingredients: String) {
-        self.recipeCache.setObject(recipes as NSArray, forKey: ingredients as NSString)
+    func save(recipes: [LocalRecipe], nextPage: String?, forKey ingredients: String) {
+        let recipe = RecipeCache(recipes: recipes, nextPage: nextPage)
+        self.recipeCache.setObject(recipe as AnyObject, forKey: ingredients as NSString)
     }
 
-    func getRecipes(for ingredients: String) -> [LocalRecipe] {
-        return (recipeCache.object(forKey: ingredients as NSString) as? [LocalRecipe]) ?? []
+    func getRecipes(for ingredients: String) -> ([LocalRecipe], String?) {
+        if let recipe = recipeCache.object(forKey: ingredients as NSString) as? RecipeCache {
+            return (recipe.recipes, recipe.nextPage)
+        } else {
+            return ([], nil)
+        }
     }
 }

@@ -30,9 +30,24 @@ enum API {
         }
     }
 
-    struct RecipResponse: Decodable {
+    struct RecipResponse: Codable {
+        let links: RecipResponseLinks
         let hits: [Hit]
+
+        enum CodingKeys: String, CodingKey {
+            case links = "_links"
+            case hits
+        }
     }
+}
+
+struct RecipResponseLinks: Codable {
+    let next: Next
+}
+
+// MARK: - Next
+struct Next: Codable {
+    let href: String?
 }
 
 // MARK: - Hit
