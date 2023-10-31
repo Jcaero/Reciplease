@@ -32,7 +32,7 @@ final class AccessibilityTest: XCTestCase {
         app.addButton.tap()
         app.searchButton.tap()
         let expectation = XCTestExpectation(description: "Attente de 3 secondes")
-        XCTWaiter().wait(for: [expectation], timeout: 3.0)
+        XCTWaiter().wait(for: [expectation], timeout: 2.0)
         try app.performAccessibilityAudit(for: .all.subtracting(.textClipped))
     }
 

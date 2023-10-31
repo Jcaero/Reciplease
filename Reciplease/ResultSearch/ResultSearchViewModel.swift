@@ -67,6 +67,7 @@ class ResultSearchViewModel: ObservableObject {
     }
 
     private func checkIfRecipesCanBeShow() {
+        print("count is \(recipes.count)")
         if self.recipes.isEmpty {
             alerteMessage = ErrorMessage(title: "Information", message: "Pas de recette disponible")
         } else {

@@ -179,12 +179,16 @@ extension ResultSearchViewController: UITableViewDelegate {
   }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
+        var moreRecipeActive = true
+#if DEBUG
+        moreRecipeActive = false
+#endif
+        guard moreRecipeActive else { return }
         switch context {
-        case .favorite: if indexPath.row == (viewModel.recipes.count - 1) && viewModel.isNetworkSuccessful == true {
+        case .favorite: break
+        default: if indexPath.row == (viewModel.recipes.count - 1) && viewModel.isNetworkSuccessful == true {
             viewModel.fetchMoreRecipes()
         }
-        default: break
         }
     }
 }

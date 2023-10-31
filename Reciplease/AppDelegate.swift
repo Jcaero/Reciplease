@@ -15,6 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         CoreDataManager.sharedInstance.load {}
+#if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("IS_RUNNING_UITEST") {
+            RecipeSaveManager().deleteAllRecipe()
+            }
+#endif
         return true
     }
 

@@ -10,9 +10,18 @@ import XCTest
 
 final class FavoriteSearchControlleur: XCTestCase {
 
+    override func setUp() {
+        super.setUp()
+    }
+
+    override func tearDown() {
+        super.tearDown()
+    }
+
     func testAppHaveNoSaveRecipe_WhenTapOnFavorite_ShowErreur() throws {
 
         let app = UIApplication()
+        app.launchArguments.append("IS_RUNNING_UITEST")
         app.launch()
         app.tabBarFavorite.tap()
         let expectation = XCTestExpectation(description: "Attente de 2 secondes")
