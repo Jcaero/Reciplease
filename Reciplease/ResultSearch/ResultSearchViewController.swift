@@ -159,22 +159,37 @@ extension ResultSearchViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let recipe = self.viewModel.recipes[indexPath.row]
+
         let deleteItem = UIContextualAction(style: .destructive, title: "Delete") {  (_, _, _) in
-            self.recipeSaveManager.deleteRecipe(self.viewModel.recipes[indexPath.row])
+            self.recipeSaveManager.deleteRecipe(recipe)
             self.viewModel.recipes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
         }
 
         let saveItem = UIContextualAction(style: .normal, title: "Save") {  (_, _, _) in
-            let recipe = self.viewModel.recipes[indexPath.row]
             self.recipeSaveManager.saveRecipe(named: recipe, image: nil)
             recipe.isSave = true
+            tableView.reloadData()
         }
-        saveItem.backgroundColor = .blue
+
+        let undoSaveItem = UIContextualAction(style: .normal, title: "undo Save") {  (_, _, _) in
+            self.recipeSaveManager.deleteRecipe(recipe)
+            recipe.isSave = false
+            tableView.reloadData()
+        }
+
+        saveItem.backgroundColor = .darkGreen
+        undoSaveItem.backgroundColor = .red
 
         switch context {
         case .favorite: return UISwipeActionsConfiguration(actions: [deleteItem])
-        default: return UISwipeActionsConfiguration(actions: [saveItem])
+        default:    if recipe.isSave {
+                        return UISwipeActionsConfiguration(actions: [undoSaveItem])
+                    } else {
+                        return UISwipeActionsConfiguration(actions: [saveItem])
+                    }
         }
   }
 
