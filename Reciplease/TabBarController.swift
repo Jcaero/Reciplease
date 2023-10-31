@@ -24,7 +24,6 @@ class TabBar: UITabBarController {
         searchController.tabBarItem.accessibilityHint = "appuyer pour afficher la page des Favoris"
 
         viewControllers = [searchController, favoriteController]
-
     }
 
     func setupTabBar() {

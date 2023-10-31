@@ -134,7 +134,8 @@ class SearchController: ViewController {
 
         initNavigationBar()
 
-        setupView()
+        setupUI()
+        setupContraints()
         updateDisplayAccessibility()
         setupTapGesture()
 
@@ -146,7 +147,7 @@ class SearchController: ViewController {
     }
 
     // MARK: - Layout
-    private func setupView() {
+    private func setupUI() {
         [searchStackView,
          questionTitle,
          addIngredients,
@@ -159,20 +160,7 @@ class SearchController: ViewController {
         }
 
         view.addSubview(searchArea)
-        NSLayoutConstraint.activate([
-            searchArea.leftAnchor.constraint(equalTo: view.leftAnchor),
-            searchArea.rightAnchor.constraint(equalTo: view.rightAnchor),
-            searchArea.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            searchArea.heightAnchor.constraint(greaterThanOrEqualToConstant: 100)
-        ])
-
         searchArea.addSubview(searchStackView)
-        NSLayoutConstraint.activate([
-            searchStackView.leftAnchor.constraint(equalTo: searchArea.leftAnchor, constant: 10),
-            searchStackView.rightAnchor.constraint(equalTo: searchArea.rightAnchor, constant: -10),
-            searchStackView.topAnchor.constraint(equalTo: searchArea.topAnchor, constant: 10),
-            searchArea.bottomAnchor.constraint(equalTo: searchStackView.bottomAnchor, constant: 15)
-        ])
 
         searchStackView.addArrangedSubview(questionTitle)
         searchStackView.addArrangedSubview(inputStackView)
@@ -181,6 +169,30 @@ class SearchController: ViewController {
         inputStackView.addArrangedSubview(addIngredients)
 
         searchStackView.addSubview(underligne)
+
+        view.addSubview(clearStackView)
+        clearStackView.addArrangedSubview(yourIngredientsLabel)
+        clearStackView.addArrangedSubview(clearIngredients)
+        
+        view.addSubview(searchRecipes)
+        view.addSubview(ingredientListView)
+    }
+
+    private func setupContraints() {
+        NSLayoutConstraint.activate([
+            searchArea.leftAnchor.constraint(equalTo: view.leftAnchor),
+            searchArea.rightAnchor.constraint(equalTo: view.rightAnchor),
+            searchArea.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            searchArea.heightAnchor.constraint(greaterThanOrEqualToConstant: 100)
+        ])
+
+        NSLayoutConstraint.activate([
+            searchStackView.leftAnchor.constraint(equalTo: searchArea.leftAnchor, constant: 10),
+            searchStackView.rightAnchor.constraint(equalTo: searchArea.rightAnchor, constant: -10),
+            searchStackView.topAnchor.constraint(equalTo: searchArea.topAnchor, constant: 10),
+            searchArea.bottomAnchor.constraint(equalTo: searchStackView.bottomAnchor, constant: 15)
+        ])
+
         NSLayoutConstraint.activate([
             underligne.heightAnchor.constraint(equalToConstant: 1),
             underligne.leftAnchor.constraint(equalTo: inputIngredient.leftAnchor),
@@ -188,9 +200,6 @@ class SearchController: ViewController {
             underligne.topAnchor.constraint(equalTo: inputIngredient.bottomAnchor, constant: 5)
         ])
 
-        view.addSubview(clearStackView)
-        clearStackView.addArrangedSubview(yourIngredientsLabel)
-        clearStackView.addArrangedSubview(clearIngredients)
         NSLayoutConstraint.activate([
             clearStackView.topAnchor.constraint(equalTo: searchArea.bottomAnchor, constant: 10),
             clearStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
@@ -200,7 +209,6 @@ class SearchController: ViewController {
             addIngredients.heightAnchor.constraint(equalTo: clearIngredients.heightAnchor)
         ])
 
-        view.addSubview(searchRecipes)
         NSLayoutConstraint.activate([
             searchRecipes.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             searchRecipes.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
@@ -208,7 +216,6 @@ class SearchController: ViewController {
             searchRecipes.heightAnchor.constraint(greaterThanOrEqualToConstant: 60)
         ])
 
-        view.addSubview(ingredientListView)
         NSLayoutConstraint.activate([
             ingredientListView.topAnchor.constraint(equalTo: clearStackView.bottomAnchor, constant: 10),
             ingredientListView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),

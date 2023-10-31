@@ -179,7 +179,7 @@ extension ResultSearchViewController: UITableViewDelegate {
   }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
+
         switch context {
         case .favorite: if indexPath.row == (viewModel.recipes.count - 1) && viewModel.isNetworkSuccessful == true {
             viewModel.fetchMoreRecipes()
