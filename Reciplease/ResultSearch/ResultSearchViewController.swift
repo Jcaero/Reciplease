@@ -40,12 +40,21 @@ class ResultSearchViewController: ViewController {
     private var context: ResultSearchViewController.Context
     private let viewModel = ResultSearchViewModel()
 
+    private let refreshControl = UIRefreshControl()
+
     // MARK: - Init
     init(context: ResultSearchViewController.Context) {
         self.context = context
         super.init()
         setupUI()
         setupBinding()
+        
+        switch context {
+        case.favorite:
+            break
+        default:
+            setupRefresh()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -123,6 +132,23 @@ class ResultSearchViewController: ViewController {
     }
 }
 
+// MARK: - RefreshController
+extension ResultSearchViewController {
+    func setupRefresh() {
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        refreshControl.tintColor = .white
+        refreshControl.attributedTitle = NSAttributedString(string: "Update recipe")
+    }
+
+    @objc private func refreshData() {
+        self.viewModel.refreshData {
+            self.refreshControl.endRefreshing()
+            self.activityIndicator.stopAnimating()
+        }
+    }
+}
+
 // MARK: - UITableViewDataSource
 
 extension ResultSearchViewController: UITableViewDataSource {
@@ -195,7 +221,7 @@ extension ResultSearchViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         var moreRecipeActive = true
-#if DEBUG
+#if test
         moreRecipeActive = false
 #endif
         guard moreRecipeActive else { return }

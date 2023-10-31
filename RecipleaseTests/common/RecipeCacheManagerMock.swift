@@ -11,6 +11,9 @@ import UIKit
 @testable import Reciplease
 
 class RecipeCacheManagerMock: RecipeCacheManagerProtocol {
+    func remove(for ingredients: String) {
+    }
+    
     private var mockRecipe: Recipe?
 
     init(mockRecipeCached: Recipe?) {

@@ -16,7 +16,8 @@ class ResultSearchViewModel: ObservableObject {
     private let repository: NetworkRepositoryProtocol
     private let recipesSaveManager: RecipeSaveManagerProtocol
     private let recipeCacheManager: RecipeCacheManagerProtocol
-    private var ingredientsKey: String = ""
+    private var ingredients: [String] = []
+    private var ingredientsKey: String { return ingredients.joined(separator: ",") }
 
     var recipes: [LocalRecipe] = []
     var nextPage: String?
@@ -24,6 +25,7 @@ class ResultSearchViewModel: ObservableObject {
     @Published var isNetworkSuccessful = false
     @Published var alerteMessage: ErrorMessage?
 
+    // MARK: - INIT
     init(repository: NetworkRepositoryProtocol = NetworkRepository(),
          recipesSaveManager: RecipeSaveManagerProtocol = RecipeSaveManager(),
          recipeCacheManager: RecipeCacheManagerProtocol = RecipeCacheManager.shared) {
@@ -32,8 +34,9 @@ class ResultSearchViewModel: ObservableObject {
         self.recipeCacheManager = recipeCacheManager
     }
 
+    // MARK: - Fetch function
     func fetchInitRecipes(with ingredients: [String]) {
-        self.ingredientsKey = ingredients.joined(separator: ",")
+        self.ingredients = ingredients
         if haveRecipesInCache() {
             checkIfRecipesCanBeShow()
         } else {
@@ -66,24 +69,6 @@ class ResultSearchViewModel: ObservableObject {
         checkIfRecipesCanBeShow()
     }
 
-    private func checkIfRecipesCanBeShow() {
-        print("count is \(recipes.count)")
-        if self.recipes.isEmpty {
-            alerteMessage = ErrorMessage(title: "Information", message: "Pas de recette disponible")
-        } else {
-            recipeCacheManager.save(recipes: recipes, nextPage: nextPage, forKey: ingredientsKey)
-            isNetworkSuccessful = true
-        }
-    }
-
-    private func haveRecipesInCache() -> Bool {
-        let (cachedRecipes, cachedNextPage) = recipeCacheManager.getRecipes(for: ingredientsKey)
-
-        recipes = cachedRecipes
-        nextPage = cachedNextPage
-        return !recipes.isEmpty
-    }
-
     func fetchMoreRecipes() {
         guard let url = nextPage else { return }
         self.isNetworkSuccessful = false
@@ -103,5 +88,36 @@ class ResultSearchViewModel: ObservableObject {
                 self.recipes.append(contentsOf: data.hits.map { LocalRecipe(recipe: $0.recipe) })
                 self.checkIfRecipesCanBeShow()
             }.store(in: &cancellables)
+    }
+
+    // MARK: - check function
+    private func checkIfRecipesCanBeShow() {
+        print("count is \(recipes.count)")
+        if self.recipes.isEmpty {
+            alerteMessage = ErrorMessage(title: "Information", message: "Pas de recette disponible")
+        } else {
+            recipeCacheManager.save(recipes: recipes, nextPage: nextPage, forKey: ingredientsKey)
+            isNetworkSuccessful = true
+        }
+    }
+
+    // MARK: - cache gestion
+    private func haveRecipesInCache() -> Bool {
+        let (cachedRecipes, cachedNextPage) = recipeCacheManager.getRecipes(for: ingredientsKey)
+
+        recipes = cachedRecipes
+        nextPage = cachedNextPage
+        return !recipes.isEmpty
+    }
+
+    private func removeInCache() {
+        recipeCacheManager.remove(for: ingredientsKey)
+    }
+
+    // MARK: - refresh
+    func refreshData(completion: (() -> Void)) {
+        removeInCache()
+        fetchRecipes(with: ingredients)
+        completion()
     }
 }

@@ -11,8 +11,6 @@ import UIKit
 @testable import Reciplease
 
 final class RecipeSaveManagerMock: RecipeSaveManagerProtocol {
-    func deleteAllRecipe() {
-    }
 
     private var mockRecipe: Recipe?
 
@@ -34,5 +32,8 @@ final class RecipeSaveManagerMock: RecipeSaveManagerProtocol {
     func isSaveRecipeContains(_ recipe: LocalRecipe) -> Bool {
         guard let mockRecipe = mockRecipe else { return false }
         return recipe.label == mockRecipe.label ? true : false
+    }
+
+    func deleteAllRecipe() {
     }
 }

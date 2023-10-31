@@ -11,6 +11,7 @@ import UIKit
 protocol RecipeCacheManagerProtocol {
     func save(recipes: [LocalRecipe], nextPage: String?, forKey ingredients: String)
     func getRecipes(for ingredients: String) -> ([LocalRecipe], String?)
+    func remove(for ingredients: String)
 }
 
 struct RecipeCache {
@@ -44,5 +45,9 @@ class RecipeCacheManager: RecipeCacheManagerProtocol {
         } else {
             return ([], nil)
         }
+    }
+
+    func remove(for ingredients: String) {
+        recipeCache.removeObject(forKey: ingredients as NSString)
     }
 }

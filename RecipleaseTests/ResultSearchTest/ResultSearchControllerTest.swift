@@ -67,4 +67,16 @@ final class ResultSearchControllerTest: TestCase {
         XCTAssertEqual(viewModel.isNetworkSuccessful, true)
         XCTAssertEqual(viewModel.recipes.count, 1)
     }
+
+    func testHaveIngredientListeAndRecipeInCache_WhenRefresh_CleanCacheAndFetchRecipe() {
+
+        viewModel = ResultSearchViewModel(repository: NetwokRepositoryMock(mockResult: mockRecipe),
+                                          recipesSaveManager: RecipeSaveManagerMock(mockRecipe: nil),
+                                          recipeCacheManager: RecipeCacheManagerMock(mockRecipeCached: nil))
+
+        viewModel.refreshData {
+            XCTAssertEqual(viewModel.isNetworkSuccessful, true)
+            XCTAssertEqual(viewModel.recipes.count, 1)
+        }
+    }
 }

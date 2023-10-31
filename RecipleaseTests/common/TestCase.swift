@@ -22,6 +22,7 @@ class TestCase: XCTestCase {
                         ],
                         ingredients: [Ingredient(food: "Lemon"), Ingredient(food: "blueberries")],
                         totalTime: 2)
+
     let mockRecipeTwo = Recipe(uri: "http://www.edamam.com/Lemon",
                         label: "Blueberry-Lemon 2",
                         images: Images(regular: Large(url: "https://edamam-product-images/Lemon")),
