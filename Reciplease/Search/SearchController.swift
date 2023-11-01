@@ -30,7 +30,7 @@ class SearchController: ViewController {
         label.setupDynamicTextWith(policeName: "Symbol", size: 35, style: .largeTitle)
         label.textColor = .anthraciteGray
         label.textAlignment = .center
-        label.setAccessibility(with: .header, label: "Question Title", hint: "What's in your fridge ?")
+        label.setAccessibility(with: .header, label: "What's in your fridge ?", hint: "Question")
         return label
     }()
 
@@ -108,7 +108,7 @@ class SearchController: ViewController {
         texte.backgroundColor = .anthraciteGray
         texte.isEditable = false
         texte.setupDynamicTextWith(policeName: "Chalkduster", size: 23, style: .largeTitle)
-        texte.setAccessibility(with: .staticText, label: "ingredients", hint: "Ingredient in your liste")
+        texte.setAccessibility(with: .staticText, label: "ingredient", hint: "Ingredient in your liste")
         return texte
     }()
 
@@ -142,7 +142,10 @@ class SearchController: ViewController {
         inputIngredient.delegate = self
 
         viewModel.$ingredientList
-            .assign(to: \.text, on: self.ingredientListView)
+            .sink { [weak self] newValue in
+                self?.ingredientListView.text = newValue
+                self?.ingredientListView.accessibilityValue = newValue
+            }
             .store(in: &cancellables)
     }
 
@@ -173,7 +176,7 @@ class SearchController: ViewController {
         view.addSubview(clearStackView)
         clearStackView.addArrangedSubview(yourIngredientsLabel)
         clearStackView.addArrangedSubview(clearIngredients)
-        
+
         view.addSubview(searchRecipes)
         view.addSubview(ingredientListView)
     }

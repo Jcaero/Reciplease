@@ -48,7 +48,7 @@ class ResultSearchViewController: ViewController {
         super.init()
         setupUI()
         setupBinding()
-        
+
         switch context {
         case.favorite:
             break
@@ -221,7 +221,7 @@ extension ResultSearchViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         var moreRecipeActive = true
-#if test
+#if DEBUG
         moreRecipeActive = false
 #endif
         guard moreRecipeActive else { return }
