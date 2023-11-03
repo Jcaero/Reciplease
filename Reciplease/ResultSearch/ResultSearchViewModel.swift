@@ -16,9 +16,9 @@ class ResultSearchViewModel: ObservableObject {
     private let repository: NetworkRepositoryProtocol
     private let recipesSaveManager: RecipeSaveManagerProtocol
     private let recipeCacheManager: RecipeCacheManagerProtocol
+
     private var ingredients: [String] = []
     private var ingredientsKey: String { return ingredients.joined(separator: ",") }
-
     var recipes: [LocalRecipe] = []
     var nextPage: String?
 

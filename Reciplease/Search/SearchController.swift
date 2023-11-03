@@ -136,17 +136,13 @@ class SearchController: ViewController {
 
         setupUI()
         setupContraints()
+
         updateDisplayAccessibility()
         setupTapGesture()
 
         inputIngredient.delegate = self
 
-        viewModel.$ingredientList
-            .sink { [weak self] newValue in
-                self?.ingredientListView.text = newValue
-                self?.ingredientListView.accessibilityValue = newValue
-            }
-            .store(in: &cancellables)
+        setupBinding()
     }
 
     // MARK: - Layout
@@ -225,6 +221,16 @@ class SearchController: ViewController {
             ingredientListView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
             ingredientListView.bottomAnchor.constraint(equalTo: searchRecipes.topAnchor, constant: -10)
         ])
+    }
+    
+    //MARK: - Binding
+    private func setupBinding() {
+        viewModel.$ingredientList
+            .sink { [weak self] newValue in
+                self?.ingredientListView.text = newValue
+                self?.ingredientListView.accessibilityValue = newValue
+            }
+            .store(in: &cancellables)
     }
 }
 

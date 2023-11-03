@@ -46,6 +46,7 @@ class ResultSearchViewController: ViewController {
     init(context: ResultSearchViewController.Context) {
         self.context = context
         super.init()
+
         setupUI()
         setupBinding()
 
