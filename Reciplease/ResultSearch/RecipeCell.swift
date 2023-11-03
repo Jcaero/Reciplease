@@ -108,7 +108,7 @@ class RecipeCell: UITableViewCell {
         self.recipe = recipe
         setupTexte()
         setupAccessibilityValue()
-        
+
         setupImageRecip()
         setupColorOfStackInfoView()
     }

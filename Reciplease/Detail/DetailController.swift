@@ -115,9 +115,11 @@ class DetailController: ViewController {
     init(with recipe: LocalRecipe) {
         super.init()
         self.recipe = recipe
-        titleLabel.text = recipe.label
-        ingredientListView.text = "- " + recipe.listeOfIngredientsWithDetail.joined(separator: "\n- ")
+
+        setTitleText()
+        setTextInTextView(withYield: false)
         infoStackView.setup(with: Int(recipe.totalTime), yield: Int(recipe.yield))
+
         isStarFilled = recipe.isSave
 
         setupImageRecip(of: recipe)
@@ -223,7 +225,6 @@ class DetailController: ViewController {
     // MARK: - manage Image
     private func setupImageRecip(of recipe: LocalRecipe) {
         if let image = recipe.image {
-            print("save image")
             self.recipImage.image = image
         } else if !recipe.imageUrl.isEmpty {
             downloadRecipeImage(recipe.imageUrl)
@@ -246,7 +247,7 @@ class DetailController: ViewController {
             }.store(in: &cancellables)
     }
 
-    // MARK: - TextView
+    // MARK: - Text
     private func setTextInTextView(withYield result: Bool) {
         let normalText = "- " + recipe.listeOfIngredientsWithDetail.joined(separator: "\n- ")
 
@@ -254,12 +255,17 @@ class DetailController: ViewController {
         let accessibilityText = """
                                 Yield = \(recipe.yield)
                                 Total Time = \(totalTime)
-                                
+
                                 Ingredients
                                 \(normalText)
                                 """
 
         ingredientListView.text = result ? accessibilityText : normalText
+    }
+
+    private func setTitleText() {
+        titleLabel.text = recipe.label
+        titleLabel.accessibilityValue = titleLabel.text
     }
 }
 
