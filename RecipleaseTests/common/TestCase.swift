@@ -35,7 +35,7 @@ class TestCase: XCTestCase {
                         ],
                         ingredients: [Ingredient(food: "Lemon"), Ingredient(food: "blueberries")],
                         totalTime: 2)
-    
+
     let mockImage = UIImage(data: "ImageMock".data(using: .utf8)!)
 
     func getData(fromJson file: String) -> Data? {

@@ -245,6 +245,22 @@ class DetailController: ViewController {
                 self.recipImage.image = image
             }.store(in: &cancellables)
     }
+
+    // MARK: - TextView
+    private func setTextInTextView(withYield result: Bool) {
+        let normalText = "- " + recipe.listeOfIngredientsWithDetail.joined(separator: "\n- ")
+
+        let totalTime = recipe.totalTime == 0 ? "UNK" : String(recipe.totalTime)
+        let accessibilityText = """
+                                Yield = \(recipe.yield)
+                                Total Time = \(totalTime)
+                                
+                                Ingredients
+                                \(normalText)
+                                """
+
+        ingredientListView.text = result ? accessibilityText : normalText
+    }
 }
 
 // MARK: - Accessibility
@@ -264,6 +280,7 @@ extension DetailController {
             getDirectionsButton.setTitle("Directions", for: .normal)
             ingredientLabel.isHidden = true
             infoView.isHidden = true
+            setTextInTextView(withYield: true)
             switch currentCategory {
             case .accessibilityExtraExtraExtraLarge:
                 titleLabel.setupDynamicTextWith(policeName: "Symbol", size: 19, style: .caption2)
@@ -277,6 +294,7 @@ extension DetailController {
             getDirectionsButton.setTitle("Get directions", for: .normal)
             ingredientLabel.isHidden = false
             infoView.isHidden = false
+            setTextInTextView(withYield: false)
             titleLabel.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .headline)
         }
     }

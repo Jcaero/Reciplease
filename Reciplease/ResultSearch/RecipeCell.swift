@@ -62,7 +62,7 @@ class RecipeCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Fonction
+    // MARK: - UI
     private func setupUI() {
         [title,
          ingredient,
@@ -103,13 +103,20 @@ class RecipeCell: UITableViewCell {
         ])
     }
 
+    // MARK: - Setup cell
     func setupCell(with recipe: LocalRecipe) {
         self.recipe = recipe
+        setupTexte()
+        setupAccessibilityValue()
+        
+        setupImageRecip()
+        setupColorOfStackInfoView()
+    }
+
+    private func setupTexte() {
         title.text = recipe.label
         ingredient.text = recipe.listeOfIngredients.map { $0.food }.joined(separator: ", ")
         infoStackView.setup(with: Int(recipe.totalTime), yield: Int(recipe.yield))
-        setupImageRecip()
-        setupColorOfStackInfoView()
     }
 
     private func setupImageRecip() {
@@ -129,6 +136,7 @@ class RecipeCell: UITableViewCell {
         }
     }
 
+    // MARK: - Image
     private func downloadRecipeImage(_ imageUrl: String) {
         imageRepository.downloadImageWith(imageUrl)
             .receive(on: DispatchQueue.main)
@@ -148,5 +156,11 @@ class RecipeCell: UITableViewCell {
     private func showImage( image: UIImage) {
         self.backGroundImage.image = image
         self.backgroundView = backGroundImage
+    }
+
+    // MARK: - accessibility
+    private func setupAccessibilityValue() {
+        self.title.accessibilityValue = title.text
+        self.ingredient.accessibilityValue = ingredient.text
     }
 }

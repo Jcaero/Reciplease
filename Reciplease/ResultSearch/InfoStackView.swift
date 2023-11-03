@@ -74,17 +74,14 @@ class InfoStackView: UIStackView {
 
     // MARK: - Function
     func setup(with time: Int, yield: Int) {
-        switch time {
-        case 0:
-            timeLabel.text = "UNK"
-        case let value where value >= 60:
-            timeLabel.text = String(value / 60) + "h"
-        default:
-            timeLabel.text = String(time) + "m"
-        }
+        timeLabel.text = transformTimeInString(with: time)
+        timeLabel.accessibilityValue = timeLabel.text
+
         yieldLabel.text = String(yield)
+        yieldLabel.accessibilityValue = yieldLabel.text
     }
 
+    // MARK: - UI
     private func initStack() {
         self.axis = .vertical
         self.distribution = .fillEqually
@@ -117,6 +114,18 @@ class InfoStackView: UIStackView {
             fork.widthAnchor.constraint(equalTo: fork.heightAnchor),
             yieldLabel.heightAnchor.constraint(equalTo: timeLabel.heightAnchor)
         ])
+    }
+
+    // MARK: - Time
+    private func transformTimeInString( with time: Int) -> String {
+        switch time {
+        case 0:
+            return "UNK"
+        case let value where value >= 60:
+            return String(value / 60) + " h"
+        default:
+            return String(time) + " m"
+        }
     }
 
 }

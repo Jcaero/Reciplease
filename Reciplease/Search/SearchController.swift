@@ -222,8 +222,8 @@ class SearchController: ViewController {
             ingredientListView.bottomAnchor.constraint(equalTo: searchRecipes.topAnchor, constant: -10)
         ])
     }
-    
-    //MARK: - Binding
+
+    // MARK: - Binding
     private func setupBinding() {
         viewModel.$ingredientList
             .sink { [weak self] newValue in

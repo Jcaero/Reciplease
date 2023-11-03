@@ -24,7 +24,7 @@ class NetwokRepositoryMock: NetworkRepositoryProtocol {
         let simulatedNext = Next(href: nil)
         let simulatedLinks = RecipResponseLinks(next: simulatedNext)
         let simulatedHit = Hit(recipe: mockResult)
-        
+
         let simulatedResponse = API.RecipResponse(links: simulatedLinks, hits: [simulatedHit])
         self.mockResult = simulatedResponse
     }
