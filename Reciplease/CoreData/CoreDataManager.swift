@@ -43,7 +43,6 @@ final class CoreDataManager: CoreDataManagerProtocol {
         if viewContext.hasChanges {
             do {
                 try viewContext.save()
-                print("save")
             } catch {
                 print("Error while saving: \(error.localizedDescription )")
             }

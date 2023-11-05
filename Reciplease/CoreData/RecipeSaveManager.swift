@@ -103,7 +103,6 @@ final class RecipeSaveManager: RecipeSaveManagerProtocol {
             let saveIngredient = SaveIngredient(context: coreDataManager.viewContext)
             saveIngredient.food = ingredient.food
             saveIngredient.addToRecipe(localRecipe)
-            print("save liste = \(String(describing: saveIngredient.food))")
         }
 
     }
