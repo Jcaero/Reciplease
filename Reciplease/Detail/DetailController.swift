@@ -80,7 +80,8 @@ class DetailController: ViewController {
         button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .footnote)
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "go to detail liste of recipes", hint: "Pressed button to go to detail liste of recipes")
-        button.addTarget(self, action: #selector(getDirection), for: .touchUpInside)
+        let action = UIAction {[weak self] _ in self?.getDirection() }
+        button.addAction(action, for: .primaryActionTriggered)
         button.accessibilityIdentifier = "getDirectionsButton"
         return button
     }()
@@ -328,7 +329,7 @@ extension DetailController {
 // MARK: - GetDirections buttons
 
 extension DetailController {
-    @objc func getDirection() {
+    private func getDirection() {
         guard let url = URL(string: self.recipe.sourceUrl) else { return }
         UIApplication.shared.open(url)
     }

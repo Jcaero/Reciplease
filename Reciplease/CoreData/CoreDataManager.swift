@@ -28,13 +28,11 @@ final class CoreDataManager: CoreDataManagerProtocol {
 
         persistentContainer = NSPersistentContainer(name: modelName)
         viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        print("init container")
     }
 
     func load(completion: (() -> Void)? = nil) {
         persistentContainer.loadPersistentStores { (_, error) in
             guard error == nil else { fatalError(error!.localizedDescription)}
-            print("load container")
             completion?()
         }
     }

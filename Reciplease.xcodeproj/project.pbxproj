@@ -373,8 +373,8 @@
 		4799097D2ABCCD550056753E /* RecipleaseUITests */ = {
 			isa = PBXGroup;
 			children = (
-				4799097E2ABCCD550056753E /* RecipleaseUITests.swift */,
 				47D73EA42AED07B700498103 /* UIApplication.swift */,
+				4799097E2ABCCD550056753E /* RecipleaseUITests.swift */,
 				47D73EA22AED069600498103 /* SearchControlleur.swift */,
 				479909802ABCCD550056753E /* RecipleaseUITestsLaunchTests.swift */,
 				4783D8CD2AEFCAF900531227 /* FavoriteSearchControlleur.swift */,

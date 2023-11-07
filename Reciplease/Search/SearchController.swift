@@ -50,7 +50,8 @@ class SearchController: ViewController {
         button.setupDynamicTextWith(style: .body)
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "Add ingredient", hint: "Pressed button to add ingredient")
-        button.addTarget(self, action: #selector(addIngredient), for: .touchUpInside)
+        let action = UIAction {[weak self] _ in self?.addIngredient() }
+        button.addAction(action, for: .primaryActionTriggered)
         button.accessibilityIdentifier = "Add"
         return button
     }()
@@ -97,7 +98,8 @@ class SearchController: ViewController {
         button.setupDynamicTextWith(style: .body)
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "clear ingredient", hint: "Pressed button to clear ingredient")
-        button.addTarget(self, action: #selector(clearIngredient), for: .touchUpInside)
+        let action = UIAction {[weak self] _ in self?.clearIngredient() }
+        button.addAction(action, for: .primaryActionTriggered)
         button.accessibilityIdentifier = "Clear"
         return button
     }()
@@ -120,7 +122,8 @@ class SearchController: ViewController {
         button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .footnote)
         button.layer.cornerRadius = 5
         button.setAccessibility(with: .button, label: "search for recipes", hint: "Pressed button to search recipes with ingredients")
-        button.addTarget(self, action: #selector(searchRecip), for: .touchUpInside)
+        let action = UIAction {[weak self] _ in self?.searchRecip() }
+        button.addAction(action, for: .primaryActionTriggered)
         button.accessibilityIdentifier = "searchButton"
         return button
     }()
@@ -236,13 +239,13 @@ class SearchController: ViewController {
 
 // MARK: - Add action button
 extension SearchController {
-    @objc func addIngredient() {
+    private func addIngredient() {
         viewModel.addIngredient(inputIngredient.text)
         inputIngredient.text = ""
         dismissKeyboard()
     }
 
-    @objc func clearIngredient() {
+    private func clearIngredient() {
         viewModel.clearIngredientList()
     }
 }
@@ -286,7 +289,7 @@ extension SearchController: UITextFieldDelegate {
 
 // MARK: - Search Button
 extension SearchController {
-    @objc func searchRecip() {
+    private func searchRecip() {
         guard !viewModel.ingredients.isEmpty else {return}
 
         let newController = ResultSearchViewController(context: .search(ingredients: viewModel.ingredients))
