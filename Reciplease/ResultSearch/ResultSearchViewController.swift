@@ -221,11 +221,9 @@ extension ResultSearchViewController: UITableViewDelegate {
   }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        var moreRecipeActive = true
-#if DEBUG
-        moreRecipeActive = false
+#if TESTING
+        return
 #endif
-        guard moreRecipeActive else { return }
         switch context {
         case .favorite: break
         default: if indexPath.row == (viewModel.recipes.count - 1) && viewModel.isNetworkSuccessful == true {
