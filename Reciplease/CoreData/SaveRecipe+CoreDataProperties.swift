@@ -47,7 +47,6 @@ extension SaveRecipe {
 
     @objc(removeIngredient:)
     @NSManaged public func removeFromIngredient(_ values: NSSet)
-
 }
 
 extension SaveRecipe: Identifiable {

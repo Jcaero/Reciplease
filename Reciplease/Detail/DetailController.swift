@@ -314,7 +314,6 @@ extension DetailController {
         isStarFilled.toggle()
 
         if isStarFilled {
-            print("core data save")
             recipeSaveManager.saveRecipe(named: recipe, image: recipImage.image!)
             recipe.isSave = true
             self.navigationItem.rightBarButtonItem?.image = filledStarImage

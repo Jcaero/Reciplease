@@ -25,7 +25,6 @@ class NetworkRepository: NetworkRepositoryProtocol, ObservableObject {
     func fetchRecip(_ liste: [String]) -> AnyPublisher<API.RecipResponse, Error> {
         let ingredients = liste.joined(separator: " ")
         let url = API.EndPoint.recip(ingredients).url
-        print("\(url)")
 
         return AF.request(url, method: .get, parameters: nil)
             .publishDecodable(type: API.RecipResponse.self)
@@ -40,7 +39,6 @@ class NetworkRepository: NetworkRepositoryProtocol, ObservableObject {
                return Fail(error: URLError(.badURL))
                    .eraseToAnyPublisher()
            }
-        print("\(String(describing: url))")
 
         return AF.request(url, method: .get, parameters: nil)
             .publishDecodable(type: API.RecipResponse.self)

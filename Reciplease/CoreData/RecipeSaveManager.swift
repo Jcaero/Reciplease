@@ -65,7 +65,6 @@ final class RecipeSaveManager: RecipeSaveManagerProtocol {
                 context.delete(recipeToDelete)
             }
             coreDataManager.save()
-            print("Recipe deleted from Core Data")
         } catch let error as NSError {
             print("Could not fetch or delete. \(error), \(error.userInfo)")
         }

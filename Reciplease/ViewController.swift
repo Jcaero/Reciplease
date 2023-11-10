@@ -26,42 +26,6 @@ class ViewController: UIViewController {
         view.backgroundColor = .anthraciteGray
     }
 
-    // note: original idea by http://holko.pl/2017/06/26/checking-uiviewcontroller-deallocation,
-    // and some adjustments by Vincent.
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-
-#if DEBUG
-        checkDeallocation()
-#endif
-    }
-
-#if DEBUG
-    private func checkDeallocation(afterDelay delay: TimeInterval = 2.0) {
-        // We don’t check `isBeingDismissed` simply on this view controller because it’s common
-        // to wrap a view controller in another view controller (e.g. in UINavigationController)
-        // and present the wrapping view controller instead.
-        if isMovingFromParent || rootParentViewController.isBeingDismissed {
-            let type = Swift.type(of: self)
-            let disappearanceSource: String = isMovingFromParent ? "removed from its parent" : "dismissed"
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
-                assert(self == nil, "\(type) not deallocated after being \(disappearanceSource)")
-            }
-        }
-    }
-
-    private var rootParentViewController: UIViewController {
-        var root: UIViewController = self
-
-        while let parent = root.parent {
-            root = parent
-        }
-
-        return root
-    }
-#endif
-
     // MARK: - Init navigationBar
     func initNavigationBar() {
         let appearance = UINavigationBarAppearance()
